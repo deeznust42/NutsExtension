@@ -78,7 +78,7 @@ export const FirewallSettings = ({ isDarkMode }: FirewallSettingsProps) => {
                 <label
                   htmlFor="toggle-firewall"
                   className={`block h-6 cursor-pointer overflow-hidden rounded-full ${
-                    isEnabled ? 'bg-blue-500' : isDarkMode ? 'bg-gray-600' : 'bg-gray-300'
+                    isEnabled ? 'bg-red-500' : isDarkMode ? 'bg-gray-600' : 'bg-gray-300'
                   }`}>
                   <span className="sr-only">Toggle Firewall</span>
                   <span
@@ -98,8 +98,8 @@ export const FirewallSettings = ({ isDarkMode }: FirewallSettingsProps) => {
                 className={`px-4 py-2 text-base ${
                   activeList === 'allow'
                     ? isDarkMode
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-blue-500 text-white'
+                      ? 'bg-red-600 text-white'
+                      : 'bg-red-500 text-white'
                     : isDarkMode
                       ? 'bg-slate-700 text-gray-200'
                       : 'bg-gray-200 text-gray-700'
@@ -111,8 +111,8 @@ export const FirewallSettings = ({ isDarkMode }: FirewallSettingsProps) => {
                 className={`px-4 py-2 text-base ${
                   activeList === 'deny'
                     ? isDarkMode
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-blue-500 text-white'
+                      ? 'bg-red-600 text-white'
+                      : 'bg-red-500 text-white'
                     : isDarkMode
                       ? 'bg-slate-700 text-gray-200'
                       : 'bg-gray-200 text-gray-700'
@@ -141,7 +141,7 @@ export const FirewallSettings = ({ isDarkMode }: FirewallSettingsProps) => {
             <Button
               onClick={handleAddUrl}
               className={`px-4 py-2 text-sm ${
-                isDarkMode ? 'bg-green-600 text-white hover:bg-green-700' : 'bg-green-500 text-white hover:bg-green-600'
+                isDarkMode ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-red-500 text-white hover:bg-red-600'
               }`}>
               Add
             </Button>

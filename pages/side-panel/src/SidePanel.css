@@ -1,22 +1,22 @@
 /* Add this at the top of the file */
 body {
-  border-color: rgb(159, 6, 11) !important; /* sky-200 color */
+  border-color: rgb(239, 68, 68) !important; /* red-500 color */
 }
 
 /* Remove unused classes: .App, .App-logo, .App-header */
 
 code {
-  background: rgba(186, 230, 253, 0.4);
+  background: rgba(254, 202, 202, 0.4);
   border-radius: 0.25rem;
   padding: 0.2rem 0.5rem;
-  color: #0369a1;
+  color: #dc2626;
 }
 
 /* Dark mode support for code */
 @media (prefers-color-scheme: dark) {
   code {
-    background: rgba(30, 58, 138, 0.4);
-    color: #7dd3fc;
+    background: rgba(127, 29, 29, 0.4);
+    color: #fca5a5;
   }
 }
 
