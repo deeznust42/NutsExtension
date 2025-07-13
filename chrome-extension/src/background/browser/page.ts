@@ -20,7 +20,6 @@ import { DOMElementNode, type DOMState } from './dom/views';
 import { type BrowserContextConfig, DEFAULT_BROWSER_CONTEXT_CONFIG, type PageState, URLNotAllowedError } from './views';
 import { createLogger } from '@src/background/log';
 import { ClickableElementProcessor } from './dom/clickable/service';
-import { isUrlAllowed } from './util';
 
 const logger = createLogger('Page');
 
@@ -502,11 +501,6 @@ export default class Page {
       return;
     }
     logger.info('navigateTo', url);
-
-    // Check if URL is allowed
-    if (!isUrlAllowed(url, this._config.allowedUrls, this._config.deniedUrls)) {
-      throw new URLNotAllowedError(`URL: ${url} is not allowed`);
-    }
 
     try {
       await Promise.all([this.waitForPageAndFramesLoad(), this._puppeteerPage.goto(url)]);
@@ -1560,30 +1554,10 @@ export default class Page {
   }
 
   /**
-   * Check the current page URL and handle if it's not allowed
-   * @throws URLNotAllowedError if the current URL is not allowed
+   * Check the current page URL and handle navigation
    */
   private async _checkAndHandleNavigation(): Promise<void> {
-    if (!this._puppeteerPage) {
-      return;
-    }
-
-    const currentUrl = this._puppeteerPage.url();
-    if (!isUrlAllowed(currentUrl, this._config.allowedUrls, this._config.deniedUrls)) {
-      const errorMessage = `URL: ${currentUrl} is not allowed`;
-      logger.error(errorMessage);
-
-      // Navigate to home page or about:blank
-      const safeUrl = this._config.homePageUrl || 'about:blank';
-      logger.info(`Redirecting to safe URL: ${safeUrl}`);
-
-      try {
-        await this._puppeteerPage.goto(safeUrl);
-      } catch (error) {
-        logger.error(`Failed to redirect to safe URL: ${error instanceof Error ? error.message : String(error)}`);
-      }
-
-      throw new URLNotAllowedError(errorMessage);
-    }
+    // Firewall functionality has been removed
+    // This method is kept for potential future use
   }
 }

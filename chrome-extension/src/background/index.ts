@@ -1,11 +1,5 @@
 import 'webextension-polyfill';
-import {
-  agentModelStore,
-  AgentNameEnum,
-  firewallStore,
-  generalSettingsStore,
-  llmProviderStore,
-} from '@extension/storage';
+import { agentModelStore, AgentNameEnum, generalSettingsStore, llmProviderStore } from '@extension/storage';
 import BrowserContext from './browser/context';
 import { Executor } from './agent/executor';
 import { createLogger } from './log';
@@ -308,20 +302,6 @@ async function setupExecutor(taskId: string, task: string, browserContext: Brows
     // Log the provider config being used for the validator
     const validatorProviderConfig = providers[validatorModel.provider];
     validatorLLM = createChatModel(validatorProviderConfig, validatorModel);
-  }
-
-  // Apply firewall settings to browser context
-  const firewall = await firewallStore.getFirewall();
-  if (firewall.enabled) {
-    browserContext.updateConfig({
-      allowedUrls: firewall.allowList,
-      deniedUrls: firewall.denyList,
-    });
-  } else {
-    browserContext.updateConfig({
-      allowedUrls: [],
-      deniedUrls: [],
-    });
   }
 
   const generalSettings = await generalSettingsStore.getSettings();
