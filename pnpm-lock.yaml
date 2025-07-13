@@ -116,33 +116,15 @@ importers:
       '@extension/storage':
         specifier: workspace:*
         version: link:../packages/storage
-      '@langchain/anthropic':
-        specifier: 0.3.21
-        version: 0.3.21(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))
-      '@langchain/cerebras':
-        specifier: ^0.0.1
-        version: 0.0.1(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))
       '@langchain/core':
         specifier: 0.3.57
         version: 0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
-      '@langchain/deepseek':
-        specifier: ^0.0.2
-        version: 0.0.2(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(ws@8.18.2)
       '@langchain/google-genai':
         specifier: 0.2.10
         version: 0.2.10(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(zod@3.25.58)
       '@langchain/groq':
         specifier: ^0.2.2
         version: 0.2.2(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))
-      '@langchain/ollama':
-        specifier: 0.2.1
-        version: 0.2.1(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))
-      '@langchain/openai':
-        specifier: 0.5.12
-        version: 0.5.12(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(ws@8.18.2)
-      '@langchain/xai':
-        specifier: ^0.0.3
-        version: 0.0.3(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(ws@8.18.2)
       jsonrepair:
         specifier: ^3.12.0
         version: 3.12.0
@@ -396,12 +378,6 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
-  '@anthropic-ai/sdk@0.39.0':
-    resolution: {integrity: sha512-eMyDIPRZbt1CCLErRCi3exlAvNkBtRe+kW5vvJyef93PmNr/clstYgHhtvmkxN82nlKgzyGPCyGxrm0JQ1ZIdg==}
-
-  '@cerebras/cerebras_cloud_sdk@1.35.0':
-    resolution: {integrity: sha512-bQ6KYHmcvudHJ1aLzqkeETn3Y071/8/zpcZho6g4pKZ+VluHvLmIG0buhrwF9qJY5WSLmXR/s4pruxVRmfV7yQ==}
-
   '@cfworker/json-schema@4.1.1':
     resolution: {integrity: sha512-gAmrUZSGtKc3AiBL71iNWxDsyUC5uMaKKGdvzYsBoTW/xi42JQHl7eKV2OYzCUqvc+D2RCcf7EXY2iCyFIk6og==}
 
@@ -622,27 +598,9 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@langchain/anthropic@0.3.21':
-    resolution: {integrity: sha512-iyVZ9PHcNbABVzWFWtolcDUqHYCEkl1yypRYXE98tTPiNhGo6g/MgKky96TEcOnJ0VNHD6qlzo9LhQl87OplvA==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@langchain/core': '>=0.3.48 <0.4.0'
-
-  '@langchain/cerebras@0.0.1':
-    resolution: {integrity: sha512-ycI5yooLaCXrsamfGr6SGY+KnswvDYhSakFHT6LIwssvue3N1KlXYRZjrzm5xSMRdT+CVf9u6dOnv99GCWO7xQ==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@langchain/core': '>=0.3.0 <0.4.0'
-
   '@langchain/core@0.3.57':
     resolution: {integrity: sha512-jz28qCTKJmi47b6jqhQ6vYRTG5jRpqhtPQjriRTB5wR8mgvzo6xKs0fG/kExS3ZvM79ytD1npBvgf8i19xOo9Q==}
     engines: {node: '>=18'}
-
-  '@langchain/deepseek@0.0.2':
-    resolution: {integrity: sha512-u13KbPUXW7uhcybbRzYdRroBgqVUSgG0SJM15c7Etld2yjRQC2c4O/ga9eQZdLh/kaDlQfH/ZITFdjHe77RnGw==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@langchain/core': '>=0.3.58 <0.4.0'
 
   '@langchain/google-genai@0.2.10':
     resolution: {integrity: sha512-kIy0qhu7FAsShNTvuOx8uV+hf7mWk8OzJP5W9mjs1ovAIT1C9WqG1epkhexBfj4DAQfQ6E+m/oGtJ+CVsalspw==}
@@ -655,24 +613,6 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       '@langchain/core': '>=0.2.21 <0.4.0'
-
-  '@langchain/ollama@0.2.1':
-    resolution: {integrity: sha512-9WQ/rJV002n2f/aBPzNKBZU7kJfhqDnaGTWeIKO5gM0wZ+Rb2mfk7psluFIedachwsM/FQ+oIBcViHriaXngzA==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@langchain/core': '>=0.2.21 <0.4.0'
-
-  '@langchain/openai@0.5.12':
-    resolution: {integrity: sha512-k7rxBY3ed/HIiMLd6HBqFibsfB0+L6c82H8JgXDqKeyUoACJIi1JaKHXmofmCeF2SBXBU9dog4gEGpHfcUDGUA==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@langchain/core': '>=0.3.48 <0.4.0'
-
-  '@langchain/xai@0.0.3':
-    resolution: {integrity: sha512-NA+0d6z/1focGuakceOz/AspWN9xcz7mYpjLFuCDtOPRLzdjUTRiqljXx9RVSl/VQMA8AzHCOA64m3asYZAYWg==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@langchain/core': '>=0.3.58 <0.4.0'
 
   '@laynezh/vite-plugin-lib-assets@0.6.1':
     resolution: {integrity: sha512-pdIRW/PiJkuM7/OObjGBGfQmsWetmVObeez6uwT3nhP5cu2zT0L5QELq69caWD/v3QlPY3CPXVN0kZrzQzdvsQ==}
@@ -1806,10 +1746,6 @@ packages:
   fast-uri@3.0.6:
     resolution: {integrity: sha512-Atfo14OibSv5wAp4VWNsFYE1AchQRTv9cBGWET4pZWHzYshFSS9NQI6I57rdKn9croWVMbYFbLhJ+yJvmZIIHw==}
 
-  fast-xml-parser@4.5.3:
-    resolution: {integrity: sha512-RKihhV+SHsIUGXObeVy9AXiBbFwkVk7Syp8XgwN5U3JV416+Gwp/GO9i0JYKmikykgz/UHRrrV4ROuZEo/T0ig==}
-    hasBin: true
-
   fastq@1.19.1:
     resolution: {integrity: sha512-GwLTyxkCXjXbxqIhTsMI2Nui8huMPtnxg7krajPJAjnEG/iiOS7i+zCtWGZR9G0NBKbXKh6X9m9UIsYX/N6vvQ==}
 
@@ -2464,9 +2400,6 @@ packages:
     resolution: {integrity: sha512-gXah6aZrcUxjWg2zR2MwouP2eHlCBzdV4pygudehaKXSGW4v2AsRQUK+lwwXhii6KFZcunEnmSUoYp5CXibxtA==}
     engines: {node: '>= 0.4'}
 
-  ollama@0.5.15:
-    resolution: {integrity: sha512-TSaZSJyP7MQJFjSmmNsoJiriwa3U+/UJRw6+M8aucs5dTsaWNZsBIGpDb5rXnW6nXxJBB/z79gZY8IaiIQgelQ==}
-
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
 
@@ -2988,9 +2921,6 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  strnum@1.1.2:
-    resolution: {integrity: sha512-vrN+B7DBIoTTZjnPNewwhx6cBA/H+IS7rfW68n7XxC1y7uoiGQBxaKzqucGUgavX15dJgiGztLJ8vxuEzwqBdA==}
-
   sucrase@3.35.0:
     resolution: {integrity: sha512-8EbVDiu9iN/nESwxeSxDKe0dunta1GOlHufmSSXxMD2z2/tMZpDMpvXQGsc+ajGo8y2uYUmixaSRUc/QPoQ0GA==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -3288,9 +3218,6 @@ packages:
       webpack-cli:
         optional: true
 
-  whatwg-fetch@3.6.20:
-    resolution: {integrity: sha512-EqhiFU6daOA8kpjOWTL0olhVOF3i7OrFzSYiGsEMB8GcXS+RrzauAERX65xMeNWVqxA6HXH2m69Z9LaKKdisfg==}
-
   whatwg-url@5.0.0:
     resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
 
@@ -3397,30 +3324,6 @@ packages:
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
-
-  '@anthropic-ai/sdk@0.39.0':
-    dependencies:
-      '@types/node': 18.19.104
-      '@types/node-fetch': 2.6.12
-      abort-controller: 3.0.0
-      agentkeepalive: 4.6.0
-      form-data-encoder: 1.7.2
-      formdata-node: 4.4.1
-      node-fetch: 2.7.0
-    transitivePeerDependencies:
-      - encoding
-
-  '@cerebras/cerebras_cloud_sdk@1.35.0':
-    dependencies:
-      '@types/node': 18.19.104
-      '@types/node-fetch': 2.6.12
-      abort-controller: 3.0.0
-      agentkeepalive: 4.6.0
-      form-data-encoder: 1.7.2
-      formdata-node: 4.4.1
-      node-fetch: 2.7.0
-    transitivePeerDependencies:
-      - encoding
 
   '@cfworker/json-schema@4.1.1': {}
 
@@ -3576,26 +3479,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@langchain/anthropic@0.3.21(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))':
-    dependencies:
-      '@anthropic-ai/sdk': 0.39.0
-      '@langchain/core': 0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
-      fast-xml-parser: 4.5.3
-      zod: 3.25.58
-      zod-to-json-schema: 3.24.5(zod@3.25.58)
-    transitivePeerDependencies:
-      - encoding
-
-  '@langchain/cerebras@0.0.1(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))':
-    dependencies:
-      '@cerebras/cerebras_cloud_sdk': 1.35.0
-      '@langchain/core': 0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
-      uuid: 10.0.0
-      zod: 3.25.58
-      zod-to-json-schema: 3.24.5(zod@3.25.58)
-    transitivePeerDependencies:
-      - encoding
-
   '@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))':
     dependencies:
       '@cfworker/json-schema': 4.1.1
@@ -3612,14 +3495,6 @@ snapshots:
       zod-to-json-schema: 3.24.5(zod@3.25.58)
     transitivePeerDependencies:
       - openai
-
-  '@langchain/deepseek@0.0.2(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(ws@8.18.2)':
-    dependencies:
-      '@langchain/core': 0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
-      '@langchain/openai': 0.5.12(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(ws@8.18.2)
-    transitivePeerDependencies:
-      - encoding
-      - ws
 
   '@langchain/google-genai@0.2.10(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(zod@3.25.58)':
     dependencies:
@@ -3638,33 +3513,6 @@ snapshots:
       zod-to-json-schema: 3.24.5(zod@3.25.58)
     transitivePeerDependencies:
       - encoding
-
-  '@langchain/ollama@0.2.1(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))':
-    dependencies:
-      '@langchain/core': 0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
-      ollama: 0.5.15
-      uuid: 10.0.0
-      zod: 3.25.58
-      zod-to-json-schema: 3.24.5(zod@3.25.58)
-
-  '@langchain/openai@0.5.12(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(ws@8.18.2)':
-    dependencies:
-      '@langchain/core': 0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
-      js-tiktoken: 1.0.20
-      openai: 4.103.0(ws@8.18.2)(zod@3.25.58)
-      zod: 3.25.58
-      zod-to-json-schema: 3.24.5(zod@3.25.58)
-    transitivePeerDependencies:
-      - encoding
-      - ws
-
-  '@langchain/xai@0.0.3(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(ws@8.18.2)':
-    dependencies:
-      '@langchain/core': 0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
-      '@langchain/openai': 0.5.12(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(ws@8.18.2)
-    transitivePeerDependencies:
-      - encoding
-      - ws
 
   '@laynezh/vite-plugin-lib-assets@0.6.1(vite@6.3.5(@types/node@22.15.23)(jiti@1.21.7)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0))':
     dependencies:
@@ -4961,10 +4809,6 @@ snapshots:
 
   fast-uri@3.0.6: {}
 
-  fast-xml-parser@4.5.3:
-    dependencies:
-      strnum: 1.1.2
-
   fastq@1.19.1:
     dependencies:
       reusify: 1.1.0
@@ -5640,10 +5484,6 @@ snapshots:
       define-properties: 1.2.1
       es-object-atoms: 1.1.1
 
-  ollama@0.5.15:
-    dependencies:
-      whatwg-fetch: 3.6.20
-
   once@1.4.0:
     dependencies:
       wrappy: 1.0.2
@@ -5670,6 +5510,7 @@ snapshots:
       zod: 3.25.58
     transitivePeerDependencies:
       - encoding
+    optional: true
 
   optionator@0.9.4:
     dependencies:
@@ -6235,8 +6076,6 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  strnum@1.1.2: {}
-
   sucrase@3.35.0:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
@@ -6573,8 +6412,6 @@ snapshots:
       - '@swc/core'
       - esbuild
       - uglify-js
-
-  whatwg-fetch@3.6.20: {}
 
   whatwg-url@5.0.0:
     dependencies:
