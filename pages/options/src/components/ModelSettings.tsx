@@ -95,8 +95,8 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
         if (config) {
           setSelectedModel(`${config.provider}>${config.modelName}`);
           setModelParameters({
-            temperature: config.parameters?.temperature ?? 0,
-            topP: config.parameters?.topP ?? 0,
+            temperature: typeof config.parameters?.temperature === 'number' ? config.parameters.temperature : 0,
+            topP: typeof config.parameters?.topP === 'number' ? config.parameters.topP : 0,
           });
           if (config.reasoningEffort) {
             setReasoningEffort(config.reasoningEffort as 'low' | 'medium' | 'high');
@@ -389,15 +389,10 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
       configToSave.createdAt = providers[provider].createdAt || Date.now();
       // baseUrl, azureDeploymentName, azureApiVersion should be correctly set by handlers
 
-      if (providers[provider].type === ProviderTypeEnum.AzureOpenAI) {
-        // Ensure modelNames is NOT included for Azure
-        configToSave.modelNames = undefined;
-      } else {
-        // Ensure modelNames IS included for non-Azure
-        // Use existing modelNames from state, or default if somehow missing
-        configToSave.modelNames =
-          providers[provider].modelNames || llmProviderModelNames[provider as keyof typeof llmProviderModelNames] || [];
-      }
+      // Remove AzureOpenAI and OpenRouter from JSX and logic
+      // Only set modelNames for supported providers
+      configToSave.modelNames =
+        providers[provider].modelNames || llmProviderModelNames[provider as keyof typeof llmProviderModelNames] || [];
 
       // Pass the cleaned config to setProvider
       // Cast to ProviderConfig as we've ensured necessary fields based on type
@@ -1023,10 +1018,7 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                         className={`w-20 text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                         API Key
                         {/* Show asterisk only if required */}
-                        {providerConfig.type !== ProviderTypeEnum.CustomOpenAI &&
-                        providerConfig.type !== ProviderTypeEnum.AzureOpenAI
-                          ? '*'
-                          : ''}
+                        {providerConfig.type !== ProviderTypeEnum.CustomOpenAI ? '*' : ''}
                       </label>
                       <div className="relative flex-1">
                         <input
@@ -1035,9 +1027,7 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                           placeholder={
                             providerConfig.type === ProviderTypeEnum.CustomOpenAI
                               ? `${providerConfig.name || providerId} API key (optional)`
-                              : providerConfig.type === ProviderTypeEnum.AzureOpenAI
-                                ? 'API Key (leave empty for Azure)'
-                                : `${providerConfig.name || providerId} API key (required)`
+                              : `${providerConfig.name || providerId} API key (required)`
                           }
                           value={providerConfig.apiKey || ''}
                           onChange={e => handleApiKeyChange(providerId, e.target.value, providerConfig.baseUrl)}
@@ -1095,26 +1085,18 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                       )}
 
                     {/* Base URL input (for custom_openai, azure_openai, and openrouter) */}
-                    {(providerConfig.type === ProviderTypeEnum.CustomOpenAI ||
-                      providerConfig.type === ProviderTypeEnum.AzureOpenAI ||
-                      providerConfig.type === ProviderTypeEnum.OpenRouter) && (
+                    {providerConfig.type === ProviderTypeEnum.CustomOpenAI && (
                       <div className="flex flex-col">
                         <div className="flex items-center">
                           <label
                             htmlFor={`${providerId}-base-url`}
                             className={`w-20 text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                            Base URL
-                            {/* Show asterisk only if required */}
-                            {providerConfig.type === ProviderTypeEnum.CustomOpenAI ? '*' : ''}
+                            Base URL*
                           </label>
                           <input
                             id={`${providerId}-base-url`}
                             type="text"
-                            placeholder={
-                              providerConfig.type === ProviderTypeEnum.CustomOpenAI
-                                ? 'Required OpenAI-compatible API endpoint'
-                                : 'Optional base URL'
-                            }
+                            placeholder="Required OpenAI-compatible API endpoint"
                             value={providerConfig.baseUrl || ''}
                             onChange={e => handleApiKeyChange(providerId, providerConfig.apiKey || '', e.target.value)}
                             className={`flex-1 rounded-md border text-sm ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-800' : 'border-gray-300 bg-white text-gray-700 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} p-2 outline-none`}
@@ -1204,11 +1186,10 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                 <div className="py-1">
                   {/* Map through provider types to create buttons */}
                   {Object.values(ProviderTypeEnum)
-                    // Filter out already added providers and only show Gemini and Groq
+                    // Filter out already added providers and only show Groq and Gemini
                     .filter(
                       type =>
                         (type === ProviderTypeEnum.Gemini || type === ProviderTypeEnum.Groq) &&
-                        type !== ProviderTypeEnum.CustomOpenAI &&
                         !providersFromStorage.has(type) &&
                         !modifiedProviders.has(type),
                     )
