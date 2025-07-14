@@ -39,23 +39,14 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
   const [providers, setProviders] = useState<Record<string, ProviderConfig>>({});
   const [modifiedProviders, setModifiedProviders] = useState<Set<string>>(new Set());
   const [providersFromStorage, setProvidersFromStorage] = useState<Set<string>>(new Set());
-  const [selectedModels, setSelectedModels] = useState<Record<AgentNameEnum, string>>({
-    [AgentNameEnum.Navigator]: '',
-    [AgentNameEnum.Planner]: '',
-    [AgentNameEnum.Validator]: '',
+  // Remove state for separate agent selections
+  // Replace with a single selectedModel state
+  const [selectedModel, setSelectedModel] = useState<string>('');
+  const [modelParameters, setModelParameters] = useState<{ temperature: number; topP: number }>({
+    temperature: 0,
+    topP: 0,
   });
-  const [modelParameters, setModelParameters] = useState<Record<AgentNameEnum, { temperature: number; topP: number }>>({
-    [AgentNameEnum.Navigator]: { temperature: 0, topP: 0 },
-    [AgentNameEnum.Planner]: { temperature: 0, topP: 0 },
-    [AgentNameEnum.Validator]: { temperature: 0, topP: 0 },
-  });
-
-  // State for reasoning effort for O-series models
-  const [reasoningEffort, setReasoningEffort] = useState<Record<AgentNameEnum, 'low' | 'medium' | 'high' | undefined>>({
-    [AgentNameEnum.Navigator]: undefined,
-    [AgentNameEnum.Planner]: undefined,
-    [AgentNameEnum.Validator]: undefined,
-  });
+  const [reasoningEffort, setReasoningEffort] = useState<'low' | 'medium' | 'high' | undefined>(undefined);
   const [newModelInputs, setNewModelInputs] = useState<Record<string, string>>({});
   const [isProviderSelectorOpen, setIsProviderSelectorOpen] = useState(false);
   const newlyAddedProviderRef = useRef<string | null>(null);
@@ -95,45 +86,27 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
   }, []);
 
   // Load existing agent models and parameters on mount
+  // Remove useEffect for loading agent models separately
+  // Instead, load the model for one agent (e.g., Planner) and use it for all
   useEffect(() => {
-    const loadAgentModels = async () => {
+    const loadAgentModel = async () => {
       try {
-        const models: Record<AgentNameEnum, string> = {
-          [AgentNameEnum.Planner]: '',
-          [AgentNameEnum.Navigator]: '',
-          [AgentNameEnum.Validator]: '',
-        };
-
-        for (const agent of Object.values(AgentNameEnum)) {
-          const config = await agentModelStore.getAgentModel(agent);
-          if (config) {
-            // Store in provider>model format
-            models[agent] = `${config.provider}>${config.modelName}`;
-            if (config.parameters?.temperature !== undefined || config.parameters?.topP !== undefined) {
-              setModelParameters(prev => ({
-                ...prev,
-                [agent]: {
-                  temperature: config.parameters?.temperature ?? prev[agent].temperature,
-                  topP: config.parameters?.topP ?? prev[agent].topP,
-                },
-              }));
-            }
-            // Also load reasoningEffort if available
-            if (config.reasoningEffort) {
-              setReasoningEffort(prev => ({
-                ...prev,
-                [agent]: config.reasoningEffort as 'low' | 'medium' | 'high',
-              }));
-            }
+        const config = await agentModelStore.getAgentModel(AgentNameEnum.Planner);
+        if (config) {
+          setSelectedModel(`${config.provider}>${config.modelName}`);
+          setModelParameters({
+            temperature: config.parameters?.temperature ?? 0,
+            topP: config.parameters?.topP ?? 0,
+          });
+          if (config.reasoningEffort) {
+            setReasoningEffort(config.reasoningEffort as 'low' | 'medium' | 'high');
           }
         }
-        setSelectedModels(models);
       } catch (error) {
-        console.error('Error loading agent models:', error);
+        console.error('Error loading agent model:', error);
       }
     };
-
-    loadAgentModels();
+    loadAgentModel();
   }, []);
 
   useEffect(() => {
@@ -202,29 +175,16 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
 
       // Only use providers that are actually in storage
       for (const [provider, config] of Object.entries(storedProviders)) {
-        if (config.type === ProviderTypeEnum.AzureOpenAI) {
-          // Handle Azure providers specially - use deployment names as models
-          const deploymentNames = config.azureDeploymentNames || [];
-
-          models.push(
-            ...deploymentNames.map(deployment => ({
-              provider,
-              providerName: config.name || provider,
-              model: deployment,
-            })),
-          );
-        } else {
-          // Standard handling for non-Azure providers
-          const providerModels =
-            config.modelNames || llmProviderModelNames[provider as keyof typeof llmProviderModelNames] || [];
-          models.push(
-            ...providerModels.map(model => ({
-              provider,
-              providerName: config.name || provider,
-              model,
-            })),
-          );
-        }
+        // Only handle supported providers
+        const providerModels =
+          config.modelNames || llmProviderModelNames[provider as keyof typeof llmProviderModelNames] || [];
+        models.push(
+          ...providerModels.map(model => ({
+            provider,
+            providerName: config.name || provider,
+            model,
+          })),
+        );
       }
     } catch (error) {
       console.error('Error loading providers for model selection:', error);
@@ -376,19 +336,7 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
     const config = providers[provider];
 
     if (providerType === ProviderTypeEnum.CustomOpenAI) {
-      hasInput = Boolean(config?.baseUrl?.trim()); // Custom needs Base URL, name checked elsewhere
-    } else if (providerType === ProviderTypeEnum.Ollama) {
-      hasInput = Boolean(config?.baseUrl?.trim()); // Ollama needs Base URL
-    } else if (providerType === ProviderTypeEnum.AzureOpenAI) {
-      // Azure needs API Key, Endpoint, Deployment Names, and API Version
-      hasInput =
-        Boolean(config?.apiKey?.trim()) &&
-        Boolean(config?.baseUrl?.trim()) &&
-        Boolean(config?.azureDeploymentNames?.length) &&
-        Boolean(config?.azureApiVersion?.trim());
-    } else if (providerType === ProviderTypeEnum.OpenRouter) {
-      // OpenRouter needs API Key and optionally Base URL (has default)
-      hasInput = Boolean(config?.apiKey?.trim()) && Boolean(config?.baseUrl?.trim());
+      hasInput = Boolean(config?.baseUrl?.trim());
     } else {
       // Other built-in providers just need API Key
       hasInput = Boolean(config?.apiKey?.trim());
@@ -413,13 +361,9 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
         return;
       }
 
-      // Check if base URL is required but missing for custom_openai, ollama, azure_openai or openrouter
-      // Note: Groq and Cerebras do not require base URL as they use the default endpoint
+      // Check if base URL is required but missing for custom_openai
       if (
-        (providers[provider].type === ProviderTypeEnum.CustomOpenAI ||
-          providers[provider].type === ProviderTypeEnum.Ollama ||
-          providers[provider].type === ProviderTypeEnum.AzureOpenAI ||
-          providers[provider].type === ProviderTypeEnum.OpenRouter) &&
+        providers[provider].type === ProviderTypeEnum.CustomOpenAI &&
         (!providers[provider].baseUrl || !providers[provider].baseUrl.trim())
       ) {
         alert(`Base URL is required for ${getDefaultDisplayNameFromProviderId(provider)}. Please enter it.`);
@@ -533,84 +477,57 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
     });
   };
 
-  const handleModelChange = async (agentName: AgentNameEnum, modelValue: string) => {
-    // modelValue will be in format "provider>model"
+  // Replace handleModelChange to update all agent roles
+  const handleModelChange = async (modelValue: string) => {
     const [provider, model] = modelValue.split('>');
-
-    console.log(`[handleModelChange] Setting ${agentName} model: provider=${provider}, model=${model}`);
-
-    // Set parameters based on provider type
-    const newParameters = getDefaultAgentModelParams(provider, agentName);
-
-    setModelParameters(prev => ({
-      ...prev,
-      [agentName]: newParameters,
-    }));
-
-    // Store both provider and model name in the format "provider>model"
-    setSelectedModels(prev => ({
-      ...prev,
-      [agentName]: modelValue, // Store the full provider>model value
-    }));
-
-    try {
-      if (model) {
-        const providerConfig = providers[provider];
-
-        // For Azure, verify the model is in the deployment names list
-        if (providerConfig && providerConfig.type === ProviderTypeEnum.AzureOpenAI) {
-          console.log(`[handleModelChange] Azure model selected: ${model}`);
-        }
-
-        // Reset reasoning effort if switching models
-        if (isOpenAIOModel(model)) {
-          // Keep existing reasoning effort if already set for O-series models
-          setReasoningEffort(prev => ({
-            ...prev,
-            [agentName]: prev[agentName] || 'medium', // Default to medium if not set
-          }));
-        } else {
-          // Clear reasoning effort for non-O-series models
-          setReasoningEffort(prev => ({
-            ...prev,
-            [agentName]: undefined,
-          }));
-        }
-
-        await agentModelStore.setAgentModel(agentName, {
-          provider,
-          modelName: model,
-          parameters: newParameters,
-          reasoningEffort: isOpenAIOModel(model) ? reasoningEffort[agentName] || 'medium' : undefined,
-        });
-      } else {
-        // Reset storage if no model is selected
-        await agentModelStore.resetAgentModel(agentName);
-      }
-    } catch (error) {
-      console.error('Error saving agent model:', error);
+    setSelectedModel(modelValue);
+    // Use Planner as default for parameter shape
+    const params = getDefaultAgentModelParams(provider, AgentNameEnum.Planner);
+    setModelParameters({
+      temperature: params.temperature ?? 0,
+      topP: params.topP ?? 0,
+    });
+    // Save for all agent roles
+    for (const agent of Object.values(AgentNameEnum)) {
+      await agentModelStore.setAgentModel(agent, {
+        provider,
+        modelName: model,
+        parameters: {
+          temperature: params.temperature ?? 0,
+          topP: params.topP ?? 0,
+        },
+        reasoningEffort: isOpenAIOModel(model) ? reasoningEffort || 'medium' : undefined,
+      });
     }
   };
 
-  const handleReasoningEffortChange = async (agentName: AgentNameEnum, value: 'low' | 'medium' | 'high') => {
-    setReasoningEffort(prev => ({
-      ...prev,
-      [agentName]: value,
-    }));
+  const handleReasoningEffortChange = async (value: 'low' | 'medium' | 'high') => {
+    setReasoningEffort(value);
 
     // Only update if we have a selected model
-    if (selectedModels[agentName] && isOpenAIOModel(selectedModels[agentName])) {
+    if (selectedModel && isOpenAIOModel(selectedModel)) {
       try {
         // Find provider
-        const provider = getProviderForModel(selectedModels[agentName]);
+        const provider = getProviderForModel(selectedModel);
 
         if (provider) {
-          await agentModelStore.setAgentModel(agentName, {
+          await agentModelStore.setAgentModel(AgentNameEnum.Planner, {
             provider,
-            modelName: selectedModels[agentName],
-            parameters: modelParameters[agentName],
+            modelName: selectedModel,
+            parameters: modelParameters,
             reasoningEffort: value,
           });
+          // Also update for other agents
+          for (const agent of Object.values(AgentNameEnum)) {
+            if (agent !== AgentNameEnum.Planner) {
+              await agentModelStore.setAgentModel(agent, {
+                provider,
+                modelName: selectedModel,
+                parameters: modelParameters,
+                reasoningEffort: value,
+              });
+            }
+          }
         }
       } catch (error) {
         console.error('Error saving reasoning effort:', error);
@@ -618,19 +535,16 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
     }
   };
 
-  const handleParameterChange = async (agentName: AgentNameEnum, paramName: 'temperature' | 'topP', value: number) => {
+  const handleParameterChange = async (paramName: 'temperature' | 'topP', value: number) => {
     const newParameters = {
-      ...modelParameters[agentName],
+      ...modelParameters,
       [paramName]: value,
     };
 
-    setModelParameters(prev => ({
-      ...prev,
-      [agentName]: newParameters,
-    }));
+    setModelParameters(newParameters);
 
     // Only update if we have a selected model
-    if (selectedModels[agentName]) {
+    if (selectedModel) {
       try {
         // Find provider
         let provider: string | undefined;
@@ -638,18 +552,28 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
           // Check standard model names for providers
           const modelNames =
             providerConfig.modelNames || llmProviderModelNames[providerKey as keyof typeof llmProviderModelNames] || [];
-          if (modelNames.includes(selectedModels[agentName])) {
+          if (modelNames.includes(selectedModel)) {
             provider = providerKey;
             break;
           }
         }
 
         if (provider) {
-          await agentModelStore.setAgentModel(agentName, {
+          await agentModelStore.setAgentModel(AgentNameEnum.Planner, {
             provider,
-            modelName: selectedModels[agentName],
+            modelName: selectedModel,
             parameters: newParameters,
           });
+          // Also update for other agents
+          for (const agent of Object.values(AgentNameEnum)) {
+            if (agent !== AgentNameEnum.Planner) {
+              await agentModelStore.setAgentModel(agent, {
+                provider,
+                modelName: selectedModel,
+                parameters: newParameters,
+              });
+            }
+          }
         }
       } catch (error) {
         console.error('Error saving agent parameters:', error);
@@ -679,30 +603,28 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
     }
   };
 
-  const renderModelSelect = (agentName: AgentNameEnum) => (
+  const renderModelSelect = () => (
     <div
       className={`rounded-lg border ${isDarkMode ? 'border-gray-700 bg-slate-800' : 'border-gray-200 bg-gray-50'} p-4`}>
-      <h3 className={`mb-2 text-lg font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-        {agentName.charAt(0).toUpperCase() + agentName.slice(1)}
-      </h3>
+      <h3 className={`mb-2 text-lg font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Model</h3>
       <p className={`mb-4 text-sm font-normal ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-        {getAgentDescription(agentName)}
+        Configure the model used for all agent roles.
       </p>
 
       <div className="space-y-4">
         {/* Model Selection */}
         <div className="flex items-center">
           <label
-            htmlFor={`${agentName}-model`}
+            htmlFor="unified-model"
             className={`w-24 text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
             Model
           </label>
           <select
-            id={`${agentName}-model`}
+            id="unified-model"
             className={`flex-1 rounded-md border text-sm ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200' : 'border-gray-300 bg-white text-gray-700'} px-3 py-2`}
             disabled={availableModels.length === 0}
-            value={selectedModels[agentName] || ''} // Use the stored provider>model value directly
-            onChange={e => handleModelChange(agentName, e.target.value)}>
+            value={selectedModel || ''}
+            onChange={e => handleModelChange(e.target.value)}>
             <option key="default" value="">
               Choose model
             </option>
@@ -717,42 +639,42 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
         {/* Temperature Slider */}
         <div className="flex items-center">
           <label
-            htmlFor={`${agentName}-temperature`}
+            htmlFor="unified-temperature"
             className={`w-24 text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
             Temperature
           </label>
           <div className="flex flex-1 items-center space-x-2">
             <input
-              id={`${agentName}-temperature`}
+              id="unified-temperature"
               type="range"
               min="0"
               max="2"
               step="0.01"
-              value={modelParameters[agentName].temperature}
-              onChange={e => handleParameterChange(agentName, 'temperature', Number.parseFloat(e.target.value))}
+              value={modelParameters.temperature}
+              onChange={e => handleParameterChange('temperature', Number.parseFloat(e.target.value))}
               style={{
-                background: `linear-gradient(to right, ${isDarkMode ? '#3b82f6' : '#60a5fa'} 0%, ${isDarkMode ? '#3b82f6' : '#60a5fa'} ${(modelParameters[agentName].temperature / 2) * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} ${(modelParameters[agentName].temperature / 2) * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} 100%)`,
+                background: `linear-gradient(to right, ${isDarkMode ? '#3b82f6' : '#60a5fa'} 0%, ${isDarkMode ? '#3b82f6' : '#60a5fa'} ${(modelParameters.temperature / 2) * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} ${(modelParameters.temperature / 2) * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} 100%)`,
               }}
               className={`flex-1 ${isDarkMode ? 'accent-blue-500' : 'accent-blue-400'} h-1 appearance-none rounded-full`}
             />
             <div className="flex items-center space-x-2">
               <span className={`w-12 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                {modelParameters[agentName].temperature.toFixed(2)}
+                {modelParameters.temperature.toFixed(2)}
               </span>
               <input
                 type="number"
                 min="0"
                 max="2"
                 step="0.01"
-                value={modelParameters[agentName].temperature}
+                value={modelParameters.temperature}
                 onChange={e => {
                   const value = Number.parseFloat(e.target.value);
                   if (!Number.isNaN(value) && value >= 0 && value <= 2) {
-                    handleParameterChange(agentName, 'temperature', value);
+                    handleParameterChange('temperature', value);
                   }
                 }}
                 className={`w-20 rounded-md border ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-800' : 'border-gray-300 bg-white text-gray-700 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} px-2 py-1 text-sm`}
-                aria-label={`${agentName} temperature number input`}
+                aria-label="Temperature number input"
               />
             </div>
           </div>
@@ -761,60 +683,60 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
         {/* Top P Slider */}
         <div className="flex items-center">
           <label
-            htmlFor={`${agentName}-topP`}
+            htmlFor="unified-topP"
             className={`w-24 text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
             Top P
           </label>
           <div className="flex flex-1 items-center space-x-2">
             <input
-              id={`${agentName}-topP`}
+              id="unified-topP"
               type="range"
               min="0"
               max="1"
               step="0.001"
-              value={modelParameters[agentName].topP}
-              onChange={e => handleParameterChange(agentName, 'topP', Number.parseFloat(e.target.value))}
+              value={modelParameters.topP}
+              onChange={e => handleParameterChange('topP', Number.parseFloat(e.target.value))}
               style={{
-                background: `linear-gradient(to right, ${isDarkMode ? '#3b82f6' : '#60a5fa'} 0%, ${isDarkMode ? '#3b82f6' : '#60a5fa'} ${modelParameters[agentName].topP * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} ${modelParameters[agentName].topP * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} 100%)`,
+                background: `linear-gradient(to right, ${isDarkMode ? '#3b82f6' : '#60a5fa'} 0%, ${isDarkMode ? '#3b82f6' : '#60a5fa'} ${modelParameters.topP * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} ${modelParameters.topP * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} 100%)`,
               }}
               className={`flex-1 ${isDarkMode ? 'accent-blue-500' : 'accent-blue-400'} h-1 appearance-none rounded-full`}
             />
             <div className="flex items-center space-x-2">
               <span className={`w-12 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                {modelParameters[agentName].topP.toFixed(3)}
+                {modelParameters.topP.toFixed(3)}
               </span>
               <input
                 type="number"
                 min="0"
                 max="1"
                 step="0.001"
-                value={modelParameters[agentName].topP}
+                value={modelParameters.topP}
                 onChange={e => {
                   const value = Number.parseFloat(e.target.value);
                   if (!Number.isNaN(value) && value >= 0 && value <= 1) {
-                    handleParameterChange(agentName, 'topP', value);
+                    handleParameterChange('topP', value);
                   }
                 }}
                 className={`w-20 rounded-md border ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-800' : 'border-gray-300 bg-white text-gray-700 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} px-2 py-1 text-sm`}
-                aria-label={`${agentName} top P number input`}
+                aria-label="Top P number input"
               />
             </div>
           </div>
         </div>
 
         {/* Reasoning Effort Selector (only for O-series models) */}
-        {selectedModels[agentName] && isOpenAIOModel(selectedModels[agentName]) && (
+        {selectedModel && isOpenAIOModel(selectedModel) && (
           <div className="flex items-center">
             <label
-              htmlFor={`${agentName}-reasoning-effort`}
+              htmlFor="unified-reasoning-effort"
               className={`w-24 text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               Reasoning
             </label>
             <div className="flex flex-1 items-center space-x-2">
               <select
-                id={`${agentName}-reasoning-effort`}
-                value={reasoningEffort[agentName] || 'medium'}
-                onChange={e => handleReasoningEffortChange(agentName, e.target.value as 'low' | 'medium' | 'high')}
+                id="unified-reasoning-effort"
+                value={reasoningEffort || 'medium'}
+                onChange={e => handleReasoningEffortChange(e.target.value as 'low' | 'medium' | 'high')}
                 className={`flex-1 rounded-md border text-sm ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200' : 'border-gray-300 bg-white text-gray-700'} px-3 py-2`}>
                 <option value="low">Low (Faster)</option>
                 <option value="medium">Medium (Balanced)</option>
@@ -979,12 +901,6 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
       return;
     }
 
-    // Handle Azure OpenAI specially to allow multiple instances
-    if (providerType === ProviderTypeEnum.AzureOpenAI) {
-      addAzureProvider();
-      return;
-    }
-
     // Handle built-in supported providers
     addBuiltInProvider(providerType);
   };
@@ -1108,7 +1024,7 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                         API Key
                         {/* Show asterisk only if required */}
                         {providerConfig.type !== ProviderTypeEnum.CustomOpenAI &&
-                        providerConfig.type !== ProviderTypeEnum.Ollama
+                        providerConfig.type !== ProviderTypeEnum.AzureOpenAI
                           ? '*'
                           : ''}
                       </label>
@@ -1119,8 +1035,8 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                           placeholder={
                             providerConfig.type === ProviderTypeEnum.CustomOpenAI
                               ? `${providerConfig.name || providerId} API key (optional)`
-                              : providerConfig.type === ProviderTypeEnum.Ollama
-                                ? 'API Key (leave empty for Ollama)'
+                              : providerConfig.type === ProviderTypeEnum.AzureOpenAI
+                                ? 'API Key (leave empty for Azure)'
                                 : `${providerConfig.name || providerId} API key (required)`
                           }
                           value={providerConfig.apiKey || ''}
@@ -1178,9 +1094,8 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                         </div>
                       )}
 
-                    {/* Base URL input (for custom_openai, ollama, azure_openai, and openrouter) */}
+                    {/* Base URL input (for custom_openai, azure_openai, and openrouter) */}
                     {(providerConfig.type === ProviderTypeEnum.CustomOpenAI ||
-                      providerConfig.type === ProviderTypeEnum.Ollama ||
                       providerConfig.type === ProviderTypeEnum.AzureOpenAI ||
                       providerConfig.type === ProviderTypeEnum.OpenRouter) && (
                       <div className="flex flex-col">
@@ -1329,17 +1244,13 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
         </div>
       </div>
 
-      {/* Updated Agent Models Section */}
+      {/* Unified Model Selection Section */}
       <div
         className={`rounded-lg border ${isDarkMode ? 'border-slate-700 bg-slate-800' : 'border-blue-100 bg-gray-50'} p-6 text-left shadow-sm`}>
         <h2 className={`mb-4 text-left text-xl font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
           Model Selection
         </h2>
-        <div className="space-y-4">
-          {[AgentNameEnum.Planner, AgentNameEnum.Navigator, AgentNameEnum.Validator].map(agentName => (
-            <div key={agentName}>{renderModelSelect(agentName)}</div>
-          ))}
-        </div>
+        <div className="space-y-4">{renderModelSelect()}</div>
       </div>
 
       {/* Speech-to-Text Model Selection */}
