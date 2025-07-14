@@ -2,13 +2,11 @@ import { useState, useEffect } from 'react';
 import '@src/Options.css';
 import { Button } from '@extension/ui';
 import { withErrorBoundary, withSuspense } from '@extension/shared';
-import { GeneralSettings } from './components/GeneralSettings';
 import { ModelSettings } from './components/ModelSettings';
 
-type TabTypes = 'general' | 'models' | 'help';
+type TabTypes = 'models' | 'help';
 
 const TABS: { id: TabTypes; icon: string; label: string }[] = [
-  { id: 'general', icon: '⚙️', label: 'General' },
   { id: 'models', icon: '📊', label: 'Models' },
   { id: 'help', icon: '📚', label: 'Help' },
 ];
@@ -40,8 +38,6 @@ const Options = () => {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'general':
-        return <GeneralSettings isDarkMode={isDarkMode} />;
       case 'models':
         return <ModelSettings isDarkMode={isDarkMode} />;
       default:
