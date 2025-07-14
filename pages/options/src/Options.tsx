@@ -64,7 +64,6 @@ const Options = () => {
                         ? `${isDarkMode ? 'bg-slate-700/70 text-gray-300 hover:text-white' : 'bg-red-500/15 font-medium text-gray-700 hover:text-white'} backdrop-blur-sm`
                         : `${isDarkMode ? 'bg-red-800/50' : ''} text-white backdrop-blur-sm`
                     }`}>
-                  <span>{item.icon}</span>
                   <span>{item.label}</span>
                 </Button>
               </li>
