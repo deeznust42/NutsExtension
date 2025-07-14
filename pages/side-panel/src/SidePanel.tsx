@@ -1079,9 +1079,6 @@ const SidePanel = () => {
                       <ChatInput
                         onSendMessage={handleSendMessage}
                         onStopTask={handleStopTask}
-                        onMicClick={handleMicClick}
-                        isRecording={isRecording}
-                        isProcessingSpeech={isProcessingSpeech}
                         disabled={!inputEnabled || isHistoricalSession}
                         showStopButton={showStopButton}
                         setContent={setter => {
@@ -1117,9 +1114,6 @@ const SidePanel = () => {
                     <ChatInput
                       onSendMessage={handleSendMessage}
                       onStopTask={handleStopTask}
-                      onMicClick={handleMicClick}
-                      isRecording={isRecording}
-                      isProcessingSpeech={isProcessingSpeech}
                       disabled={!inputEnabled || isHistoricalSession}
                       showStopButton={showStopButton}
                       setContent={setter => {
