@@ -6,9 +6,9 @@ import { ModelSettings } from './components/ModelSettings';
 
 type TabTypes = 'models' | 'help';
 
-const TABS: { id: TabTypes; icon: string; label: string }[] = [
-  { id: 'models', icon: '📊', label: 'Models' },
-  { id: 'help', icon: '📚', label: 'Help' },
+const TABS: { id: TabTypes; label: string }[] = [
+  { id: 'models', label: 'Models' },
+  { id: 'help', label: 'Help' },
 ];
 
 const Options = () => {
