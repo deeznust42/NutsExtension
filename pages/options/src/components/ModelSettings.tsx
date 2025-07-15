@@ -1101,15 +1101,52 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                             className={`min-w-[100px] flex-1 border-none text-xs ${isDarkMode ? 'bg-transparent text-gray-200' : 'bg-transparent text-gray-900'} p-0.5 outline-none`}
                           />
                         </div>
-                        <p className={`mt-1 text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                          Type and Press Enter or Space to add.
-                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
               );
             })
+          )}
+        </div>
+        {/* Add Provider button and dropdown */}
+        <div className="provider-selector-container relative pt-2">
+          <Button
+            variant="secondary"
+            onClick={() => setIsProviderSelectorOpen(prev => !prev)}
+            className={`flex w-full items-center justify-center font-medium ${isDarkMode ? 'border-blue-700 bg-slate-700 text-blue-200 hover:bg-blue-800' : 'border-blue-200 bg-blue-50 text-blue-800 hover:bg-blue-100'}`}>
+            <span className="mr-2 text-sm">+</span> <span className="text-sm">Add New Provider</span>
+          </Button>
+          {isProviderSelectorOpen && (
+            <div
+              className={`absolute z-10 mt-2 w-full overflow-hidden rounded border ${isDarkMode ? 'border-blue-600 bg-slate-700 shadow-lg shadow-slate-900/50' : 'border-blue-200 bg-white shadow-xl shadow-blue-100/50'}`}>
+              <div className="py-1">
+                {/* Map through provider types to create buttons */}
+                {Object.values(ProviderTypeEnum)
+                  .filter(
+                    type =>
+                      (type === ProviderTypeEnum.Gemini || type === ProviderTypeEnum.Groq) &&
+                      !providersFromStorage.has(type) &&
+                      !modifiedProviders.has(type),
+                  )
+                  .map(type => (
+                    <button
+                      key={type}
+                      type="button"
+                      className={`flex w-full items-center px-4 py-2 text-left text-sm ${isDarkMode ? 'text-blue-200 hover:bg-blue-600/30 hover:text-white' : 'text-blue-700 hover:bg-blue-100 hover:text-blue-800'} transition-colors duration-150`}
+                      onClick={() => handleProviderSelection(type)}>
+                      <span className="font-medium">{getDefaultDisplayNameFromProviderId(type)}</span>
+                    </button>
+                  ))}
+                {/* Custom provider button (always shown) */}
+                <button
+                  type="button"
+                  className={`flex w-full items-center px-4 py-2 text-left text-sm ${isDarkMode ? 'text-blue-200 hover:bg-blue-600/30 hover:text-white' : 'text-blue-700 hover:bg-blue-100 hover:text-blue-800'} transition-colors duration-150`}
+                  onClick={() => handleProviderSelection(ProviderTypeEnum.CustomOpenAI)}>
+                  <span className="font-medium">OpenAI-compatible API Provider</span>
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>
