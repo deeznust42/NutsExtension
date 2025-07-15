@@ -600,25 +600,23 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
 
   const renderModelSelect = () => (
     <div
-      className={`rounded-2xl shadow-lg border ${isDarkMode ? 'border-slate-700 bg-slate-800' : 'border-gray-200 bg-white'} p-8 mb-8`}>
-      <h3 className={`mb-4 text-2xl font-extrabold ${isDarkMode ? 'text-gray-100' : 'text-[#1a2550]'}`}>
-        Model Selection
-      </h3>
-      <p className={`mb-8 text-base font-normal ${isDarkMode ? 'text-gray-400' : 'text-[#22306a]'}`}>
+      className={`rounded shadow border ${isDarkMode ? 'border-slate-700 bg-slate-800' : 'border-gray-200 bg-white'} p-4 mb-4`}>
+      <h3 className={`mb-2 text-lg font-bold ${isDarkMode ? 'text-gray-100' : 'text-[#1a2550]'}`}>Model Selection</h3>
+      <p className={`mb-4 text-sm font-normal ${isDarkMode ? 'text-gray-400' : 'text-[#22306a]'}`}>
         Choose and configure the model used for all agent roles.
       </p>
 
-      <div className="space-y-8">
+      <div className="space-y-4">
         {/* Model Selection */}
-        <div className="flex flex-col md:flex-row md:items-center gap-4">
+        <div className="flex flex-col md:flex-row md:items-center gap-2">
           <label
             htmlFor="unified-model"
-            className={`w-32 text-lg font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
+            className={`w-24 text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
             Model
           </label>
           <select
             id="unified-model"
-            className={`flex-1 rounded-lg border text-lg ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200' : 'border-gray-300 bg-gray-50 text-gray-900'} px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400`}
+            className={`flex-1 rounded border text-sm ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200' : 'border-gray-300 bg-gray-50 text-gray-900'} px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400`}
             disabled={availableModels.length === 0}
             value={selectedModel || ''}
             onChange={e => handleModelChange(e.target.value)}>
@@ -634,13 +632,13 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
         </div>
 
         {/* Temperature Slider */}
-        <div className="flex flex-col md:flex-row md:items-center gap-4">
+        <div className="flex flex-col md:flex-row md:items-center gap-2">
           <label
             htmlFor="unified-temperature"
-            className={`w-32 text-lg font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
+            className={`w-24 text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
             Temperature
           </label>
-          <div className="flex flex-1 items-center gap-4">
+          <div className="flex flex-1 items-center gap-2">
             <input
               id="unified-temperature"
               type="range"
@@ -652,7 +650,7 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
               style={{
                 background: `linear-gradient(to right, ${isDarkMode ? '#3b82f6' : '#60a5fa'} 0%, ${isDarkMode ? '#3b82f6' : '#60a5fa'} ${(modelParameters.temperature / 2) * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} ${(modelParameters.temperature / 2) * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} 100%)`,
               }}
-              className={`flex-1 ${isDarkMode ? 'accent-blue-500' : 'accent-blue-400'} h-2 appearance-none rounded-full`}
+              className={`flex-1 ${isDarkMode ? 'accent-blue-500' : 'accent-blue-400'} h-1 appearance-none rounded-full`}
             />
             <input
               type="number"
@@ -666,23 +664,23 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                   handleParameterChange('temperature', value);
                 }
               }}
-              className={`w-20 rounded-md border ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-800' : 'border-gray-300 bg-white text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} px-2 py-2 text-lg`}
+              className={`w-16 rounded border ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-800' : 'border-gray-300 bg-white text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} px-1 py-1 text-sm`}
               aria-label="Temperature number input"
             />
-            <span className={`w-16 text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <span className={`w-10 text-xs ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               {modelParameters.temperature.toFixed(2)}
             </span>
           </div>
         </div>
 
         {/* Top P Slider */}
-        <div className="flex flex-col md:flex-row md:items-center gap-4">
+        <div className="flex flex-col md:flex-row md:items-center gap-2">
           <label
             htmlFor="unified-topP"
-            className={`w-32 text-lg font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
+            className={`w-24 text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
             Top P
           </label>
-          <div className="flex flex-1 items-center gap-4">
+          <div className="flex flex-1 items-center gap-2">
             <input
               id="unified-topP"
               type="range"
@@ -694,7 +692,7 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
               style={{
                 background: `linear-gradient(to right, ${isDarkMode ? '#3b82f6' : '#60a5fa'} 0%, ${isDarkMode ? '#3b82f6' : '#60a5fa'} ${modelParameters.topP * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} ${modelParameters.topP * 100}%, ${isDarkMode ? '#475569' : '#cbd5e1'} 100%)`,
               }}
-              className={`flex-1 ${isDarkMode ? 'accent-blue-500' : 'accent-blue-400'} h-2 appearance-none rounded-full`}
+              className={`flex-1 ${isDarkMode ? 'accent-blue-500' : 'accent-blue-400'} h-1 appearance-none rounded-full`}
             />
             <input
               type="number"
@@ -708,10 +706,10 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                   handleParameterChange('topP', value);
                 }
               }}
-              className={`w-20 rounded-md border ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-800' : 'border-gray-300 bg-white text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} px-2 py-2 text-lg`}
+              className={`w-16 rounded border ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-800' : 'border-gray-300 bg-white text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} px-1 py-1 text-sm`}
               aria-label="Top P number input"
             />
-            <span className={`w-16 text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <span className={`w-10 text-xs ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               {modelParameters.topP.toFixed(3)}
             </span>
           </div>
@@ -719,17 +717,17 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
 
         {/* Reasoning Effort Selector (only for O-series models) */}
         {selectedModel && isOpenAIOModel(selectedModel) && (
-          <div className="flex flex-col md:flex-row md:items-center gap-4">
+          <div className="flex flex-col md:flex-row md:items-center gap-2">
             <label
               htmlFor="unified-reasoning-effort"
-              className={`w-32 text-lg font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
+              className={`w-24 text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
               Reasoning
             </label>
             <select
               id="unified-reasoning-effort"
               value={reasoningEffort || 'medium'}
               onChange={e => handleReasoningEffortChange(e.target.value as 'low' | 'medium' | 'high')}
-              className={`flex-1 rounded-lg border text-lg ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200' : 'border-gray-300 bg-gray-50 text-gray-900'} px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400`}>
+              className={`flex-1 rounded border text-sm ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200' : 'border-gray-300 bg-gray-50 text-gray-900'} px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400`}>
               <option value="low">Low (Faster)</option>
               <option value="medium">Medium (Balanced)</option>
               <option value="high">High (More thorough)</option>
@@ -909,17 +907,15 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
   };
 
   return (
-    <section className="space-y-8">
+    <section className="space-y-6">
       {/* LLM Providers Section */}
       <div
-        className={`rounded-2xl shadow-lg border ${isDarkMode ? 'border-slate-700 bg-slate-800' : 'border-gray-200 bg-white'} p-8 mb-8`}>
-        <h2 className={`mb-6 text-2xl font-extrabold ${isDarkMode ? 'text-gray-100' : 'text-[#1a2550]'}`}>
-          LLM Providers
-        </h2>
-        <div className="space-y-8">
+        className={`rounded-lg shadow border ${isDarkMode ? 'border-slate-700 bg-slate-800' : 'border-gray-200 bg-white'} p-4 mb-4`}>
+        <h2 className={`mb-3 text-lg font-bold ${isDarkMode ? 'text-gray-100' : 'text-[#1a2550]'}`}>LLM Providers</h2>
+        <div className="space-y-4">
           {getSortedProviders().length === 0 ? (
-            <div className="py-12 text-center text-gray-500">
-              <p className="mb-4">No providers configured yet. Add a provider to get started.</p>
+            <div className="py-6 text-center text-gray-500">
+              <p className="mb-2">No providers configured yet. Add a provider to get started.</p>
             </div>
           ) : (
             getSortedProviders().map(([providerId, providerConfig]) => {
@@ -929,12 +925,12 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                 <div
                   key={providerId}
                   id={`provider-${providerId}`}
-                  className={`rounded-xl border shadow-sm p-6 space-y-6 transition-all duration-200 ${isNew ? (isDarkMode ? 'border-blue-700 bg-slate-700' : 'border-blue-200 bg-blue-50/70') : isDarkMode ? 'border-slate-700 bg-slate-800' : 'border-gray-200 bg-white'}`}>
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    <h3 className={`text-xl font-bold ${isDarkMode ? 'text-gray-100' : 'text-[#1a2550]'}`}>
+                  className={`rounded border shadow-sm p-3 space-y-3 transition-all duration-200 ${isNew ? (isDarkMode ? 'border-blue-700 bg-slate-700' : 'border-blue-200 bg-blue-50/70') : isDarkMode ? 'border-slate-700 bg-slate-800' : 'border-gray-200 bg-white'}`}>
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                    <h3 className={`text-base font-bold ${isDarkMode ? 'text-gray-100' : 'text-[#1a2550]'}`}>
                       {providerConfig.name || providerId}
                     </h3>
-                    <div className="flex gap-2">
+                    <div className="flex gap-1">
                       {isNew && (
                         <Button variant="secondary" onClick={() => handleCancelProvider(providerId)}>
                           Cancel
@@ -953,17 +949,17 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                     </div>
                   </div>
                   {isNew && (
-                    <div className={`mb-2 text-sm ${isDarkMode ? 'text-teal-300' : 'text-teal-700'}`}>
+                    <div className={`mb-1 text-xs ${isDarkMode ? 'text-teal-300' : 'text-teal-700'}`}>
                       This provider is newly added. Enter your API key and click Save to configure it.
                     </div>
                   )}
-                  <div className="space-y-4">
+                  <div className="space-y-2">
                     {/* Name input (only for custom_openai) */}
                     {providerConfig.type === ProviderTypeEnum.CustomOpenAI && (
-                      <div className="flex flex-col md:flex-row md:items-center gap-4">
+                      <div className="flex flex-col md:flex-row md:items-center gap-2">
                         <label
                           htmlFor={`${providerId}-name`}
-                          className={`w-32 text-lg font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
+                          className={`w-24 text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
                           Name
                         </label>
                         <input
@@ -972,7 +968,7 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                           placeholder="Provider name"
                           value={providerConfig.name || ''}
                           onChange={e => handleNameChange(providerId, e.target.value)}
-                          className={`flex-1 rounded-lg border px-4 py-3 text-lg ${nameErrors[providerId] ? (isDarkMode ? 'border-red-700 bg-slate-700 text-gray-200 focus:border-red-600 focus:ring-2 focus:ring-red-900' : 'border-red-300 bg-gray-50 focus:border-red-400 focus:ring-2 focus:ring-red-200') : isDarkMode ? 'border-blue-700 bg-slate-700 text-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-900' : 'border-blue-300 bg-gray-50 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} outline-none`}
+                          className={`flex-1 rounded border px-2 py-1 text-sm ${nameErrors[providerId] ? (isDarkMode ? 'border-red-700 bg-slate-700 text-gray-200 focus:border-red-600 focus:ring-2 focus:ring-red-900' : 'border-red-300 bg-gray-50 focus:border-red-400 focus:ring-2 focus:ring-red-200') : isDarkMode ? 'border-blue-700 bg-slate-700 text-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-900' : 'border-blue-300 bg-gray-50 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} outline-none`}
                         />
                         {nameErrors[providerId] ? (
                           <p className={`ml-2 mt-1 text-xs ${isDarkMode ? 'text-red-400' : 'text-red-500'}`}>
@@ -986,10 +982,10 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                       </div>
                     )}
                     {/* API Key input */}
-                    <div className="flex flex-col md:flex-row md:items-center gap-4">
+                    <div className="flex flex-col md:flex-row md:items-center gap-2">
                       <label
                         htmlFor={`${providerId}-api-key`}
-                        className={`w-32 text-lg font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
+                        className={`w-24 text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
                         API Key{providerConfig.type !== ProviderTypeEnum.CustomOpenAI ? '*' : ''}
                       </label>
                       <div className="relative flex-1">
@@ -1003,7 +999,7 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                           }
                           value={providerConfig.apiKey || ''}
                           onChange={e => handleApiKeyChange(providerId, e.target.value, providerConfig.baseUrl)}
-                          className={`w-full rounded-lg border px-4 py-3 text-lg ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-800' : 'border-gray-300 bg-gray-50 text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} outline-none`}
+                          className={`w-full rounded border px-2 py-1 text-sm ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-800' : 'border-gray-300 bg-gray-50 text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} outline-none`}
                         />
                         {isNew && (
                           <button
@@ -1019,7 +1015,7 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                               strokeWidth="2"
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                              className="size-5"
+                              className="size-4"
                               aria-hidden="true">
                               <title>{visibleApiKeys[providerId] ? 'Hide API key' : 'Show API key'}</title>
                               {visibleApiKeys[providerId] ? (
@@ -1043,17 +1039,17 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                     {isNew && visibleApiKeys[providerId] && providerConfig.apiKey && (
                       <div className="ml-2 mt-1">
                         <p
-                          className={`break-words font-mono text-base ${isDarkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>
+                          className={`break-words font-mono text-xs ${isDarkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>
                           {providerConfig.apiKey}
                         </p>
                       </div>
                     )}
                     {/* Base URL input */}
                     {providerConfig.type === ProviderTypeEnum.CustomOpenAI && (
-                      <div className="flex flex-col md:flex-row md:items-center gap-4">
+                      <div className="flex flex-col md:flex-row md:items-center gap-2">
                         <label
                           htmlFor={`${providerId}-base-url`}
-                          className={`w-32 text-lg font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
+                          className={`w-24 text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
                           Base URL*
                         </label>
                         <input
@@ -1062,20 +1058,19 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                           placeholder="Required OpenAI-compatible API endpoint"
                           value={providerConfig.baseUrl || ''}
                           onChange={e => handleApiKeyChange(providerId, providerConfig.apiKey || '', e.target.value)}
-                          className={`flex-1 rounded-lg border px-4 py-3 text-lg ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-800' : 'border-gray-300 bg-gray-50 text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} outline-none`}
+                          className={`flex-1 rounded border px-2 py-1 text-sm ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-800' : 'border-gray-300 bg-gray-50 text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-200'} outline-none`}
                         />
                       </div>
                     )}
-                    {/* Models input section */}
-                    <div className="flex flex-col md:flex-row md:items-start gap-4">
+                    <div className="flex flex-col md:flex-row md:items-start gap-2">
                       <label
                         htmlFor={`${providerId}-models-label`}
-                        className={`w-32 pt-2 text-lg font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
+                        className={`w-24 pt-1 text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-[#1a2550]'}`}>
                         Models
                       </label>
-                      <div className="flex-1 space-y-2">
+                      <div className="flex-1 space-y-1">
                         <div
-                          className={`flex min-h-[42px] flex-wrap items-center gap-2 rounded-lg border ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200' : 'border-gray-300 bg-white text-gray-900'} p-2`}>
+                          className={`flex min-h-[32px] flex-wrap items-center gap-1 rounded border ${isDarkMode ? 'border-slate-600 bg-slate-700 text-gray-200' : 'border-gray-300 bg-white text-gray-900'} p-1`}>
                           {(() => {
                             const models =
                               providerConfig.modelNames !== undefined
@@ -1084,7 +1079,7 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                             return models.map(model => (
                               <div
                                 key={model}
-                                className={`flex items-center rounded-full ${isDarkMode ? 'bg-blue-900 text-blue-100' : 'bg-blue-100 text-blue-800'} px-2 py-1 text-base`}>
+                                className={`flex items-center rounded-full ${isDarkMode ? 'bg-blue-900 text-blue-100' : 'bg-blue-100 text-blue-800'} px-2 py-0.5 text-xs`}>
                                 <span>{model}</span>
                                 <button
                                   type="button"
@@ -1103,7 +1098,7 @@ export const ModelSettings = ({ isDarkMode = false }: ModelSettingsProps) => {
                             value={newModelInputs[providerId] || ''}
                             onChange={e => handleModelsChange(providerId, e.target.value)}
                             onKeyDown={e => handleKeyDown(e, providerId)}
-                            className={`min-w-[150px] flex-1 border-none text-base ${isDarkMode ? 'bg-transparent text-gray-200' : 'bg-transparent text-gray-900'} p-1 outline-none`}
+                            className={`min-w-[100px] flex-1 border-none text-xs ${isDarkMode ? 'bg-transparent text-gray-200' : 'bg-transparent text-gray-900'} p-0.5 outline-none`}
                           />
                         </div>
                         <p className={`mt-1 text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
