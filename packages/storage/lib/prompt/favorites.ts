@@ -5,9 +5,8 @@ import type { BaseStorage } from '../base/types';
 // Template data
 const defaultFavoritePrompts = [
   {
-    title: '📚 Explore AI Papers',
-    content:
-      '- Go to https://huggingface.co/papers and click through each of the top 3 upvoted papers.\n- For each paper:\n  - Record the title, URL and upvotes\n  - Summarise the abstract section\n- Finally, compile together a summary of all 3 papers, ranked by upvotes',
+    title: 'What deadlines are due?',
+    content: '- Click the sidepanel arrow and scrape the due deadlines along with the time left',
   },
   {
     title: '🐦 Follow us on X/Twitter!',
