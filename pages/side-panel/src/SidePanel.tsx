@@ -10,6 +10,7 @@ import MessageList from './components/MessageList';
 import ChatInput from './components/ChatInput';
 import ChatHistoryList from './components/ChatHistoryList';
 import BookmarkList from './components/BookmarkList';
+import AuthScreen from './components/AuthScreen';
 import { EventType, type AgentEvent, ExecutionState } from './types/event';
 import './SidePanel.css';
 
@@ -32,6 +33,7 @@ const SidePanel = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [favoritePrompts, setFavoritePrompts] = useState<FavoritePrompt[]>([]);
   const [hasConfiguredModels, setHasConfiguredModels] = useState<boolean | null>(null); // null = loading, false = no models, true = has models
+  const [authState, setAuthState] = useState<'checking' | 'needs-verification' | 'verified'>('checking');
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessingSpeech, setIsProcessingSpeech] = useState(false);
   const [isReplaying, setIsReplaying] = useState(false);
@@ -58,6 +60,31 @@ const SidePanel = () => {
     return () => darkModeMediaQuery.removeEventListener('change', handleChange);
   }, []);
 
+  // Check verification status from Chrome storage
+  const checkVerificationStatus = useCallback(async () => {
+    try {
+      const result = await chrome.storage.local.get(['isVerified']);
+      if (result.isVerified === true) {
+        setAuthState('verified');
+      } else {
+        setAuthState('needs-verification');
+      }
+    } catch (error) {
+      console.error('Error checking verification status:', error);
+      setAuthState('needs-verification');
+    }
+  }, []);
+
+  // Handle successful verification
+  const handleVerificationSuccess = useCallback(async (email: string) => {
+    try {
+      await chrome.storage.local.set({ isVerified: true, verifiedEmail: email });
+      setAuthState('verified');
+    } catch (error) {
+      console.error('Error saving verification status:', error);
+    }
+  }, []);
+
   // Check if models are configured
   const checkModelConfiguration = useCallback(async () => {
     try {
@@ -71,6 +98,11 @@ const SidePanel = () => {
       setHasConfiguredModels(false);
     }
   }, []);
+
+  // Check verification status on mount
+  useEffect(() => {
+    checkVerificationStatus();
+  }, [checkVerificationStatus]);
 
   // Check model configuration on mount
   useEffect(() => {
@@ -971,6 +1003,25 @@ const SidePanel = () => {
       setIsRecording(false);
     }
   };
+
+  // Show auth screen if verification is needed
+  if (authState === 'needs-verification') {
+    return <AuthScreen onVerificationSuccess={handleVerificationSuccess} isDarkMode={isDarkMode} />;
+  }
+
+  // Show loading screen while checking auth status
+  if (authState === 'checking') {
+    return (
+      <div
+        className={`flex h-screen flex-col items-center justify-center p-8 ${isDarkMode ? 'bg-slate-900' : 'bg-[#1a2550]'}`}>
+        <div className="text-center">
+          <img src="/icon-128.png" alt="Nanobrowser Logo" className="mx-auto mb-4 size-12" />
+          <div className="mx-auto mb-4 size-8 animate-spin rounded-full border-2 border-[#7dd3fc] border-t-transparent"></div>
+          <p className={`${isDarkMode ? 'text-sky-300' : 'text-[#7dd3fc]'}`}>Checking verification status...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
