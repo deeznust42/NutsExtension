@@ -124,7 +124,7 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="your.name@seecs.edu.pk"
+                placeholder="yourname@seecs.edu.pk"
                 disabled={isLoading}
                 className={`w-full rounded-lg border px-4 py-3 transition-colors ${
                   isDarkMode
@@ -199,7 +199,7 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
         {/* Footer */}
         <div className="mt-8 text-center">
           <p className={`text-xs ${isDarkMode ? 'text-sky-400' : 'text-[#7dd3fc]/60'}`}>
-            Only nust chads can access this extension.
+            Limited to Nust students and faculty.
           </p>
         </div>
       </div>
