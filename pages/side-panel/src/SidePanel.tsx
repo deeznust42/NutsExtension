@@ -1106,7 +1106,7 @@ const SidePanel = () => {
                 <div className="max-w-md text-center">
                   <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-12" />
                   <h3 className={`mb-2 text-lg font-semibold ${isDarkMode ? 'text-sky-200' : 'text-[#7dd3fc]'}`}>
-                    Deez Nust
+                    Welcome to Deez Nust
                   </h3>
                   <p className="mb-4">To get started, configure your API keys in the settings page.</p>
                   <button
