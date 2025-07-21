@@ -68,8 +68,8 @@ const Options = () => {
                           ? 'bg-slate-900 text-white shadow'
                           : 'bg-[#1a2550] text-white shadow'
                         : isDarkMode
-                          ? 'bg-slate-800 text-gray-200 hover:bg-slate-700 hover:text-white border border-slate-700'
-                          : 'bg-white text-[#1a2550] hover:bg-[#22306a] hover:text-white border border-[#e5e7eb]'
+                          ? 'bg-slate-800 text-gray-200 hover:bg-[#2563eb] hover:text-white border border-slate-700'
+                          : 'bg-white text-[#1a2550] hover:bg-[#2563eb] hover:text-white border border-[#e5e7eb]'
                     }`}>
                   <span>{item.label}</span>
                 </Button>
