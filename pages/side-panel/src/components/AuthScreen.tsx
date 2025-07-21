@@ -124,7 +124,7 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="name@seecs.edu.pk"
+                placeholder="name@nust.edu.pk"
                 disabled={isLoading}
                 className={`w-full rounded-lg border px-4 py-3 transition-colors ${
                   isDarkMode
