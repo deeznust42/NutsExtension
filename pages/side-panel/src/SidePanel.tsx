@@ -1015,7 +1015,7 @@ const SidePanel = () => {
       <div
         className={`flex h-screen flex-col items-center justify-center p-8 ${isDarkMode ? 'bg-slate-900' : 'bg-[#1a2550]'}`}>
         <div className="text-center">
-          <img src="/icon-128.png" alt="Nanobrowser Logo" className="mx-auto mb-4 size-12" />
+          <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-12" />
           <div className="mx-auto mb-4 size-8 animate-spin rounded-full border-2 border-[#7dd3fc] border-t-transparent"></div>
           <p className={`${isDarkMode ? 'text-sky-300' : 'text-[#7dd3fc]'}`}>Checking verification status...</p>
         </div>
@@ -1038,7 +1038,7 @@ const SidePanel = () => {
                 ← Back
               </button>
             ) : (
-              <img src="/icon-128.png" alt="Extension Logo" className="size-6" />
+              <img src="/icon-128.png" alt="nuts logo" className="size-6" />
             )}
           </div>
           <div className="header-icons">
@@ -1104,7 +1104,7 @@ const SidePanel = () => {
               <div
                 className={`flex flex-1 items-center justify-center p-8 ${isDarkMode ? 'text-sky-300' : 'text-[#7dd3fc]'}`}>
                 <div className="max-w-md text-center">
-                  <img src="/icon-128.png" alt="Nanobrowser Logo" className="mx-auto mb-4 size-12" />
+                  <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-12" />
                   <h3 className={`mb-2 text-lg font-semibold ${isDarkMode ? 'text-sky-200' : 'text-[#7dd3fc]'}`}>
                     Deez Nust
                   </h3>

@@ -94,7 +94,7 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
         className={`w-full max-w-md rounded-2xl border p-8 ${isDarkMode ? 'border-slate-700 bg-slate-800' : 'border-[#22306a] bg-[#1a2550]'}`}>
         {/* Logo and Header */}
         <div className="mb-8 text-center">
-          <img src="/icon-128.png" alt="Nanobrowser Logo" className="mx-auto mb-4 size-16" />
+          <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-16" />
           <h2 className={`mb-2 text-2xl font-bold ${isDarkMode ? 'text-sky-200' : 'text-[#7dd3fc]'}`}>
             Verify Your Access
           </h2>
