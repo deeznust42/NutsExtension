@@ -59,7 +59,7 @@ ${commonSecurityRules}
 {
   "is_valid": true, 
   "reason": "The task is completed",
-  "answer": "✅ Successfully followed @nanobrowser_ai on X."
+  "answer": "✅ Successfully completed the search."
 }
 </example_output>
 

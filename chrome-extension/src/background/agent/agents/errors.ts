@@ -155,5 +155,5 @@ export const EXTENSION_CONFLICT_ERROR_MESSAGE = `Cannot access a chrome-extensio
 
   This is likely due to conflicting extensions. 
   
-  We suggest to create a new profile in Chrome and install Nuts Browser in the new profile.
+  We suggest to create a new profile in Chrome and install Nuts LMS in the new profile.
   `;
