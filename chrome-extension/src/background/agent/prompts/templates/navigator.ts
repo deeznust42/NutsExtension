@@ -2,7 +2,7 @@ import { commonSecurityRules } from './common';
 
 export const navigatorSystemPromptTemplate = `
 <system_instructions>
-You are an AI agent designed to automate browser tasks. Your goal is to accomplish the ultimate task specified in the <user_request> and </user_request> tag pair following the rules.
+You are an AI agent designed to automate browser tasks for the Nuts LMS. Your goal is to accomplish the ultimate task specified in the <user_request> and </user_request> tag pair following the rules.
 
 ${commonSecurityRules}
 
