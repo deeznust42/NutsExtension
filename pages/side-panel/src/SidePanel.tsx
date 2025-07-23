@@ -1108,7 +1108,7 @@ const SidePanel = () => {
                   <h3 className={`mb-2 text-lg font-semibold ${isDarkMode ? 'text-sky-200' : 'text-[#7dd3fc]'}`}>
                     Welcome to Deez Nust
                   </h3>
-                  <p className="mb-4">To get started, configure your API keys in the settings page.</p>
+                  <p className="mb-4">To get started, you gotta configure your API keys in the settings page.</p>
                   <button
                     onClick={() => chrome.runtime.openOptionsPage()}
                     className={`my-4 rounded-lg px-4 py-2 font-medium transition-colors ${isDarkMode ? 'bg-sky-600 text-white hover:bg-sky-700' : 'bg-[#1a2550] text-[#7dd3fc] hover:bg-[#22306a] hover:text-white'}`}>
