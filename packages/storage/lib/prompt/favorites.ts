@@ -5,7 +5,7 @@ import type { BaseStorage } from '../base/types';
 // Template data
 const defaultFavoritePrompts = [
   {
-    title: 'What deadlines are due?',
+    title: 'What deadlines are due today?',
     content: '- Click the sidepanel arrow and scrape the due deadlines along with the time left',
   },
 ];
