@@ -94,9 +94,9 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
         className={`w-full max-w-md rounded-2xl border p-8 ${isDarkMode ? 'border-slate-700 bg-slate-800' : 'border-[#22306a] bg-[#1a2550]'}`}>
         {/* Logo and Header */}
         <div className="mb-8 text-center">
-          <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-16" />
+          {step === 'email' && <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-16" />}
           <h2 className={`mb-2 text-2xl font-bold ${isDarkMode ? 'text-sky-200' : 'text-[#7dd3fc]'}`}>
-            Verify Your Access
+            {step === 'email' ? 'Verify Your Access' : 'Enter Verification Code'}
           </h2>
           <p className={`text-sm ${isDarkMode ? 'text-sky-300' : 'text-[#7dd3fc]/80'}`}>
             {step === 'email'
@@ -160,7 +160,7 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
                 onChange={e => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} // Only digits, max 6
                 placeholder="Enter 6-digit code"
                 disabled={isLoading}
-                className={`w-full rounded-lg border px-4 py-3 text-center text-lg tracking-widest transition-colors ${
+                className={`w-full rounded-lg border px-4 py-3 transition-colors ${
                   isDarkMode
                     ? 'border-slate-600 bg-slate-700 text-white placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/20'
                     : 'border-[#22306a] bg-[#0f1629] text-[#7dd3fc] placeholder-[#7dd3fc]/50 focus:border-[#38bdf8] focus:outline-none focus:ring-2 focus:ring-[#38bdf8]/20'
