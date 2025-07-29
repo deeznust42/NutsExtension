@@ -96,12 +96,12 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
         <div className="mb-8 text-center">
           {step === 'email' && <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-16" />}
           <h2 className={`mb-2 text-2xl font-bold ${isDarkMode ? 'text-sky-200' : 'text-[#7dd3fc]'}`}>
-            {step === 'email' ? 'Verify Your Access' : 'Enter Verification Code'}
+            {step === 'email' ? 'Verify Your Access' : 'Verification Code'}
           </h2>
           <p className={`text-sm ${isDarkMode ? 'text-sky-300' : 'text-[#7dd3fc]/80'}`}>
             {step === 'email'
               ? 'Enter your nust email to get started'
-              : 'Enter the verification code sent to your email'}
+              : 'Enter the code sent to your email. (Check spam folder)'}
           </p>
         </div>
 
