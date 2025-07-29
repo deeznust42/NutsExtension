@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { RxDiscordLogo } from 'react-icons/rx';
-import { FiSettings } from 'react-icons/fi';
-import { PiPlusBold } from 'react-icons/pi';
-import { GrHistory } from 'react-icons/gr';
+import { HiCog6Tooth } from 'react-icons/hi2';
+import { HiPlus } from 'react-icons/hi2';
+import { HiClock } from 'react-icons/hi2';
 import { type Message, Actors, chatHistoryStore, agentModelStore } from '@extension/storage';
 import favoritesStorage, { type FavoritePrompt } from '@extension/storage/lib/prompt/favorites';
 import MessageList from './components/MessageList';
@@ -1051,7 +1051,7 @@ const SidePanel = () => {
                   className={`header-icon ${isDarkMode ? 'text-sky-400 hover:text-sky-300' : 'text-[#7dd3fc] hover:text-[#38bdf8]'} cursor-pointer`}
                   aria-label="New Chat"
                   tabIndex={0}>
-                  <PiPlusBold size={20} />
+                  <HiPlus size={20} />
                 </button>
                 <button
                   type="button"
@@ -1060,7 +1060,7 @@ const SidePanel = () => {
                   className={`header-icon ${isDarkMode ? 'text-sky-400 hover:text-sky-300' : 'text-[#7dd3fc] hover:text-[#38bdf8]'} cursor-pointer`}
                   aria-label="Load History"
                   tabIndex={0}>
-                  <GrHistory size={20} />
+                  <HiClock size={20} />
                 </button>
               </>
             )}
@@ -1071,7 +1071,7 @@ const SidePanel = () => {
               className={`header-icon ${isDarkMode ? 'text-sky-400 hover:text-sky-300' : 'text-[#7dd3fc] hover:text-[#38bdf8]'} cursor-pointer`}
               aria-label="Settings"
               tabIndex={0}>
-              <FiSettings size={20} />
+              <HiCog6Tooth size={20} />
             </button>
           </div>
         </header>
