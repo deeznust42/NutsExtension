@@ -4,6 +4,7 @@ import { RxDiscordLogo } from 'react-icons/rx';
 import { HiCog6Tooth } from 'react-icons/hi2';
 import { HiPlus } from 'react-icons/hi2';
 import { HiClock } from 'react-icons/hi2';
+import { HiArrowLeft } from 'react-icons/hi2';
 import { type Message, Actors, chatHistoryStore, agentModelStore } from '@extension/storage';
 import favoritesStorage, { type FavoritePrompt } from '@extension/storage/lib/prompt/favorites';
 import MessageList from './components/MessageList';
@@ -1035,7 +1036,7 @@ const SidePanel = () => {
                 onClick={() => handleBackToChat(false)}
                 className={`${isDarkMode ? 'text-sky-400 hover:text-sky-300' : 'text-[#7dd3fc] hover:text-[#38bdf8]'} cursor-pointer`}
                 aria-label="Back to chat">
-                ← Back
+                <HiArrowLeft size={20} />
               </button>
             ) : (
               <img src="/icon-128.png" alt="nuts logo" className="size-6" />
