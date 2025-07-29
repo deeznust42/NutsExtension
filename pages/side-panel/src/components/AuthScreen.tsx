@@ -95,10 +95,10 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
         {/* Logo and Header */}
         <div className="mb-8 text-center">
           {step === 'email' && <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-16" />}
-          <h2 className={`mb-2 text-2xl font-bold ${isDarkMode ? 'text-sky-200' : 'text-[#7dd3fc]'}`}>
+          <h2 className={`mb-2 text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-white'}`}>
             {step === 'email' ? 'Verify Your Access' : 'Verification Code'}
           </h2>
-          <p className={`text-sm ${isDarkMode ? 'text-sky-300' : 'text-[#7dd3fc]/80'}`}>
+          <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-300'}`}>
             {step === 'email'
               ? 'Enter your nust email to get started'
               : 'Enter the code sent to your email. (Check spam folder)'}
@@ -117,7 +117,7 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
         {step === 'email' && (
           <form onSubmit={handleEmailSubmit} className="space-y-4">
             <div>
-              <label className={`mb-2 block text-sm font-medium ${isDarkMode ? 'text-sky-300' : 'text-[#7dd3fc]'}`}>
+              <label className={`mb-2 block text-sm font-medium ${isDarkMode ? 'text-white' : 'text-white'}`}>
                 Email Address
               </label>
               <input
@@ -128,8 +128,8 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
                 disabled={isLoading}
                 className={`w-full rounded-lg border px-4 py-3 transition-colors ${
                   isDarkMode
-                    ? 'border-slate-600 bg-slate-700 text-white placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/20'
-                    : 'border-[#22306a] bg-[#0f1629] text-[#7dd3fc] placeholder-[#7dd3fc]/50 focus:border-[#38bdf8] focus:outline-none focus:ring-2 focus:ring-[#38bdf8]/20'
+                    ? 'border-slate-600 bg-slate-700 text-white placeholder-slate-400 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/20'
+                    : 'border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/20'
                 }`}
                 required
               />
@@ -139,8 +139,8 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
               disabled={isLoading || !email.trim()}
               className={`w-full rounded-lg px-4 py-3 font-medium transition-colors ${
                 isDarkMode
-                  ? 'bg-sky-600 text-white hover:bg-sky-700 disabled:bg-slate-600 disabled:text-slate-400'
-                  : 'bg-[#38bdf8] text-white hover:bg-[#0ea5e9] disabled:bg-[#22306a] disabled:text-[#7dd3fc]/50'
+                  ? 'bg-white text-gray-900 hover:bg-gray-200 disabled:bg-slate-600 disabled:text-slate-400'
+                  : 'bg-white text-gray-900 hover:bg-gray-200 disabled:bg-gray-300 disabled:text-gray-500'
               }`}>
               {isLoading ? 'Sending...' : 'Send Verification Code'}
             </button>
@@ -151,7 +151,7 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
         {step === 'otp' && (
           <form onSubmit={handleOtpSubmit} className="space-y-4">
             <div>
-              <label className={`mb-2 block text-sm font-medium ${isDarkMode ? 'text-sky-300' : 'text-[#7dd3fc]'}`}>
+              <label className={`mb-2 block text-sm font-medium ${isDarkMode ? 'text-white' : 'text-white'}`}>
                 Verification Code
               </label>
               <input
@@ -162,23 +162,21 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
                 disabled={isLoading}
                 className={`w-full rounded-lg border px-4 py-3 transition-colors ${
                   isDarkMode
-                    ? 'border-slate-600 bg-slate-700 text-white placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/20'
-                    : 'border-[#22306a] bg-[#0f1629] text-[#7dd3fc] placeholder-[#7dd3fc]/50 focus:border-[#38bdf8] focus:outline-none focus:ring-2 focus:ring-[#38bdf8]/20'
+                    ? 'border-slate-600 bg-slate-700 text-white placeholder-slate-400 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/20'
+                    : 'border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/20'
                 }`}
                 maxLength={6}
                 required
               />
-              <p className={`mt-2 text-xs ${isDarkMode ? 'text-sky-400' : 'text-[#7dd3fc]/60'}`}>
-                Code sent to: {email}
-              </p>
+              <p className={`mt-2 text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Code sent to: {email}</p>
             </div>
             <button
               type="submit"
               disabled={isLoading || otp.length !== 6}
               className={`w-full rounded-lg px-4 py-3 font-medium transition-colors ${
                 isDarkMode
-                  ? 'bg-sky-600 text-white hover:bg-sky-700 disabled:bg-slate-600 disabled:text-slate-400'
-                  : 'bg-[#38bdf8] text-white hover:bg-[#0ea5e9] disabled:bg-[#22306a] disabled:text-[#7dd3fc]/50'
+                  ? 'bg-white text-gray-900 hover:bg-gray-200 disabled:bg-slate-600 disabled:text-slate-400'
+                  : 'bg-white text-gray-900 hover:bg-gray-200 disabled:bg-gray-300 disabled:text-gray-500'
               }`}>
               {isLoading ? 'Verifying...' : 'Verify Code'}
             </button>
@@ -188,8 +186,8 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
               disabled={isLoading}
               className={`w-full rounded-lg border px-4 py-3 font-medium transition-colors ${
                 isDarkMode
-                  ? 'border-slate-600 text-sky-300 hover:bg-slate-700 disabled:text-slate-500'
-                  : 'border-[#22306a] text-[#7dd3fc] hover:bg-[#22306a] disabled:text-[#7dd3fc]/50'
+                  ? 'border-slate-600 text-white hover:bg-slate-700 disabled:text-slate-500'
+                  : 'border-gray-300 text-gray-700 hover:bg-gray-100 disabled:text-gray-400'
               }`}>
               Back to Email
             </button>
