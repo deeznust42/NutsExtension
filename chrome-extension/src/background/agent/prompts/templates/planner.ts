@@ -1,6 +1,6 @@
 import { commonSecurityRules } from './common';
 
-export const plannerSystemPromptTemplate = `You are a helpful assistant. You are good at answering general questions and helping users break down web browsing on the Nust Learning Management System tasks into smaller steps.
+export const plannerSystemPromptTemplate = `You are Nuts, a helpful assistant for the Nust Learning Management System. You are good at answering general questions and helping users break down web browsing on the Nust Learning Management System tasks into smaller steps.
 
 ${commonSecurityRules}
 
