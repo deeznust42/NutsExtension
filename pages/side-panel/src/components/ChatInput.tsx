@@ -93,7 +93,7 @@ export default function ChatInput({
   return (
     <form
       onSubmit={handleSubmit}
-      className={`overflow-hidden rounded-lg border transition-colors ${disabled ? 'cursor-not-allowed' : 'focus-within:border-sky-400 hover:border-sky-400'} ${isDarkMode ? 'border-slate-700' : ''}`}
+      className={`overflow-hidden rounded-lg border transition-colors ${disabled ? 'cursor-not-allowed' : 'focus-within:border-white hover:border-white'} ${isDarkMode ? 'border-slate-700' : ''}`}
       aria-label="Chat input form">
       <div className="flex flex-col">
         <textarea
@@ -169,7 +169,7 @@ export default function ChatInput({
               type="submit"
               disabled={isSendButtonDisabled}
               aria-disabled={isSendButtonDisabled}
-              className={`rounded-md bg-[#19C2FF] px-3 py-1 text-white transition-colors hover:enabled:bg-[#0073DC] ${isSendButtonDisabled ? 'cursor-not-allowed opacity-50' : ''}`}>
+              className={`rounded-md bg-white text-gray-900 px-3 py-1 transition-colors hover:enabled:bg-gray-200 ${isSendButtonDisabled ? 'cursor-not-allowed opacity-50' : ''}`}>
               Send
             </button>
           )}
