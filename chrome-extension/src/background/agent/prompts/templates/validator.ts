@@ -1,6 +1,6 @@
 import { commonSecurityRules } from './common';
 
-export const validatorSystemPromptTemplate = `You are a validator of an agent who interacts with a browser.
+export const validatorSystemPromptTemplate = `You are a validator of an agent who interacts with the Nust Learning Management System using the browser.
 
 ${commonSecurityRules}
 
