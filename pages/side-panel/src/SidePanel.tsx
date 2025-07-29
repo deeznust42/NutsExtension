@@ -1034,7 +1034,7 @@ const SidePanel = () => {
               <button
                 type="button"
                 onClick={() => handleBackToChat(false)}
-                className={`${isDarkMode ? 'text-sky-400 hover:text-sky-300' : 'text-[#7dd3fc] hover:text-[#38bdf8]'} cursor-pointer`}
+                className={`text-white hover:text-gray-200 cursor-pointer`}
                 aria-label="Back to chat">
                 <HiArrowLeft size={20} />
               </button>
@@ -1049,7 +1049,7 @@ const SidePanel = () => {
                   type="button"
                   onClick={handleNewChat}
                   onKeyDown={e => e.key === 'Enter' && handleNewChat()}
-                  className={`header-icon ${isDarkMode ? 'text-sky-400 hover:text-sky-300' : 'text-[#7dd3fc] hover:text-[#38bdf8]'} cursor-pointer`}
+                  className={`header-icon text-white hover:text-gray-200 cursor-pointer`}
                   aria-label="New Chat"
                   tabIndex={0}>
                   <HiPlus size={20} />
@@ -1058,7 +1058,7 @@ const SidePanel = () => {
                   type="button"
                   onClick={handleLoadHistory}
                   onKeyDown={e => e.key === 'Enter' && handleLoadHistory()}
-                  className={`header-icon ${isDarkMode ? 'text-sky-400 hover:text-sky-300' : 'text-[#7dd3fc] hover:text-[#38bdf8]'} cursor-pointer`}
+                  className={`header-icon text-white hover:text-gray-200 cursor-pointer`}
                   aria-label="Load History"
                   tabIndex={0}>
                   <HiClock size={20} />
@@ -1069,7 +1069,7 @@ const SidePanel = () => {
               type="button"
               onClick={() => chrome.runtime.openOptionsPage()}
               onKeyDown={e => e.key === 'Enter' && chrome.runtime.openOptionsPage()}
-              className={`header-icon ${isDarkMode ? 'text-sky-400 hover:text-sky-300' : 'text-[#7dd3fc] hover:text-[#38bdf8]'} cursor-pointer`}
+              className={`header-icon text-white hover:text-gray-200 cursor-pointer`}
               aria-label="Settings"
               tabIndex={0}>
               <HiCog6Tooth size={20} />

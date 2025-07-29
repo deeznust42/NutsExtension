@@ -79,14 +79,14 @@ code {
 }
 
 .header-icon {
-  color: #19C2FF;
+  color: #ffffff;
   cursor: pointer;
   transition: color 0.2s ease;
   opacity: 0.8;
 }
 
 .header-icon:hover {
-  color: #0073DC;
+  color: #f3f4f6;
   opacity: 1;
 }
 
