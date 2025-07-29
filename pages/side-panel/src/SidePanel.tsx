@@ -1017,8 +1017,8 @@ const SidePanel = () => {
         className={`flex h-screen flex-col items-center justify-center p-8 ${isDarkMode ? 'bg-slate-900' : 'bg-[#1a2550]'}`}>
         <div className="text-center">
           <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-12" />
-          <div className="mx-auto mb-4 size-8 animate-spin rounded-full border-2 border-[#7dd3fc] border-t-transparent"></div>
-          <p className={`${isDarkMode ? 'text-sky-300' : 'text-[#7dd3fc]'}`}>Checking verification status...</p>
+          <div className="mx-auto mb-4 size-8 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+          <p className={`${isDarkMode ? 'text-white' : 'text-white'}`}>Checking verification status...</p>
         </div>
       </div>
     );
@@ -1092,9 +1092,9 @@ const SidePanel = () => {
             {/* Show loading state while checking model configuration */}
             {hasConfiguredModels === null && (
               <div
-                className={`flex flex-1 items-center justify-center p-8 ${isDarkMode ? 'text-sky-300' : 'text-[#7dd3fc]'}`}>
+                className={`flex flex-1 items-center justify-center p-8 ${isDarkMode ? 'text-white' : 'text-white'}`}>
                 <div className="text-center">
-                  <div className="mx-auto mb-4 size-8 animate-spin rounded-full border-2 border-[#7dd3fc] border-t-transparent"></div>
+                  <div className="mx-auto mb-4 size-8 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
                   <p>Checking configuration...</p>
                 </div>
               </div>
@@ -1103,16 +1103,16 @@ const SidePanel = () => {
             {/* Show setup message when no models are configured */}
             {hasConfiguredModels === false && (
               <div
-                className={`flex flex-1 items-center justify-center p-8 ${isDarkMode ? 'text-sky-300' : 'text-[#7dd3fc]'}`}>
+                className={`flex flex-1 items-center justify-center p-8 ${isDarkMode ? 'text-white' : 'text-white'}`}>
                 <div className="max-w-md text-center">
                   <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-12" />
-                  <h3 className={`mb-2 text-lg font-semibold ${isDarkMode ? 'text-sky-200' : 'text-[#7dd3fc]'}`}>
+                  <h3 className={`mb-2 text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-white'}`}>
                     Welcome to Deez Nust
                   </h3>
                   <p className="mb-4">To get started, you gotta configure your API keys in the settings page.</p>
                   <button
                     onClick={() => chrome.runtime.openOptionsPage()}
-                    className={`my-4 rounded-lg px-4 py-2 font-medium transition-colors ${isDarkMode ? 'bg-sky-600 text-white hover:bg-sky-700' : 'bg-[#1a2550] text-[#7dd3fc] hover:bg-[#22306a] hover:text-white'}`}>
+                    className={`my-4 rounded-lg px-4 py-2 font-medium transition-colors ${isDarkMode ? 'bg-white text-gray-900 hover:bg-gray-200' : 'bg-white text-gray-900 hover:bg-gray-200'}`}>
                     Open Settings
                   </button>
                 </div>
@@ -1125,7 +1125,7 @@ const SidePanel = () => {
                 {messages.length === 0 && (
                   <>
                     <div
-                      className={`border-t ${isDarkMode ? 'border-sky-900' : 'border-[#22306a]'} mb-2 p-2 shadow-sm backdrop-blur-sm`}>
+                      className={`border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} mb-2 p-2 shadow-sm backdrop-blur-sm`}>
                       <ChatInput
                         onSendMessage={handleSendMessage}
                         onStopTask={handleStopTask}
@@ -1160,7 +1160,7 @@ const SidePanel = () => {
                 )}
                 {messages.length > 0 && (
                   <div
-                    className={`border-t ${isDarkMode ? 'border-sky-900' : 'border-[#22306a]'} p-2 shadow-sm backdrop-blur-sm`}>
+                    className={`border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} p-2 shadow-sm backdrop-blur-sm`}>
                     <ChatInput
                       onSendMessage={handleSendMessage}
                       onStopTask={handleStopTask}
