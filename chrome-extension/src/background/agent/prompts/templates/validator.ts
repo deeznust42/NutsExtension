@@ -56,7 +56,7 @@ And other tasks that a student does on the University's Learning Management Syst
 <example_output>
 {
   "is_valid": false, 
-  "reason": "The user wanted to search for \\"cat photos\\", but the agent searched for \\"dog photos\\" instead.",
+  "reason": "The user wanted to search for \\"assignment deadlines\\", but the agent searched for \\"course materials\\" instead.",
   "answer": ""
 }
 </example_output>
