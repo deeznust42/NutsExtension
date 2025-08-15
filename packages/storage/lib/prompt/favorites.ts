@@ -6,7 +6,7 @@ import type { BaseStorage } from '../base/types';
 const defaultFavoritePrompts = [
   {
     title: 'What deadlines are due today?',
-    content: '- Click the sidepanel arrow and scrape the due deadlines along with the time left',
+    content: '- Head to the calendar and return the due deadlines for today in a structured format',
   },
 ];
 
