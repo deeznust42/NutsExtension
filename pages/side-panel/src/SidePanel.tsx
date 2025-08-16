@@ -1088,17 +1088,15 @@ const SidePanel = () => {
               <div className="flex flex-1 items-center justify-center p-8 text-white">
                 <div className="max-w-md text-center">
                   <div className="mb-6 flex justify-center">
-                    <div className="rounded-full bg-white/10 p-4 backdrop-blur-sm border border-white/20">
-                      <img src="/icon-128.png" alt="nuts logo" className="size-12" />
-                    </div>
+                    <img src="/icon-128.png" alt="nuts logo" className="size-20" />
                   </div>
                   <h3 className="mb-3 text-2xl font-bold text-white">Welcome to Deez Nust</h3>
                   <p className="mb-8 text-gray-300 text-sm leading-relaxed">
-                    To get started, you gotta configure your API keys in the settings page.
+                    To get started, you gotta configure your API keys in the settings.
                   </p>
                   <button
                     onClick={() => chrome.runtime.openOptionsPage()}
-                    className="w-full rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-4 font-semibold text-white transition-all duration-300 hover:bg-white/15 hover:border-white/30 hover:scale-[1.02] active:scale-[0.98]">
+                    className="inline-block rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 font-medium text-white transition-all duration-300 hover:bg-white/15 hover:border-white/30 hover:scale-[1.02] active:scale-[0.98]">
                     Open Settings
                   </button>
                 </div>
