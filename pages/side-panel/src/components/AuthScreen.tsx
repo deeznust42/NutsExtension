@@ -89,7 +89,7 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
 
   return (
     <div className="flex h-screen flex-col items-center justify-center p-8 bg-[#1a2550]">
-      <div className="w-full max-w-md rounded-2xl border p-8 border-[#22306a] bg-[#1a2550]">
+      <div className="w-full max-w-md p-8">
         {/* Logo and Header */}
         <div className="mb-8 text-center">
           {step === 'email' && <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-16" />}
