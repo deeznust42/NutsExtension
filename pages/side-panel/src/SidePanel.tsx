@@ -31,7 +31,7 @@ const SidePanel = () => {
   const [chatSessions, setChatSessions] = useState<Array<{ id: string; title: string; createdAt: number }>>([]);
   const [isFollowUpMode, setIsFollowUpMode] = useState(false);
   const [isHistoricalSession, setIsHistoricalSession] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+
   const [favoritePrompts, setFavoritePrompts] = useState<FavoritePrompt[]>([]);
   const [hasConfiguredModels, setHasConfiguredModels] = useState<boolean | null>(null); // null = loading, false = no models, true = has models
   const [authState, setAuthState] = useState<'checking' | 'needs-verification' | 'verified'>('checking');
@@ -47,19 +47,6 @@ const SidePanel = () => {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const recordingTimerRef = useRef<number | null>(null);
-
-  // Check for dark mode preference
-  useEffect(() => {
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(darkModeMediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsDarkMode(e.matches);
-    };
-
-    darkModeMediaQuery.addEventListener('change', handleChange);
-    return () => darkModeMediaQuery.removeEventListener('change', handleChange);
-  }, []);
 
   // Check verification status from Chrome storage
   const checkVerificationStatus = useCallback(async () => {
@@ -1007,18 +994,17 @@ const SidePanel = () => {
 
   // Show auth screen if verification is needed
   if (authState === 'needs-verification') {
-    return <AuthScreen onVerificationSuccess={handleVerificationSuccess} isDarkMode={isDarkMode} />;
+    return <AuthScreen onVerificationSuccess={handleVerificationSuccess} />;
   }
 
   // Show loading screen while checking auth status
   if (authState === 'checking') {
     return (
-      <div
-        className={`flex h-screen flex-col items-center justify-center p-8 ${isDarkMode ? 'bg-slate-900' : 'bg-[#1a2550]'}`}>
+      <div className="flex h-screen flex-col items-center justify-center p-8 bg-[#1a2550]">
         <div className="text-center">
           <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-12" />
           <div className="mx-auto mb-4 size-8 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-          <p className={`${isDarkMode ? 'text-white' : 'text-white'}`}>Checking verification status...</p>
+          <p className="text-white">Checking verification status...</p>
         </div>
       </div>
     );
@@ -1026,9 +1012,8 @@ const SidePanel = () => {
 
   return (
     <div>
-      <div
-        className={`flex h-screen flex-col ${isDarkMode ? 'bg-slate-900' : 'bg-[#1a2550]'} overflow-hidden border ${isDarkMode ? 'border-slate-700' : 'border-[#22306a]'} rounded-2xl`}>
-        <header className={`header relative ${isDarkMode ? '' : 'bg-[#1a2550] border-b border-[#22306a]'}`}>
+      <div className="flex h-screen flex-col bg-[#1a2550] overflow-hidden border border-[#22306a] rounded-2xl">
+        <header className="header relative bg-[#1a2550] border-b border-[#22306a]">
           <div className="header-logo">
             {showHistory ? (
               <button
@@ -1084,15 +1069,13 @@ const SidePanel = () => {
               onSessionDelete={handleSessionDelete}
               onSessionBookmark={handleSessionBookmark}
               visible={true}
-              isDarkMode={isDarkMode}
             />
           </div>
         ) : (
           <>
             {/* Show loading state while checking model configuration */}
             {hasConfiguredModels === null && (
-              <div
-                className={`flex flex-1 items-center justify-center p-8 ${isDarkMode ? 'text-white' : 'text-white'}`}>
+              <div className="flex flex-1 items-center justify-center p-8 text-white">
                 <div className="text-center">
                   <div className="mx-auto mb-4 size-8 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
                   <p>Checking configuration...</p>
@@ -1102,17 +1085,20 @@ const SidePanel = () => {
 
             {/* Show setup message when no models are configured */}
             {hasConfiguredModels === false && (
-              <div
-                className={`flex flex-1 items-center justify-center p-8 ${isDarkMode ? 'text-white' : 'text-white'}`}>
+              <div className="flex flex-1 items-center justify-center p-8 text-white">
                 <div className="max-w-md text-center">
-                  <img src="/icon-128.png" alt="nuts logo" className="mx-auto mb-4 size-12" />
-                  <h3 className={`mb-2 text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-white'}`}>
-                    Welcome to Deez Nust
-                  </h3>
-                  <p className="mb-4">To get started, you gotta configure your API keys in the settings page.</p>
+                  <div className="mb-6 flex justify-center">
+                    <div className="rounded-full bg-white/10 p-4 backdrop-blur-sm border border-white/20">
+                      <img src="/icon-128.png" alt="nuts logo" className="size-12" />
+                    </div>
+                  </div>
+                  <h3 className="mb-3 text-2xl font-bold text-white">Welcome to Deez Nust</h3>
+                  <p className="mb-8 text-gray-300 text-sm leading-relaxed">
+                    To get started, you gotta configure your API keys in the settings page.
+                  </p>
                   <button
                     onClick={() => chrome.runtime.openOptionsPage()}
-                    className={`my-4 rounded-lg px-4 py-2 font-medium transition-colors ${isDarkMode ? 'bg-white text-gray-900 hover:bg-gray-200' : 'bg-white text-gray-900 hover:bg-gray-200'}`}>
+                    className="w-full rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-4 font-semibold text-white transition-all duration-300 hover:bg-white/15 hover:border-white/30 hover:scale-[1.02] active:scale-[0.98]">
                     Open Settings
                   </button>
                 </div>
@@ -1124,8 +1110,7 @@ const SidePanel = () => {
               <>
                 {messages.length === 0 && (
                   <>
-                    <div
-                      className={`border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} mb-2 p-2 shadow-sm backdrop-blur-sm`}>
+                    <div className="border-t border-gray-200 mb-2 p-2 shadow-sm backdrop-blur-sm">
                       <ChatInput
                         onSendMessage={handleSendMessage}
                         onStopTask={handleStopTask}
@@ -1134,7 +1119,6 @@ const SidePanel = () => {
                         setContent={setter => {
                           setInputTextRef.current = setter;
                         }}
-                        isDarkMode={isDarkMode}
                         historicalSessionId={isHistoricalSession ? currentSessionId : null}
                         onReplay={handleReplay}
                       />
@@ -1146,21 +1130,18 @@ const SidePanel = () => {
                         onBookmarkUpdateTitle={handleBookmarkUpdateTitle}
                         onBookmarkDelete={handleBookmarkDelete}
                         onBookmarkReorder={handleBookmarkReorder}
-                        isDarkMode={isDarkMode}
                       />
                     </div>
                   </>
                 )}
                 {messages.length > 0 && (
-                  <div
-                    className={`scrollbar-gutter-stable flex-1 overflow-x-hidden overflow-y-scroll scroll-smooth p-2 ${isDarkMode ? 'bg-slate-900/80' : ''}`}>
-                    <MessageList messages={messages} isDarkMode={isDarkMode} />
+                  <div className="scrollbar-gutter-stable flex-1 overflow-x-hidden overflow-y-scroll scroll-smooth p-2">
+                    <MessageList messages={messages} />
                     <div ref={messagesEndRef} />
                   </div>
                 )}
                 {messages.length > 0 && (
-                  <div
-                    className={`border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} p-2 shadow-sm backdrop-blur-sm`}>
+                  <div className="border-t border-gray-200 p-2 shadow-sm backdrop-blur-sm">
                     <ChatInput
                       onSendMessage={handleSendMessage}
                       onStopTask={handleStopTask}
@@ -1169,7 +1150,6 @@ const SidePanel = () => {
                       setContent={setter => {
                         setInputTextRef.current = setter;
                       }}
-                      isDarkMode={isDarkMode}
                       historicalSessionId={isHistoricalSession ? currentSessionId : null}
                       onReplay={handleReplay}
                     />

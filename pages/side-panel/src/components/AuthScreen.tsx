@@ -3,10 +3,9 @@ import { devMojoAuth } from '../services/mojoAuth';
 
 interface AuthScreenProps {
   onVerificationSuccess: (email: string) => void;
-  isDarkMode: boolean;
 }
 
-const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
+const AuthScreen = ({ onVerificationSuccess }: AuthScreenProps) => {
   const [step, setStep] = useState<'email' | 'otp'>('email');
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');

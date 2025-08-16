@@ -14,7 +14,6 @@ interface BookmarkListProps {
   onBookmarkUpdateTitle?: (id: number, title: string) => void;
   onBookmarkDelete?: (id: number) => void;
   onBookmarkReorder?: (draggedId: number, targetId: number) => void;
-  isDarkMode?: boolean;
 }
 
 const BookmarkList: React.FC<BookmarkListProps> = ({
@@ -23,7 +22,6 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
   onBookmarkUpdateTitle,
   onBookmarkDelete,
   onBookmarkReorder,
-  isDarkMode = false,
 }) => {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editTitle, setEditTitle] = useState<string>('');
@@ -81,7 +79,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
 
   return (
     <div className="p-2">
-      <h3 className={`mb-3 text-sm font-medium ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>Quick Start</h3>
+      <h3 className="mb-3 text-sm font-medium text-gray-700">Quick Start</h3>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {bookmarks.map(bookmark => (
           <div
@@ -91,9 +89,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
             onDragEnd={handleDragEnd}
             onDragOver={handleDragOver}
             onDrop={e => handleDrop(e, bookmark.id)}
-            className={`group relative rounded-lg p-3 ${
-              isDarkMode ? 'bg-slate-800 hover:bg-slate-700' : 'bg-white hover:bg-gray-50'
-            } border ${isDarkMode ? 'border-slate-700' : 'border-gray-200'}`}>
+            className="group relative rounded-lg p-3 bg-white hover:bg-gray-50 border border-gray-200">
             {editingId === bookmark.id ? (
               <div className="flex items-center">
                 <input
@@ -101,30 +97,18 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
                   type="text"
                   value={editTitle}
                   onChange={e => setEditTitle(e.target.value)}
-                  className={`mr-2 grow rounded px-2 py-1 text-sm ${
-                    isDarkMode
-                      ? 'border-slate-600 bg-slate-700 text-gray-200'
-                      : 'border-gray-200 bg-white text-gray-700'
-                  } border`}
+                  className="mr-2 grow rounded px-2 py-1 text-sm border-gray-200 bg-white text-gray-700 border"
                 />
                 <button
                   onClick={() => handleSaveEdit(bookmark.id)}
-                  className={`rounded p-1 ${
-                    isDarkMode
-                      ? 'bg-slate-700 text-green-400 hover:bg-slate-600'
-                      : 'bg-white text-green-500 hover:bg-gray-100'
-                  }`}
+                  className="rounded p-1 bg-white text-green-500 hover:bg-gray-100"
                   aria-label="Save edit"
                   type="button">
                   <FaCheck size={14} />
                 </button>
                 <button
                   onClick={handleCancelEdit}
-                  className={`ml-1 rounded p-1 ${
-                    isDarkMode
-                      ? 'bg-slate-700 text-red-400 hover:bg-slate-600'
-                      : 'bg-white text-red-500 hover:bg-gray-100'
-                  }`}
+                  className="ml-1 rounded p-1 bg-white text-red-500 hover:bg-gray-100"
                   aria-label="Cancel edit"
                   type="button">
                   <FaTimes size={14} />
@@ -142,10 +126,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
                       }
                     }}
                     className="w-full text-left">
-                    <div
-                      className={`truncate pr-10 text-sm font-medium ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>
-                      {bookmark.title}
-                    </div>
+                    <div className="truncate pr-10 text-sm font-medium text-gray-700">{bookmark.title}</div>
                   </button>
                 </div>
               </>
@@ -159,11 +140,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
                     e.stopPropagation();
                     handleEditClick(bookmark);
                   }}
-                  className={`absolute right-[28px] top-1/2 z-10 -translate-y-1/2 rounded p-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 ${
-                    isDarkMode
-                      ? 'bg-slate-700 text-white hover:bg-slate-600'
-                      : 'bg-white text-gray-900 hover:bg-gray-100'
-                  }`}
+                  className="absolute right-[28px] top-1/2 z-10 -translate-y-1/2 rounded p-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 bg-white text-gray-900 hover:bg-gray-100"
                   aria-label="Edit bookmark"
                   type="button">
                   <FaPen size={14} />
@@ -177,11 +154,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
                       onBookmarkDelete(bookmark.id);
                     }
                   }}
-                  className={`absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded p-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 ${
-                    isDarkMode
-                      ? 'bg-slate-700 text-gray-400 hover:bg-slate-600'
-                      : 'bg-white text-gray-500 hover:bg-gray-100'
-                  }`}
+                  className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded p-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 bg-white text-gray-500 hover:bg-gray-100"
                   aria-label="Delete bookmark"
                   type="button">
                   <FaTrash size={14} />

@@ -146,17 +146,5 @@ code {
   }
 }
 
-/* Dark mode text and background colors */
-@media (prefers-color-scheme: dark) {
-  .dark-mode-text {
-    color: #e2e8f0 !important; /* slate-200 */
-  }
-  
-  .dark-mode-bg {
-    background-color: #1e293b !important; /* slate-800 */
-  }
-  
-  .dark-mode-border {
-    border-color: #475569 !important; /* slate-600 */
-  }
-}
+
+
