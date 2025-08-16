@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { RxDiscordLogo } from 'react-icons/rx';
-import { HiCog6Tooth } from 'react-icons/hi2';
-import { HiPlus } from 'react-icons/hi2';
-import { HiClock } from 'react-icons/hi2';
-import { HiArrowLeft } from 'react-icons/hi2';
+import { LuSettings2, LuPlus, LuHistory, LuArrowLeft } from 'react-icons/lu';
 import { type Message, Actors, chatHistoryStore, agentModelStore } from '@extension/storage';
 import favoritesStorage, { type FavoritePrompt } from '@extension/storage/lib/prompt/favorites';
 import MessageList from './components/MessageList';
@@ -1021,7 +1018,7 @@ const SidePanel = () => {
                 onClick={() => handleBackToChat(false)}
                 className={`text-white hover:text-gray-200 cursor-pointer`}
                 aria-label="Back to chat">
-                <HiArrowLeft size={20} />
+                <LuArrowLeft size={20} />
               </button>
             ) : (
               <img src="/icon-128.png" alt="nuts logo" className="size-6" />
@@ -1037,7 +1034,7 @@ const SidePanel = () => {
                   className={`header-icon text-white hover:text-gray-200 cursor-pointer`}
                   aria-label="New Chat"
                   tabIndex={0}>
-                  <HiPlus size={20} />
+                  <LuPlus size={20} />
                 </button>
                 <button
                   type="button"
@@ -1046,7 +1043,7 @@ const SidePanel = () => {
                   className={`header-icon text-white hover:text-gray-200 cursor-pointer`}
                   aria-label="Load History"
                   tabIndex={0}>
-                  <HiClock size={20} />
+                  <LuHistory size={20} />
                 </button>
               </>
             )}
@@ -1057,7 +1054,7 @@ const SidePanel = () => {
               className={`header-icon text-white hover:text-gray-200 cursor-pointer`}
               aria-label="Settings"
               tabIndex={0}>
-              <HiCog6Tooth size={20} />
+              <LuSettings2 size={20} />
             </button>
           </div>
         </header>
