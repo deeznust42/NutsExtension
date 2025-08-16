@@ -105,7 +105,9 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-4 rounded-lg border p-3 text-sm border-red-400 bg-red-500/10 text-red-300">{error}</div>
+          <div className="mb-3 rounded-lg border px-3 py-2 text-xs border-red-400 bg-red-500/10 text-red-300">
+            {error}
+          </div>
         )}
 
         {/* Email Step */}
@@ -119,14 +121,14 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
                 onChange={e => setEmail(e.target.value)}
                 placeholder="name@nust.edu.pk"
                 disabled={isLoading}
-                className="w-full rounded-lg border px-4 py-3 transition-colors border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/20"
+                className="w-full rounded-2xl border border-[#3b4a73] bg-[#2a3859] px-6 py-4 text-white placeholder-gray-400 transition-all duration-200 focus:border-[#4a5a8d] focus:outline-none focus:ring-2 focus:ring-[#4a5a8d]/30"
                 required
               />
             </div>
             <button
               type="submit"
               disabled={isLoading || !email.trim()}
-              className="w-full rounded-lg px-4 py-3 font-medium transition-colors bg-white text-gray-900 hover:bg-gray-200 disabled:bg-gray-300 disabled:text-gray-500">
+              className="w-full rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-4 font-semibold text-white transition-all duration-300 hover:bg-white/15 hover:border-white/30 hover:scale-[1.02] active:scale-[0.98] disabled:bg-gray-600/20 disabled:border-gray-600/30 disabled:text-gray-400 disabled:hover:scale-100">
               {isLoading ? 'Sending...' : 'Send Verification Code'}
             </button>
           </form>
@@ -143,7 +145,7 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
                 onChange={e => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} // Only digits, max 6
                 placeholder="Enter 6-digit code"
                 disabled={isLoading}
-                className="w-full rounded-lg border px-4 py-3 transition-colors border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/20"
+                className="w-full rounded-2xl border border-[#3b4a73] bg-[#2a3859] px-6 py-4 text-white placeholder-gray-400 transition-all duration-200 focus:border-[#4a5a8d] focus:outline-none focus:ring-2 focus:ring-[#4a5a8d]/30"
                 maxLength={6}
                 required
               />
@@ -152,14 +154,14 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
             <button
               type="submit"
               disabled={isLoading || otp.length !== 6}
-              className="w-full rounded-lg px-4 py-3 font-medium transition-colors bg-white text-gray-900 hover:bg-gray-200 disabled:bg-gray-300 disabled:text-gray-500">
+              className="w-full rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-4 font-semibold text-white transition-all duration-300 hover:bg-white/15 hover:border-white/30 hover:scale-[1.02] active:scale-[0.98] disabled:bg-gray-600/20 disabled:border-gray-600/30 disabled:text-gray-400 disabled:hover:scale-100">
               {isLoading ? 'Verifying...' : 'Verify Code'}
             </button>
             <button
               type="button"
               onClick={handleBackToEmail}
               disabled={isLoading}
-              className="w-full rounded-lg border px-4 py-3 font-medium transition-colors border-gray-300 text-gray-700 hover:bg-gray-100 disabled:text-gray-400">
+              className="w-full rounded-2xl border border-[#3b4a73] bg-transparent px-6 py-4 font-medium text-gray-300 transition-all duration-200 hover:bg-[#2a3859] hover:border-[#4a5a8d] disabled:text-gray-500">
               Back to Email
             </button>
           </form>
@@ -167,7 +169,7 @@ const AuthScreen = ({ onVerificationSuccess, isDarkMode }: AuthScreenProps) => {
 
         {/* Footer */}
         <div className="mt-8 text-center">
-          <p className="text-xs text-[#7dd3fc]/60">Limited to Nust students and faculty.</p>
+          <p className="text-xs font-bold text-[#7dd3fc]/60">Limited to Nust students and faculty.</p>
         </div>
       </div>
     </div>
