@@ -32,11 +32,12 @@ const Options = () => {
   };
 
   return (
-    <div className={`flex min-h-screen min-w-[768px] bg-[#1a2550] text-gray-900`}>
+    <div className={`flex min-h-screen min-w-[768px] bg-[#1a2550] text-white`}>
       {/* Vertical Navigation Bar */}
-      <nav className={`w-56 border-r border-[#22306a] bg-white/95 shadow-md flex flex-col justify-between`}>
+      <nav
+        className={`w-56 border-r border-[#22306a] bg-white/10 backdrop-blur-sm shadow-md flex flex-col justify-between`}>
         <div className="p-6">
-          <h1 className={`mb-8 text-2xl font-extrabold tracking-tight text-center text-[#1a2550]`}>Settings</h1>
+          <h1 className={`mb-8 text-2xl font-extrabold tracking-tight text-center text-white`}>Settings</h1>
           <ul className="space-y-3">
             {TABS.map(item => (
               <li key={item.id}>
@@ -45,8 +46,8 @@ const Options = () => {
                   className={`flex w-full items-center space-x-2 rounded-lg px-4 py-2 text-left text-lg font-semibold transition-colors duration-150
                     ${
                       activeTab === item.id
-                        ? 'bg-[#1a2550] text-white shadow'
-                        : 'bg-white text-[#1a2550] hover:bg-[#2563eb] hover:text-white border border-[#e5e7eb]'
+                        ? 'bg-white/20 backdrop-blur-sm text-white shadow border border-white/20'
+                        : 'bg-white/10 backdrop-blur-sm text-white hover:bg-white/15 hover:border-white/30 border border-white/10'
                     }`}>
                   <span>{item.label}</span>
                 </Button>
@@ -57,14 +58,12 @@ const Options = () => {
       </nav>
 
       {/* Main Content Area */}
-      <main className={`flex-1 flex items-center justify-center bg-[#1a2550]`}>
-        <div className={`w-full max-w-2xl p-10 rounded-2xl shadow-2xl bg-white`}>
-          <div className="mb-8 text-center">
-            <h2 className={`text-3xl font-extrabold mb-2 text-[#1a2550]`}>Deez Nust Settings</h2>
-            <p className={`text-lg text-[#22306a]`}>Configure deez</p>
-          </div>
-          {renderTabContent()}
+      <main className={`flex-1 p-8 bg-[#1a2550]`}>
+        <div className="mb-8">
+          <h2 className={`text-3xl font-extrabold mb-2 text-white`}>Deez Nust Settings</h2>
+          <p className={`text-lg text-gray-300`}>Configure deez</p>
         </div>
+        {renderTabContent()}
       </main>
     </div>
   );
