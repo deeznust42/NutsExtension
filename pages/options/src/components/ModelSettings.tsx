@@ -595,8 +595,7 @@ export const ModelSettings = () => {
   };
 
   const renderModelSelect = () => (
-    <div className={`rounded shadow border border-[#22306a] bg-white/10 backdrop-blur-sm p-4 mb-4`}>
-      <h3 className={`mb-2 text-lg font-bold text-white`}>Model Selection</h3>
+    <div>
       <p className={`mb-4 text-sm font-normal text-gray-300`}>
         Choose and configure the model used for all agent roles.
       </p>
@@ -890,9 +889,9 @@ export const ModelSettings = () => {
   };
 
   return (
-    <section className="space-y-6">
+    <section className="space-y-8">
       {/* LLM Providers Section */}
-      <div className={`rounded-lg shadow border border-[#22306a] bg-white/10 backdrop-blur-sm p-4 mb-4`}>
+      <div className={`rounded-lg shadow border border-[#22306a] bg-white/10 backdrop-blur-sm p-4 mb-12`}>
         <h2 className={`mb-3 text-lg font-bold text-white`}>LLM Providers</h2>
         <div className="space-y-4">
           {getSortedProviders().length === 0 ? (
@@ -907,12 +906,15 @@ export const ModelSettings = () => {
                 <div
                   key={providerId}
                   id={`provider-${providerId}`}
-                  className={`rounded border shadow-sm p-3 space-y-3 transition-all duration-200 ${isNew ? 'border-white/30 bg-white/15 backdrop-blur-sm' : 'border-[#22306a] bg-white/5 backdrop-blur-sm'}`}>
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                    <h3 className={`text-base font-bold text-white`}>{providerConfig.name || providerId}</h3>
-                    <div className="flex gap-1">
+                  className={`rounded-xl border shadow-lg p-6 space-y-4 transition-all duration-300 ${isNew ? 'border-white/40 bg-white/20 backdrop-blur-sm' : 'border-[#22306a] bg-white/10 backdrop-blur-sm'}`}>
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <h3 className={`text-lg font-bold text-white`}>{providerConfig.name || providerId}</h3>
+                    <div className="flex gap-2">
                       {isNew && (
-                        <Button variant="secondary" onClick={() => handleCancelProvider(providerId)}>
+                        <Button
+                          variant="secondary"
+                          onClick={() => handleCancelProvider(providerId)}
+                          className="px-4 py-2 rounded-lg transition-all duration-200">
                           Cancel
                         </Button>
                       )}
@@ -923,17 +925,19 @@ export const ModelSettings = () => {
                           providersFromStorage.has(providerId) && !modifiedProviders.has(providerId)
                             ? handleDelete(providerId)
                             : handleSave(providerId)
-                        }>
+                        }
+                        className="px-4 py-2 rounded-lg transition-all duration-200">
                         {getButtonProps(providerId).children}
                       </Button>
                     </div>
                   </div>
                   {isNew && (
-                    <div className={`mb-1 text-xs text-blue-300`}>
+                    <div
+                      className={`mb-3 text-sm text-blue-300 bg-blue-500/10 border border-blue-500/20 rounded-lg p-3`}>
                       This provider is newly added. Enter your API key and click Save to configure it.
                     </div>
                   )}
-                  <div className="space-y-2">
+                  <div className="space-y-4">
                     {/* Name input (only for custom_openai) */}
                     {providerConfig.type === ProviderTypeEnum.CustomOpenAI && (
                       <div className="flex flex-col md:flex-row md:items-center gap-2">
@@ -946,7 +950,7 @@ export const ModelSettings = () => {
                           placeholder="Provider name"
                           value={providerConfig.name || ''}
                           onChange={e => handleNameChange(providerId, e.target.value)}
-                          className={`flex-1 rounded border px-2 py-1 text-sm border-white/20 bg-white/10 backdrop-blur-sm text-white focus:border-white/40 focus:ring-2 focus:ring-white/20`}
+                          className={`flex-1 rounded-lg border px-3 py-2 text-sm border-white/20 bg-white/10 backdrop-blur-sm text-white focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-200`}
                         />
                         {nameErrors[providerId] ? (
                           <p className={`ml-2 mt-1 text-xs text-red-400`}>{nameErrors[providerId]}</p>
@@ -973,7 +977,7 @@ export const ModelSettings = () => {
                           }
                           value={providerConfig.apiKey || ''}
                           onChange={e => handleApiKeyChange(providerId, e.target.value, providerConfig.baseUrl)}
-                          className={`w-full rounded border px-2 py-1 text-sm border-white/20 bg-white/10 backdrop-blur-sm text-white focus:border-white/40 focus:ring-2 focus:ring-white/20`}
+                          className={`w-full rounded-lg border px-3 py-2 text-sm border-white/20 bg-white/10 backdrop-blur-sm text-white focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-200`}
                         />
                         {isNew && (
                           <button
@@ -1029,7 +1033,7 @@ export const ModelSettings = () => {
                           placeholder="Required OpenAI-compatible API endpoint"
                           value={providerConfig.baseUrl || ''}
                           onChange={e => handleApiKeyChange(providerId, providerConfig.apiKey || '', e.target.value)}
-                          className={`flex-1 rounded border px-2 py-1 text-sm border-white/20 bg-white/10 backdrop-blur-sm text-white focus:border-white/40 focus:ring-2 focus:ring-white/20`}
+                          className={`flex-1 rounded-lg border px-3 py-2 text-sm border-white/20 bg-white/10 backdrop-blur-sm text-white focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-200`}
                         />
                       </div>
                     )}
@@ -1041,7 +1045,7 @@ export const ModelSettings = () => {
                       </label>
                       <div className="flex-1 space-y-1">
                         <div
-                          className={`flex min-h-[32px] flex-wrap items-center gap-1 rounded border border-white/20 bg-white/10 backdrop-blur-sm text-white p-1`}>
+                          className={`flex min-h-[40px] flex-wrap items-center gap-2 rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm text-white p-2`}>
                           {(() => {
                             const models =
                               providerConfig.modelNames !== undefined
@@ -1050,12 +1054,12 @@ export const ModelSettings = () => {
                             return models.map(model => (
                               <div
                                 key={model}
-                                className={`flex items-center rounded-full bg-white/20 backdrop-blur-sm text-white px-2 py-0.5 text-xs`}>
+                                className={`flex items-center rounded-full bg-white/20 backdrop-blur-sm text-white px-3 py-1 text-xs transition-all duration-200 hover:bg-white/30`}>
                                 <span>{model}</span>
                                 <button
                                   type="button"
                                   onClick={() => removeModel(providerId, model)}
-                                  className={`ml-1 font-bold text-white hover:text-gray-200`}
+                                  className={`ml-2 font-bold text-white hover:text-gray-200 transition-colors duration-200`}
                                   aria-label={`Remove ${model}`}>
                                   ×
                                 </button>
@@ -1085,46 +1089,50 @@ export const ModelSettings = () => {
           <Button
             variant="secondary"
             onClick={() => setIsProviderSelectorOpen(prev => !prev)}
-            className={`flex w-full items-center justify-center font-medium border-white/20 bg-white/10 backdrop-blur-sm text-white hover:bg-white/15 hover:border-white/30`}>
-            <span className="mr-2 text-sm">+</span> <span className="text-sm">Add New Provider</span>
+            className={`flex w-auto mx-auto items-center justify-center font-medium border-white/20 bg-white/10 backdrop-blur-sm text-white hover:bg-white/15 hover:border-white/30 px-6 py-2 text-sm rounded-full transition-all duration-200 ease-in-out`}>
+            <span className="mr-2">+</span> <span>Add New Provider</span>
           </Button>
-          {isProviderSelectorOpen && (
-            <div
-              className={`absolute z-10 mt-2 w-full overflow-hidden rounded border border-white/20 bg-white/10 backdrop-blur-sm shadow-lg shadow-black/20`}>
-              <div className="py-1">
-                {/* Map through provider types to create buttons */}
-                {Object.values(ProviderTypeEnum)
-                  .filter(
-                    type =>
-                      (type === ProviderTypeEnum.Gemini || type === ProviderTypeEnum.Groq) &&
-                      !providersFromStorage.has(type) &&
-                      !modifiedProviders.has(type),
-                  )
-                  .map(type => (
-                    <button
-                      key={type}
-                      type="button"
-                      className={`flex w-full items-center px-4 py-2 text-left text-sm text-white hover:bg-white/15 hover:text-white transition-colors duration-150`}
-                      onClick={() => handleProviderSelection(type)}>
-                      <span className="font-medium">{getDefaultDisplayNameFromProviderId(type)}</span>
-                    </button>
-                  ))}
-                {/* Custom provider button (always shown) */}
-                <button
-                  type="button"
-                  className={`flex w-full items-center px-4 py-2 text-left text-sm text-white hover:bg-white/15 hover:text-white transition-colors duration-150`}
-                  onClick={() => handleProviderSelection(ProviderTypeEnum.CustomOpenAI)}>
-                  <span className="font-medium">OpenAI-compatible API Provider</span>
-                </button>
-              </div>
+          <div
+            className={`absolute z-50 mt-2 left-1/2 transform -translate-x-1/2 w-64 overflow-hidden rounded-2xl border border-white/20 bg-[#1a2550] shadow-2xl shadow-black/30 transition-all duration-300 ease-out ${
+              isProviderSelectorOpen
+                ? 'opacity-100 scale-100 translate-y-0'
+                : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
+            }`}>
+            <div className="py-2">
+              {/* Map through provider types to create buttons */}
+              {Object.values(ProviderTypeEnum)
+                .filter(
+                  type =>
+                    (type === ProviderTypeEnum.Gemini || type === ProviderTypeEnum.Groq) &&
+                    !providersFromStorage.has(type) &&
+                    !modifiedProviders.has(type),
+                )
+                .map(type => (
+                  <button
+                    key={type}
+                    type="button"
+                    className={`flex w-full items-center px-4 py-2.5 text-left text-sm text-white hover:bg-white/20 hover:text-white transition-all duration-200 ease-in-out mx-1 rounded-lg`}
+                    onClick={() => handleProviderSelection(type)}>
+                    <span className="font-medium">{getDefaultDisplayNameFromProviderId(type)}</span>
+                  </button>
+                ))}
+              {/* Custom provider button (always shown) */}
+              <button
+                type="button"
+                className={`flex w-full items-center px-4 py-2.5 text-left text-sm text-white hover:bg-white/20 hover:text-white transition-all duration-200 ease-in-out mx-1 rounded-lg`}
+                onClick={() => handleProviderSelection(ProviderTypeEnum.CustomOpenAI)}>
+                <span className="font-medium">OpenAI-compatible API Provider</span>
+              </button>
             </div>
-          )}
+          </div>
         </div>
+        {/* Spacer for dropdown */}
+        {isProviderSelectorOpen && <div className="h-20"></div>}
       </div>
 
       {/* Unified Model Selection Section */}
-      <div className={`rounded-lg border border-[#22306a] bg-white/10 backdrop-blur-sm p-6 text-left shadow-sm`}>
-        <h2 className={`mb-4 text-left text-xl font-semibold text-white`}>Model Selection</h2>
+      <div className={`rounded-lg shadow border border-[#22306a] bg-white/10 backdrop-blur-sm p-4`}>
+        <h2 className={`mb-3 text-lg font-bold text-white`}>Model Selection</h2>
         <div className="space-y-4">{renderModelSelect()}</div>
       </div>
 
