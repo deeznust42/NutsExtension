@@ -62,7 +62,7 @@ function MessageBlock({ message, isSameActor }: MessageBlockProps) {
             )}
           </div>
           {!isProgress && (
-            <div className="text-right text-xs text-gray-400 opacity-70">{formatTimestamp(message.timestamp)}</div>
+            <div className="text-right text-[10px] text-gray-400 opacity-50">{formatTimestamp(message.timestamp)}</div>
           )}
         </div>
       </div>
