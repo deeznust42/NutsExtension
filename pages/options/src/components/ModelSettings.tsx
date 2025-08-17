@@ -1089,11 +1089,11 @@ export const ModelSettings = () => {
           <Button
             variant="secondary"
             onClick={() => setIsProviderSelectorOpen(prev => !prev)}
-            className={`flex w-auto mx-auto items-center justify-center font-medium border-[#3b82f6] bg-[#1e293b] text-white hover:bg-[#334155] hover:border-[#60a5fa] px-6 py-2 text-sm rounded-full transition-all duration-200 ease-in-out shadow-lg`}>
+            className={`flex w-64 mx-auto items-center justify-center font-medium border-white/20 bg-white/10 backdrop-blur-sm text-white hover:bg-white/15 hover:border-white/30 px-3 py-1.5 text-sm rounded-full transition-colors duration-200 ease-in-out`}>
             <span className="mr-2">+</span> <span>Add New Provider</span>
           </Button>
           <div
-            className={`absolute z-50 mt-2 left-1/2 transform -translate-x-1/2 w-64 overflow-hidden rounded-2xl border border-[#3b82f6] bg-[#1e293b] shadow-2xl shadow-black/50 transition-all duration-300 ease-out ${
+            className={`absolute z-50 mt-2 left-1/2 transform -translate-x-1/2 w-64 overflow-hidden rounded-lg border border-[#475569] bg-[#1e293b] text-white shadow-lg transition-all duration-300 ease-out ${
               isProviderSelectorOpen
                 ? 'opacity-100 scale-100 translate-y-0'
                 : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
@@ -1111,7 +1111,7 @@ export const ModelSettings = () => {
                   <button
                     key={type}
                     type="button"
-                    className={`flex w-full items-center px-4 py-2.5 text-left text-sm text-white hover:bg-[#334155] hover:text-white transition-all duration-200 ease-in-out mx-1 rounded-lg`}
+                    className={`flex w-full items-center px-3 py-2 text-left text-sm text-white hover:bg-[#334155] hover:text-white transition-all duration-200`}
                     onClick={() => handleProviderSelection(type)}>
                     <span className="font-medium">{getDefaultDisplayNameFromProviderId(type)}</span>
                   </button>
@@ -1119,7 +1119,7 @@ export const ModelSettings = () => {
               {/* Custom provider button (always shown) */}
               <button
                 type="button"
-                className={`flex w-full items-center px-4 py-2.5 text-left text-sm text-white hover:bg-[#334155] hover:text-white transition-all duration-200 ease-in-out mx-1 rounded-lg`}
+                className={`flex w-full items-center px-3 py-2 text-left text-sm text-white hover:bg-[#334155] hover:text-white transition-all duration-200`}
                 onClick={() => handleProviderSelection(ProviderTypeEnum.CustomOpenAI)}>
                 <span className="font-medium">OpenAI-compatible API Provider</span>
               </button>
