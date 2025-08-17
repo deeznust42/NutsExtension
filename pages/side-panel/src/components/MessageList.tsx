@@ -40,7 +40,7 @@ function MessageBlock({ message, isSameActor }: MessageBlockProps) {
         <div
           className="flex size-10 shrink-0 items-center justify-center rounded-full shadow-lg"
           style={{ backgroundColor: actor.iconBackground }}>
-          <img src={actor.icon} alt={actor.name} className="size-6" />
+          <img src={actor.icon} alt={actor.name} className="size-8" />
         </div>
       )}
       {isSameActor && <div className="w-10" />}

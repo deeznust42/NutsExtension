@@ -2,36 +2,36 @@ export const ACTOR_PROFILES = {
   user: {
     name: 'User',
     icon: 'icons/user.svg',
-    iconBackground: '#4CAF50',
+    iconBackground: '#3B82F6',
   },
   system: {
     name: 'System',
     icon: 'icons/system.svg',
-    iconBackground: '#2196F3',
+    iconBackground: '#22306a',
   },
   planner: {
     name: 'Planner',
     icon: 'icons/planner.svg',
-    iconBackground: '#FF9800',
+    iconBackground: '#22306a',
   },
   navigator: {
     name: 'Navigator',
     icon: 'icons/navigator.svg',
-    iconBackground: '#40A9FF',
+    iconBackground: '#22306a',
   },
   validator: {
     name: 'Validator',
     icon: 'icons/validator.svg',
-    iconBackground: '#EC407A',
+    iconBackground: '#22306a',
   },
   manager: {
     name: 'Manager',
     icon: 'icons/manager.svg',
-    iconBackground: '#9C27B0',
+    iconBackground: '#1a2550',
   },
   evaluator: {
     name: 'Evaluator',
     icon: 'icons/evaluator.svg',
-    iconBackground: '#795548',
+    iconBackground: '#1e2a5a',
   },
 } as const;
