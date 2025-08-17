@@ -144,7 +144,7 @@ export default function ChatInput({
             <button
               type="button"
               onClick={onStopTask}
-              className="rounded-lg bg-red-500/20 border border-red-500/30 px-3 py-1.5 text-red-300 transition-all duration-200 hover:bg-red-500/30 hover:border-red-500/50 text-sm">
+              className="rounded-lg bg-red-700/90 border-2 border-red-300 px-4 py-2 text-white font-semibold transition-all duration-200 hover:bg-red-800 hover:border-red-200 hover:scale-110 text-sm">
               Stop
             </button>
           ) : historicalSessionId ? (
@@ -163,7 +163,7 @@ export default function ChatInput({
               type="submit"
               disabled={isSendButtonDisabled}
               aria-disabled={isSendButtonDisabled}
-              className={`rounded-lg bg-white/10 border border-white/20 px-3 py-1.5 text-white transition-all duration-200 hover:bg-white/20 hover:border-white/30 text-sm ${
+              className={`rounded-lg bg-white/20 border border-white/30 px-3 py-1.5 text-white transition-all duration-200 hover:bg-white/30 hover:border-white/40 hover:scale-105 text-sm font-medium ${
                 isSendButtonDisabled ? 'cursor-not-allowed opacity-50' : ''
               }`}>
               Send

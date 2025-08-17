@@ -58,7 +58,7 @@ function MessageBlock({ message, isSameActor }: MessageBlockProps) {
                 <div className="animate-progress h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full" />
               </div>
             ) : (
-              <div className="whitespace-pre-wrap break-words text-sm leading-relaxed">{message.content}</div>
+              <div className="whitespace-pre-wrap break-words text-xs leading-relaxed">{message.content}</div>
             )}
           </div>
           {!isProgress && (
