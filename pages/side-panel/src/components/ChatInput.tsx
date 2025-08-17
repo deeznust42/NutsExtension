@@ -42,7 +42,7 @@ export default function ChatInput({
     const textarea = textareaRef.current;
     if (textarea) {
       textarea.style.height = 'auto';
-      textarea.style.height = `${Math.min(textarea.scrollHeight, 100)}px`;
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 80)}px`;
     }
   };
 
@@ -58,7 +58,7 @@ export default function ChatInput({
     const textarea = textareaRef.current;
     if (textarea) {
       textarea.style.height = 'auto';
-      textarea.style.height = `${Math.min(textarea.scrollHeight, 100)}px`;
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 80)}px`;
     }
   }, []);
 
@@ -106,15 +106,15 @@ export default function ChatInput({
           onKeyDown={handleKeyDown}
           disabled={disabled}
           aria-disabled={disabled}
-          rows={5}
-          className={`w-full resize-none border-none bg-transparent p-4 text-white placeholder-gray-400 focus:outline-none ${
+          rows={3}
+          className={`w-full resize-none border-none bg-transparent p-3 text-white placeholder-gray-400 focus:outline-none text-sm ${
             disabled ? 'cursor-not-allowed' : ''
           }`}
           placeholder="What can I help you with?"
           aria-label="Message input"
         />
 
-        <div className={`flex items-center justify-between px-4 py-3 ${disabled ? 'opacity-50' : ''}`}>
+        <div className={`flex items-center justify-between px-3 py-2 ${disabled ? 'opacity-50' : ''}`}>
           <div className="flex gap-2 text-gray-400">
             {onMicClick && (
               <button
@@ -124,7 +124,7 @@ export default function ChatInput({
                 aria-label={
                   isProcessingSpeech ? 'Processing speech...' : isRecording ? 'Stop recording' : 'Start voice input'
                 }
-                className={`rounded-lg p-2 transition-all duration-200 ${
+                className={`rounded-lg p-1.5 transition-all duration-200 ${
                   disabled || isProcessingSpeech
                     ? 'cursor-not-allowed opacity-50'
                     : isRecording
@@ -144,7 +144,7 @@ export default function ChatInput({
             <button
               type="button"
               onClick={onStopTask}
-              className="rounded-lg bg-red-500/20 border border-red-500/30 px-4 py-2 text-red-300 transition-all duration-200 hover:bg-red-500/30 hover:border-red-500/50">
+              className="rounded-lg bg-red-500/20 border border-red-500/30 px-3 py-1.5 text-red-300 transition-all duration-200 hover:bg-red-500/30 hover:border-red-500/50 text-sm">
               Stop
             </button>
           ) : historicalSessionId ? (
@@ -153,7 +153,7 @@ export default function ChatInput({
               onClick={handleReplay}
               disabled={!historicalSessionId}
               aria-disabled={!historicalSessionId}
-              className={`rounded-lg bg-green-500/20 border border-green-500/30 px-4 py-2 text-green-300 transition-all duration-200 hover:bg-green-500/30 hover:border-green-500/50 ${
+              className={`rounded-lg bg-green-500/20 border border-green-500/30 px-3 py-1.5 text-green-300 transition-all duration-200 hover:bg-green-500/30 hover:border-green-500/50 text-sm ${
                 !historicalSessionId ? 'cursor-not-allowed opacity-50' : ''
               }`}>
               Replay
@@ -163,7 +163,7 @@ export default function ChatInput({
               type="submit"
               disabled={isSendButtonDisabled}
               aria-disabled={isSendButtonDisabled}
-              className={`rounded-lg bg-white/10 border border-white/20 px-4 py-2 text-white transition-all duration-200 hover:bg-white/20 hover:border-white/30 ${
+              className={`rounded-lg bg-white/10 border border-white/20 px-3 py-1.5 text-white transition-all duration-200 hover:bg-white/20 hover:border-white/30 text-sm ${
                 isSendButtonDisabled ? 'cursor-not-allowed opacity-50' : ''
               }`}>
               Send

@@ -46,22 +46,22 @@ code {
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* Scrollbar styles */
+/* Scrollbar styles - Updated to match dark theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(30, 41, 59, 0.3); /* slate-800 with transparency */
+  background: rgba(26, 37, 80, 0.3); /* #1a2550 with transparency */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(14, 165, 233, 0.6); /* sky-500 with transparency */
+  background: rgba(34, 48, 106, 0.8); /* #22306a with transparency */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(14, 165, 233, 0.8); /* sky-500 with more opacity on hover */
+  background: rgba(34, 48, 106, 1); /* #22306a solid on hover */
 }
 
 /* Dark mode scrollbar */
@@ -71,11 +71,11 @@ code {
   }
   
   ::-webkit-scrollbar-thumb {
-    background: rgba(14, 165, 233, 0.7); /* sky-500 with transparency */
+    background: rgba(34, 48, 106, 0.9); /* #22306a with transparency */
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(56, 189, 248, 0.9); /* sky-400 with more opacity on hover */
+    background: rgba(34, 48, 106, 1); /* #22306a solid on hover */
   }
 }
 
@@ -152,16 +152,16 @@ code {
 }
 
 .scrollbar-gutter-stable::-webkit-scrollbar-track {
-  background: rgba(30, 41, 59, 0.3);  /* slate-800 with transparency */
+  background: rgba(26, 37, 80, 0.3);  /* #1a2550 with transparency */
 }
 
 .scrollbar-gutter-stable::-webkit-scrollbar-thumb {
-  background: rgba(14, 165, 233, 0.6);  /* sky-500 with transparency */
+  background: rgba(34, 48, 106, 0.8);  /* #22306a with transparency */
   border-radius: 4px;
 }
 
 .scrollbar-gutter-stable::-webkit-scrollbar-thumb:hover {
-  background: rgba(56, 189, 248, 0.8);  /* sky-400 with more opacity on hover */
+  background: rgba(34, 48, 106, 1);  /* #22306a solid on hover */
 }
 
 /* Dark mode scrollbar for scrollbar-gutter-stable */
@@ -171,11 +171,11 @@ code {
   }
   
   .scrollbar-gutter-stable::-webkit-scrollbar-thumb {
-    background: rgba(14, 165, 233, 0.7);  /* sky-500 with transparency */
+    background: rgba(34, 48, 106, 0.9);  /* #22306a with transparency */
   }
   
   .scrollbar-gutter-stable::-webkit-scrollbar-thumb:hover {
-    background: rgba(56, 189, 248, 0.9);  /* sky-400 with more opacity on hover */
+    background: rgba(34, 48, 106, 1);  /* #22306a solid on hover */
   }
 }
 
