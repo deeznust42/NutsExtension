@@ -55,7 +55,7 @@ const ChatHistoryList: React.FC<ChatHistoryListProps> = ({
                     e.stopPropagation();
                     onSessionBookmark(session.id);
                   }}
-                  className="absolute right-2 top-2 rounded-lg p-2 opacity-0 transition-all duration-200 group-hover:opacity-100 bg-white/10 border border-white/20 text-white hover:bg-white/20 hover:border-white/30"
+                  className="absolute right-12 top-2 rounded-lg p-2 opacity-0 transition-all duration-200 group-hover:opacity-100 bg-white/10 border border-white/20 text-white hover:bg-white/20 hover:border-white/30"
                   aria-label="Bookmark session"
                   type="button">
                   <BsBookmark size={14} />
@@ -68,7 +68,7 @@ const ChatHistoryList: React.FC<ChatHistoryListProps> = ({
                   e.stopPropagation();
                   onSessionDelete(session.id);
                 }}
-                className="absolute bottom-2 right-2 rounded-lg p-2 opacity-0 transition-all duration-200 group-hover:opacity-100 bg-red-500/20 border border-red-500/30 text-red-300 hover:bg-red-500/30 hover:border-red-500/50"
+                className="absolute right-2 top-2 rounded-lg p-2 opacity-0 transition-all duration-200 group-hover:opacity-100 bg-red-500/20 border border-red-500/30 text-red-300 hover:bg-red-500/30 hover:border-red-500/50"
                 aria-label="Delete session"
                 type="button">
                 <FaTrash size={14} />
