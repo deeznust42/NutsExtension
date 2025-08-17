@@ -42,7 +42,7 @@ export default function ChatInput({
     const textarea = textareaRef.current;
     if (textarea) {
       textarea.style.height = 'auto';
-      textarea.style.height = `${Math.min(textarea.scrollHeight, 80)}px`;
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 60)}px`;
     }
   };
 
@@ -58,7 +58,7 @@ export default function ChatInput({
     const textarea = textareaRef.current;
     if (textarea) {
       textarea.style.height = 'auto';
-      textarea.style.height = `${Math.min(textarea.scrollHeight, 80)}px`;
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 60)}px`;
     }
   }, []);
 
@@ -106,15 +106,15 @@ export default function ChatInput({
           onKeyDown={handleKeyDown}
           disabled={disabled}
           aria-disabled={disabled}
-          rows={3}
-          className={`w-full resize-none border-none bg-transparent p-3 text-white placeholder-gray-400 focus:outline-none text-sm ${
+          rows={1}
+          className={`w-full resize-none border-none bg-transparent p-2 text-white placeholder-gray-400 focus:outline-none text-sm ${
             disabled ? 'cursor-not-allowed' : ''
           }`}
           placeholder="What can I help you with?"
           aria-label="Message input"
         />
 
-        <div className={`flex items-center justify-between px-3 py-2 ${disabled ? 'opacity-50' : ''}`}>
+        <div className={`flex items-center justify-between px-2 py-1.5 ${disabled ? 'opacity-50' : ''}`}>
           <div className="flex gap-2 text-gray-400">
             {onMicClick && (
               <button
@@ -144,7 +144,7 @@ export default function ChatInput({
             <button
               type="button"
               onClick={onStopTask}
-              className="rounded-lg bg-red-700/90 border-2 border-red-300 px-4 py-2 text-white font-semibold transition-all duration-200 hover:bg-red-800 hover:border-red-200 hover:scale-110 text-sm">
+              className="rounded-lg bg-red-800/90 border border-red-600/50 px-4 py-2 text-red-100 font-semibold text-sm hover:bg-red-800 hover:border-red-500 transition-colors">
               Stop
             </button>
           ) : historicalSessionId ? (
