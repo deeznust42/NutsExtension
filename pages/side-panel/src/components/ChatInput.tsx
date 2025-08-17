@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { FaMicrophone } from 'react-icons/fa';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { IoSend } from 'react-icons/io5';
+import { IoStop } from 'react-icons/io5';
 
 interface ChatInputProps {
   onSendMessage: (text: string) => void;
@@ -144,7 +145,7 @@ export default function ChatInput({
               type="button"
               onClick={onStopTask}
               className="rounded-lg bg-red-800/90 border border-red-600/50 px-4 py-2 text-red-100 font-semibold text-sm hover:bg-red-800 hover:border-red-500 transition-colors">
-              Stop
+              <IoStop className="h-4 w-4" />
             </button>
           ) : historicalSessionId ? (
             <button
