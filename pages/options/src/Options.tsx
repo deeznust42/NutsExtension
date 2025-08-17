@@ -22,7 +22,7 @@ const Options = () => {
           <p className={`text-lg text-gray-300 font-normal leading-relaxed`}>You may configure deez nust here</p>
           <button
             onClick={handleHelpClick}
-            className={`absolute top-0 right-0 text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium underline hover:no-underline`}>
+            className={`absolute top-0 right-0 px-4 py-2 rounded-full border-white/20 bg-white/10 backdrop-blur-sm text-white hover:bg-white/15 hover:border-white/30 transition-colors duration-200 ease-in-out text-sm font-medium`}>
             Help
           </button>
         </div>
