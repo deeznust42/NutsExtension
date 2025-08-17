@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { FaMicrophone } from 'react-icons/fa';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { IoSend } from 'react-icons/io5';
 
 interface ChatInputProps {
   onSendMessage: (text: string) => void;
@@ -98,7 +99,7 @@ export default function ChatInput({
           : 'focus-within:border-white/20 focus-within:bg-white/10 hover:border-white/15 hover:bg-white/8'
       }`}
       aria-label="Chat input form">
-      <div className="flex flex-col">
+      <div className="flex items-center">
         <textarea
           ref={textareaRef}
           value={text}
@@ -107,38 +108,36 @@ export default function ChatInput({
           disabled={disabled}
           aria-disabled={disabled}
           rows={1}
-          className={`w-full resize-none border-none bg-transparent p-2 text-white placeholder-gray-400 focus:outline-none text-sm ${
+          className={`flex-1 resize-none border-none bg-transparent p-3 text-white placeholder-gray-400 focus:outline-none text-sm ${
             disabled ? 'cursor-not-allowed' : ''
           }`}
           placeholder="What can I help you with?"
           aria-label="Message input"
         />
 
-        <div className={`flex items-center justify-between px-2 py-1.5 ${disabled ? 'opacity-50' : ''}`}>
-          <div className="flex gap-2 text-gray-400">
-            {onMicClick && (
-              <button
-                type="button"
-                onClick={onMicClick}
-                disabled={disabled || isProcessingSpeech}
-                aria-label={
-                  isProcessingSpeech ? 'Processing speech...' : isRecording ? 'Stop recording' : 'Start voice input'
-                }
-                className={`rounded-lg p-1.5 transition-all duration-200 ${
-                  disabled || isProcessingSpeech
-                    ? 'cursor-not-allowed opacity-50'
-                    : isRecording
-                      ? 'bg-white/20 text-white hover:bg-white/30'
-                      : 'hover:bg-white/10 text-gray-400 hover:text-white'
-                }`}>
-                {isProcessingSpeech ? (
-                  <AiOutlineLoading3Quarters className="h-4 w-4 animate-spin" />
-                ) : (
-                  <FaMicrophone className={`h-4 w-4 ${isRecording ? 'animate-pulse' : ''}`} />
-                )}
-              </button>
-            )}
-          </div>
+        <div className="flex items-center gap-2 px-3 py-2">
+          {onMicClick && (
+            <button
+              type="button"
+              onClick={onMicClick}
+              disabled={disabled || isProcessingSpeech}
+              aria-label={
+                isProcessingSpeech ? 'Processing speech...' : isRecording ? 'Stop recording' : 'Start voice input'
+              }
+              className={`rounded-lg p-1.5 transition-all duration-200 ${
+                disabled || isProcessingSpeech
+                  ? 'cursor-not-allowed opacity-50'
+                  : isRecording
+                    ? 'bg-white/20 text-white hover:bg-white/30'
+                    : 'hover:bg-white/10 text-gray-400 hover:text-white'
+              }`}>
+              {isProcessingSpeech ? (
+                <AiOutlineLoading3Quarters className="h-4 w-4 animate-spin" />
+              ) : (
+                <FaMicrophone className={`h-4 w-4 ${isRecording ? 'animate-pulse' : ''}`} />
+              )}
+            </button>
+          )}
 
           {showStopButton ? (
             <button
@@ -166,7 +165,7 @@ export default function ChatInput({
               className={`rounded-lg bg-white/20 border border-white/30 px-3 py-1.5 text-white transition-all duration-200 hover:bg-white/30 hover:border-white/40 hover:scale-105 text-sm font-medium ${
                 isSendButtonDisabled ? 'cursor-not-allowed opacity-50' : ''
               }`}>
-              Send
+              <IoSend className="h-4 w-4" />
             </button>
           )}
         </div>
