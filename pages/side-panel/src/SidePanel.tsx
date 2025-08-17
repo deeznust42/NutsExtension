@@ -1111,6 +1111,7 @@ const SidePanel = () => {
                         onStopTask={handleStopTask}
                         disabled={!inputEnabled || isHistoricalSession}
                         showStopButton={showStopButton}
+                        isFreshChat={true} // This is a fresh chat
                         setContent={setter => {
                           setInputTextRef.current = setter;
                         }}

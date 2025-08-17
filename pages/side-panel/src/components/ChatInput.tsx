@@ -13,6 +13,7 @@ interface ChatInputProps {
   disabled: boolean;
   showStopButton: boolean;
   setContent?: (setter: (text: string) => void) => void;
+  isFreshChat?: boolean; // New prop to indicate if this is a fresh chat
 
   // Historical session ID - if provided, shows replay button instead of send button
   historicalSessionId?: string | null;
@@ -28,6 +29,7 @@ export default function ChatInput({
   disabled,
   showStopButton,
   setContent,
+  isFreshChat = false, // Default to false
   historicalSessionId,
   onReplay,
 }: ChatInputProps) {
@@ -44,7 +46,8 @@ export default function ChatInput({
     const textarea = textareaRef.current;
     if (textarea) {
       textarea.style.height = 'auto';
-      textarea.style.height = `${Math.min(textarea.scrollHeight, 60)}px`;
+      const maxHeight = isFreshChat ? 120 : 60; // Bigger max height for fresh chat
+      textarea.style.height = `${Math.min(textarea.scrollHeight, maxHeight)}px`;
     }
   };
 
@@ -60,9 +63,10 @@ export default function ChatInput({
     const textarea = textareaRef.current;
     if (textarea) {
       textarea.style.height = 'auto';
-      textarea.style.height = `${Math.min(textarea.scrollHeight, 60)}px`;
+      const maxHeight = isFreshChat ? 120 : 60; // Bigger max height for fresh chat
+      textarea.style.height = `${Math.min(textarea.scrollHeight, maxHeight)}px`;
     }
-  }, []);
+  }, [isFreshChat]); // Add isFreshChat to dependency array
 
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
@@ -95,6 +99,10 @@ export default function ChatInput({
     <form
       onSubmit={handleSubmit}
       className={`overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 ${
+        isFreshChat
+          ? 'border-white/20 bg-white/8 shadow-lg' // More prominent for fresh chat
+          : ''
+      } ${
         disabled
           ? 'cursor-not-allowed opacity-50'
           : 'focus-within:border-white/20 focus-within:bg-white/10 hover:border-white/15 hover:bg-white/8'
@@ -108,11 +116,11 @@ export default function ChatInput({
           onKeyDown={handleKeyDown}
           disabled={disabled}
           aria-disabled={disabled}
-          rows={1}
+          rows={isFreshChat ? 3 : 1} // More rows for fresh chat
           className={`flex-1 resize-none border-none bg-transparent p-3 text-white placeholder-gray-400 focus:outline-none text-sm ${
             disabled ? 'cursor-not-allowed' : ''
           }`}
-          placeholder="What can I help you with?"
+          placeholder={isFreshChat ? 'What would you like me to help you with today?' : 'What can I help you with?'}
           aria-label="Message input"
         />
 
