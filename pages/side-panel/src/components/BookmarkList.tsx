@@ -78,8 +78,8 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
   }, [editingId]);
 
   return (
-    <div className="p-2">
-      <h3 className="mb-3 text-sm font-medium text-gray-700">Quick Start</h3>
+    <div className="p-4">
+      <h3 className="mb-4 text-sm font-medium text-gray-300">Quick Start</h3>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {bookmarks.map(bookmark => (
           <div
@@ -89,7 +89,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
             onDragEnd={handleDragEnd}
             onDragOver={handleDragOver}
             onDrop={e => handleDrop(e, bookmark.id)}
-            className="group relative rounded-lg p-3 bg-white hover:bg-gray-50 border border-gray-200">
+            className="group relative rounded-xl p-4 bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-200">
             {editingId === bookmark.id ? (
               <div className="flex items-center">
                 <input
@@ -97,18 +97,19 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
                   type="text"
                   value={editTitle}
                   onChange={e => setEditTitle(e.target.value)}
-                  className="mr-2 grow rounded px-2 py-1 text-sm border-gray-200 bg-white text-gray-700 border"
+                  className="mr-2 grow rounded-lg px-3 py-2 text-sm border border-white/20 bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-white/30 focus:bg-white/15"
+                  placeholder="Enter title..."
                 />
                 <button
                   onClick={() => handleSaveEdit(bookmark.id)}
-                  className="rounded p-1 bg-white text-green-500 hover:bg-gray-100"
+                  className="rounded-lg p-2 bg-green-500/20 border border-green-500/30 text-green-300 hover:bg-green-500/30 hover:border-green-500/50 transition-all duration-200"
                   aria-label="Save edit"
                   type="button">
                   <FaCheck size={14} />
                 </button>
                 <button
                   onClick={handleCancelEdit}
-                  className="ml-1 rounded p-1 bg-white text-red-500 hover:bg-gray-100"
+                  className="ml-1 rounded-lg p-2 bg-red-500/20 border border-red-500/30 text-red-300 hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-200"
                   aria-label="Cancel edit"
                   type="button">
                   <FaTimes size={14} />
@@ -125,28 +126,28 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
                         onBookmarkSelect(bookmark.content);
                       }
                     }}
-                    className="w-full text-left">
-                    <div className="truncate pr-10 text-sm font-medium text-gray-700">{bookmark.title}</div>
+                    className="w-full text-left pr-16">
+                    <div className="truncate text-sm font-medium text-white">{bookmark.title}</div>
                   </button>
                 </div>
               </>
             )}
 
             {editingId !== bookmark.id && (
-              <>
-                {/* Edit button - top right */}
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-2">
+                {/* Edit button */}
                 <button
                   onClick={e => {
                     e.stopPropagation();
                     handleEditClick(bookmark);
                   }}
-                  className="absolute right-[28px] top-1/2 z-10 -translate-y-1/2 rounded p-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 bg-white text-gray-900 hover:bg-gray-100"
+                  className="rounded-lg p-2 opacity-0 transition-all duration-200 group-hover:opacity-100 bg-white/10 border border-white/20 text-white hover:bg-white/20 hover:border-white/30"
                   aria-label="Edit bookmark"
                   type="button">
                   <FaPen size={14} />
                 </button>
 
-                {/* Delete button - bottom right */}
+                {/* Delete button */}
                 <button
                   onClick={e => {
                     e.stopPropagation();
@@ -154,12 +155,12 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
                       onBookmarkDelete(bookmark.id);
                     }
                   }}
-                  className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded p-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 bg-white text-gray-500 hover:bg-gray-100"
+                  className="rounded-lg p-2 opacity-0 transition-all duration-200 group-hover:opacity-100 bg-red-500/20 border border-red-500/30 text-red-300 hover:bg-red-500/30 hover:border-red-500/50"
                   aria-label="Delete bookmark"
                   type="button">
                   <FaTrash size={14} />
                 </button>
-              </>
+              </div>
             )}
           </div>
         ))}

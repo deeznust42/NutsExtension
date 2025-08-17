@@ -8,7 +8,7 @@ interface MessageListProps {
 
 export default memo(function MessageList({ messages }: MessageListProps) {
   return (
-    <div className="max-w-full space-y-4">
+    <div className="max-w-full space-y-6">
       {messages.map((message, index) => (
         <MessageBlock
           key={`${message.actor}-${message.timestamp}-${index}`}
@@ -32,35 +32,38 @@ function MessageBlock({ message, isSameActor }: MessageBlockProps) {
   }
   const actor = ACTOR_PROFILES[message.actor as keyof typeof ACTOR_PROFILES];
   const isProgress = message.content === 'Showing progress...';
+  const isUser = message.actor === 'user';
 
   return (
-    <div
-      className={`flex max-w-full gap-3 ${
-        !isSameActor ? `mt-4 border-t border-gray-200/50 pt-4 first:mt-0 first:border-t-0 first:pt-0` : ''
-      }`}>
+    <div className={`flex max-w-full gap-4 ${!isSameActor ? `mt-6 first:mt-0` : ''}`}>
       {!isSameActor && (
         <div
-          className="flex size-8 shrink-0 items-center justify-center rounded-full"
+          className="flex size-10 shrink-0 items-center justify-center rounded-full shadow-lg"
           style={{ backgroundColor: actor.iconBackground }}>
           <img src={actor.icon} alt={actor.name} className="size-6" />
         </div>
       )}
-      {isSameActor && <div className="w-8" />}
+      {isSameActor && <div className="w-10" />}
 
       <div className="min-w-0 flex-1">
-        {!isSameActor && <div className="mb-1 text-sm font-semibold text-gray-900">{actor.name}</div>}
+        {!isSameActor && <div className="mb-2 text-sm font-semibold text-white opacity-90">{actor.name}</div>}
 
-        <div className="space-y-0.5">
-          <div className="whitespace-pre-wrap break-words text-sm text-gray-700">
+        <div className="space-y-2">
+          <div
+            className={`rounded-2xl px-4 py-3 backdrop-blur-md border transition-all duration-200 ${
+              isUser ? 'bg-white/10 border-white/20 text-white' : 'bg-white/5 border-white/10 text-gray-200'
+            }`}>
             {isProgress ? (
-              <div className="h-1 overflow-hidden rounded bg-gray-200">
-                <div className="animate-progress h-full bg-white" />
+              <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                <div className="animate-progress h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full" />
               </div>
             ) : (
-              message.content
+              <div className="whitespace-pre-wrap break-words text-sm leading-relaxed">{message.content}</div>
             )}
           </div>
-          {!isProgress && <div className="text-right text-xs text-gray-300">{formatTimestamp(message.timestamp)}</div>}
+          {!isProgress && (
+            <div className="text-right text-xs text-gray-400 opacity-70">{formatTimestamp(message.timestamp)}</div>
+          )}
         </div>
       </div>
     </div>

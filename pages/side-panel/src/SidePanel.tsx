@@ -1105,7 +1105,7 @@ const SidePanel = () => {
               <>
                 {messages.length === 0 && (
                   <>
-                    <div className="border-t border-gray-200 mb-2 p-2 shadow-sm backdrop-blur-sm">
+                    <div className="border-t border-white/10 mb-4 p-4">
                       <ChatInput
                         onSendMessage={handleSendMessage}
                         onStopTask={handleStopTask}
@@ -1130,13 +1130,13 @@ const SidePanel = () => {
                   </>
                 )}
                 {messages.length > 0 && (
-                  <div className="scrollbar-gutter-stable flex-1 overflow-x-hidden overflow-y-scroll scroll-smooth p-2">
+                  <div className="scrollbar-gutter-stable flex-1 overflow-x-hidden overflow-y-scroll scroll-smooth p-4">
                     <MessageList messages={messages} />
                     <div ref={messagesEndRef} />
                   </div>
                 )}
                 {messages.length > 0 && (
-                  <div className="border-t border-gray-200 p-2 shadow-sm backdrop-blur-sm">
+                  <div className="border-t border-white/10 p-4">
                     <ChatInput
                       onSendMessage={handleSendMessage}
                       onStopTask={handleStopTask}
