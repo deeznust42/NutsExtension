@@ -608,7 +608,7 @@ export const ModelSettings = () => {
           </label>
           <select
             id="unified-model"
-            className={`flex-1 rounded border text-sm border-white/20 bg-white/10 backdrop-blur-sm text-white px-2 py-1 focus:outline-none focus:ring-2 focus:ring-white/20`}
+            className={`flex-1 rounded-lg border text-sm border-[#475569] bg-[#1e293b] text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/20 focus:border-[#3b82f6] transition-all duration-200`}
             disabled={availableModels.length === 0}
             value={selectedModel || ''}
             onChange={e => handleModelChange(e.target.value)}>
@@ -709,7 +709,7 @@ export const ModelSettings = () => {
               id="unified-reasoning-effort"
               value={reasoningEffort || 'medium'}
               onChange={e => handleReasoningEffortChange(e.target.value as 'low' | 'medium' | 'high')}
-              className={`flex-1 rounded border text-sm border-white/20 bg-white/10 backdrop-blur-sm text-white px-2 py-1 focus:outline-none focus:ring-2 focus:ring-white/20`}>
+              className={`flex-1 rounded-lg border text-sm border-[#475569] bg-[#1e293b] text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/20 focus:border-[#3b82f6] transition-all duration-200`}>
               <option value="low">Low (Faster)</option>
               <option value="medium">Medium (Balanced)</option>
               <option value="high">High (More thorough)</option>

@@ -44,3 +44,20 @@ code {
     border-color: #475569 !important; /* slate-600 */
   }
 }
+
+/* Dropdown styling for dark theme */
+select option {
+  background-color: #1e293b !important;
+  color: white !important;
+  border: none !important;
+}
+
+select:focus option:checked {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+select:focus option:hover {
+  background-color: #334155 !important;
+  color: white !important;
+}
