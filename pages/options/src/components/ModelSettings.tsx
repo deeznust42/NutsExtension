@@ -892,7 +892,7 @@ export const ModelSettings = () => {
     <section className="space-y-8">
       {/* LLM Providers Section */}
       <div className={`rounded-xl shadow-xl border border-[#22306a] bg-[#1a2550] p-6 mb-12`}>
-        <h2 className={`mb-4 text-xl font-bold text-white`}>LLM Providers</h2>
+        <h2 className={`mb-6 text-2xl font-bold text-white tracking-tight leading-tight`}>LLM Providers</h2>
         <div className="space-y-4">
           {getSortedProviders().length === 0 ? (
             <div className="py-6 text-center text-gray-300">
@@ -1132,7 +1132,7 @@ export const ModelSettings = () => {
 
       {/* Unified Model Selection Section */}
       <div className={`rounded-xl shadow-xl border border-[#22306a] bg-[#1a2550] p-6`}>
-        <h2 className={`mb-4 text-xl font-bold text-white`}>Model Selection</h2>
+        <h2 className={`mb-6 text-2xl font-bold text-white tracking-tight leading-tight`}>Model Selection</h2>
         <div className="space-y-4">{renderModelSelect()}</div>
       </div>
 

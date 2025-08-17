@@ -36,7 +36,7 @@ const Options = () => {
       {/* Vertical Navigation Bar */}
       <nav className={`w-56 border-r border-[#22306a] bg-[#1a2550] shadow-lg flex flex-col justify-between`}>
         <div className="p-6">
-          <h1 className={`mb-8 text-2xl font-extrabold tracking-tight text-center text-white`}>Settings</h1>
+          <h1 className={`mb-10 text-3xl font-bold tracking-tight text-center text-white leading-tight`}>Settings</h1>
           <ul className="space-y-3">
             {TABS.map(item => (
               <li key={item.id}>
@@ -58,9 +58,9 @@ const Options = () => {
 
       {/* Main Content Area */}
       <main className={`flex-1 p-8 bg-[#1a2550]`}>
-        <div className="mb-8">
-          <h2 className={`text-3xl font-extrabold mb-2 text-white`}>Deez Nust Settings</h2>
-          <p className={`text-lg text-gray-300`}>You may configure deez nust here</p>
+        <div className="mb-10">
+          <h2 className={`text-4xl font-bold mb-3 text-white tracking-tight leading-tight`}>Deez Nust Settings</h2>
+          <p className={`text-lg text-gray-300 font-normal leading-relaxed`}>You may configure deez nust here</p>
         </div>
         {renderTabContent()}
       </main>
