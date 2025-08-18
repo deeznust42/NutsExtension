@@ -53,7 +53,12 @@ async function injectBuildDomTree(tabId: number) {
 }
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
-  if (tabId && changeInfo.status === 'complete' && tab.url?.startsWith('http')) {
+  if (
+    tabId &&
+    changeInfo.status === 'complete' &&
+    typeof tab.url === 'string' &&
+    tab.url.startsWith('https://nust.lms.edu.pk/')
+  ) {
     await injectBuildDomTree(tabId);
   }
 });

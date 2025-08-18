@@ -60,7 +60,8 @@ const manifest = withOperaSidebar(
     name: '__MSG_extensionName__',
     version: packageJson.version,
     description: '__MSG_extensionDescription__',
-    host_permissions: ['<all_urls>'],
+    // Replace broad host permissions with specific domain
+    host_permissions: ['https://nust.lms.edu.pk/*'],
     permissions: ['storage', 'scripting', 'tabs', 'activeTab', 'debugger', 'unlimitedStorage'],
     options_page: 'options/index.html',
     background: {
@@ -75,7 +76,8 @@ const manifest = withOperaSidebar(
     },
     content_scripts: [
       {
-        matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+        // Update content script to only run on nust.lms.edu.pk
+        matches: ['https://nust.lms.edu.pk/*'],
         js: ['content/index.iife.js'],
       },
     ],
@@ -90,7 +92,8 @@ const manifest = withOperaSidebar(
           'permission/index.html',
           'permission/permission.js',
         ],
-        matches: ['*://*/*'],
+        // Update to only allow access from nust.lms.edu.pk
+        matches: ['https://nust.lms.edu.pk/*'],
       },
     ],
   }),
