@@ -19,7 +19,6 @@ export const llmProviderModelNames = {
   [ProviderTypeEnum.Gemini]: [
     'gemini-2.5-flash-preview-05-20',
     'gemini-2.5-pro-preview-06-05',
-    'gemini-2.0-flash',
     // 'gemini-2.0-flash-thinking-exp-01-21', // TODO: not support function calling for now
   ],
   [ProviderTypeEnum.Groq]: ['llama-3.3-70b-versatile'],
