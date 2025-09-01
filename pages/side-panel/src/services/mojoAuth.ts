@@ -15,7 +15,7 @@ interface MojoAuthConfig {
 
 // TODO: Replace with your actual MojoAuth API key
 const MOJOAUTH_CONFIG: MojoAuthConfig = {
-  apiKey: '25b1160c-47a0-4263-af60-608f73e821cb', // Replace with your actual API key from MojoAuth dashboard
+  apiKey: '20ed1921-5a43-47b4-9062-28decf9a51a1', // Replace with your actual API key from MojoAuth dashboard
   source: [{ type: 'email', feature: 'otp' }], // Email OTP authentication method
   serverUrl: 'https://api.mojoauth.com', // Default MojoAuth API URL
 };
