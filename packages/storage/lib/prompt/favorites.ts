@@ -5,8 +5,9 @@ import type { BaseStorage } from '../base/types';
 // Template data
 const defaultFavoritePrompts = [
   {
-    title: 'What deadlines are due today?',
-    content: 'Go to the calendar and return the due deadlines for today in a structured format',
+    title: 'What deadlines are due this week?',
+    content:
+      'Go to the "https://lms.nust.edu.pk/portal/calendar/view.php?view=month" and return the due deadlines in a structured format',
   },
   {
     title: 'Enroll into a course (Buggy as heck but we are working on it)',
