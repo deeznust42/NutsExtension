@@ -16,10 +16,7 @@ export enum ProviderTypeEnum {
 
 // Default supported models for each built-in provider
 export const llmProviderModelNames = {
-  [ProviderTypeEnum.Gemini]: [
-    'gemini-2.5-flash-preview-05-20',
-    // 'gemini-2.0-flash-thinking-exp-01-21', // TODO: not support function calling for now
-  ],
+  [ProviderTypeEnum.Gemini]: ['gemini-2.5-flash-preview-05-20'],
   [ProviderTypeEnum.Groq]: ['llama-3.3-70b-versatile'],
   // Custom OpenAI providers don't have predefined models as they are user-defined
 };
