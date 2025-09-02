@@ -44,7 +44,6 @@ export function getProviderTypeByProviderId(providerId: string): ProviderTypeEnu
   // Handle standard provider types
   switch (providerId) {
     case ProviderTypeEnum.Gemini:
-    case ProviderTypeEnum.Groq:
       return providerId;
     default:
       return ProviderTypeEnum.CustomOpenAI;
@@ -57,8 +56,6 @@ export function getDefaultDisplayNameFromProviderId(providerId: string): string 
   switch (providerId) {
     case ProviderTypeEnum.Gemini:
       return 'Gemini';
-    case ProviderTypeEnum.Groq:
-      return 'Groq';
     default:
       return providerId; // Use the provider id as display name for custom providers by default
   }
@@ -68,7 +65,6 @@ export function getDefaultDisplayNameFromProviderId(providerId: string): string 
 export function getDefaultProviderConfig(providerId: string): ProviderConfig {
   switch (providerId) {
     case ProviderTypeEnum.Gemini:
-    case ProviderTypeEnum.Groq: // Groq uses modelNames
       return {
         apiKey: '',
         name: getDefaultDisplayNameFromProviderId(providerId),

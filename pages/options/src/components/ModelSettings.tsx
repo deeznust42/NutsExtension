@@ -1103,9 +1103,7 @@ export const ModelSettings = () => {
               {Object.values(ProviderTypeEnum)
                 .filter(
                   type =>
-                    (type === ProviderTypeEnum.Gemini || type === ProviderTypeEnum.Groq) &&
-                    !providersFromStorage.has(type) &&
-                    !modifiedProviders.has(type),
+                    type === ProviderTypeEnum.Gemini && !providersFromStorage.has(type) && !modifiedProviders.has(type),
                 )
                 .map(type => (
                   <button

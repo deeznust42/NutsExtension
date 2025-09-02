@@ -1,6 +1,5 @@
 import { type ProviderConfig, type ModelConfig, ProviderTypeEnum } from '@extension/storage';
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
-import { ChatGroq } from '@langchain/groq';
 import type { BaseChatModel } from '@langchain/core/language_models/chat_models';
 
 const maxTokens = 1024 * 4;
@@ -20,19 +19,9 @@ export function createChatModel(providerConfig: ProviderConfig, modelConfig: Mod
       };
       return new ChatGoogleGenerativeAI(args);
     }
-    case ProviderTypeEnum.Groq: {
-      const args = {
-        model: modelConfig.modelName,
-        apiKey: providerConfig.apiKey,
-        temperature,
-        topP,
-        maxTokens,
-      };
-      return new ChatGroq(args);
-    }
     default: {
       // by default, we think it's a openai-compatible provider
-      throw new Error(`Unsupported provider: ${modelConfig.provider}. Only Gemini and Groq are supported.`);
+      throw new Error(`Unsupported provider: ${modelConfig.provider}. Only Gemini is supported.`);
     }
   }
 }
