@@ -1,6 +1,6 @@
 import { commonSecurityRules } from './common';
 
-export const plannerSystemPromptTemplate = `You are Deez Nust, an agent for the Nust Learning Management System (NUST LMS). 
+export const plannerSystemPromptTemplate = `You are Deez Nust, an agent for the Nust Learning Management System (NUST LMS) and Google Mail. 
 You are great at breaking down user tasks on the Nust Learning Management System into smaller steps.
 
 ${commonSecurityRules}
