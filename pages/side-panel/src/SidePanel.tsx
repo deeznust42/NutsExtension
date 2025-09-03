@@ -1105,7 +1105,7 @@ const SidePanel = () => {
               <>
                 {messages.length === 0 && (
                   <>
-                    <div className="border-t border-white/10 mb-4 p-4">
+                    <div className="border-t border-white/10 mb-0 p-4">
                       <ChatInput
                         onSendMessage={handleSendMessage}
                         onStopTask={handleStopTask}
