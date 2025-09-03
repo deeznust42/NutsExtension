@@ -56,6 +56,7 @@ export const ModelSettings = () => {
   // State for model input handling
 
   const [selectedSpeechToTextModel, setSelectedSpeechToTextModel] = useState<string>('');
+  const [isAdvancedParamsOpen, setIsAdvancedParamsOpen] = useState(false);
 
   useEffect(() => {
     const loadProviders = async () => {
@@ -621,80 +622,103 @@ export const ModelSettings = () => {
           </select>
         </div>
 
-        {/* Temperature Slider */}
-        <div className="flex flex-col md:flex-row md:items-center gap-2">
-          <label htmlFor="unified-temperature" className={`w-24 text-sm font-semibold text-gray-200`}>
-            Temperature
-          </label>
-          <div className="flex flex-1 items-center gap-2">
-            <input
-              id="unified-temperature"
-              type="range"
-              min="0"
-              max="2"
-              step="0.01"
-              value={modelParameters.temperature}
-              onChange={e => handleParameterChange('temperature', Number.parseFloat(e.target.value))}
-              style={{
-                background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(modelParameters.temperature / 2) * 100}%, #cbd5e1 ${(modelParameters.temperature / 2) * 100}%, #cbd5e1 100%)`,
-              }}
-              className={`flex-1 accent-blue-500 h-1 appearance-none rounded-full`}
-            />
-            <input
-              type="number"
-              min="0"
-              max="2"
-              step="0.01"
-              value={modelParameters.temperature}
-              onChange={e => {
-                const value = Number.parseFloat(e.target.value);
-                if (!Number.isNaN(value) && value >= 0 && value <= 2) {
-                  handleParameterChange('temperature', value);
-                }
-              }}
-              className={`w-16 rounded border border-white/20 bg-white/10 backdrop-blur-sm text-white focus:border-white/40 focus:ring-2 focus:ring-white/20 px-1 py-1 text-sm`}
-              aria-label="Temperature number input"
-            />
-            <span className={`w-10 text-xs text-gray-300`}>{modelParameters.temperature.toFixed(2)}</span>
-          </div>
-        </div>
+        {/* Advanced Model Parameters - Collapsible Section */}
+        <div className="space-y-4">
+          {/* Collapsible Header */}
+          <button
+            type="button"
+            onClick={() => setIsAdvancedParamsOpen(!isAdvancedParamsOpen)}
+            className="flex items-center gap-2 text-left w-full p-3 rounded-lg border border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-200 group">
+            <div className="flex-1">
+              <span className="text-sm font-semibold text-gray-200">For Nerds</span>
+            </div>
+            <div className={`transform transition-transform duration-200 ${isAdvancedParamsOpen ? 'rotate-180' : ''}`}>
+              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
 
-        {/* Top P Slider */}
-        <div className="flex flex-col md:flex-row md:items-center gap-2">
-          <label htmlFor="unified-topP" className={`w-24 text-sm font-semibold text-gray-200`}>
-            Top P
-          </label>
-          <div className="flex flex-1 items-center gap-2">
-            <input
-              id="unified-topP"
-              type="range"
-              min="0"
-              max="1"
-              step="0.001"
-              value={modelParameters.topP}
-              onChange={e => handleParameterChange('topP', Number.parseFloat(e.target.value))}
-              style={{
-                background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${modelParameters.topP * 100}%, #cbd5e1 ${modelParameters.topP * 100}%, #cbd5e1 100%)`,
-              }}
-              className={`flex-1 accent-blue-500 h-1 appearance-none rounded-full`}
-            />
-            <input
-              type="number"
-              min="0"
-              max="1"
-              step="0.001"
-              value={modelParameters.topP}
-              onChange={e => {
-                const value = Number.parseFloat(e.target.value);
-                if (!Number.isNaN(value) && value >= 0 && value <= 1) {
-                  handleParameterChange('topP', value);
-                }
-              }}
-              className={`w-16 rounded border border-white/20 bg-white/10 backdrop-blur-sm text-white focus:border-white/40 focus:ring-2 focus:ring-white/20 px-1 py-1 text-sm`}
-              aria-label="Top P number input"
-            />
-            <span className={`w-10 text-xs text-gray-300`}>{modelParameters.topP.toFixed(3)}</span>
-          </div>
+          {/* Collapsible Content */}
+          {isAdvancedParamsOpen && (
+            <div className="space-y-4 pl-4 border-l-2 border-white/10">
+              {/* Temperature Slider */}
+              <div className="flex flex-col md:flex-row md:items-center gap-2">
+                <label htmlFor="unified-temperature" className={`w-24 text-sm font-semibold text-gray-200`}>
+                  Temperature
+                </label>
+                <div className="flex flex-1 items-center gap-2">
+                  <input
+                    id="unified-temperature"
+                    type="range"
+                    min="0"
+                    max="2"
+                    step="0.01"
+                    value={modelParameters.temperature}
+                    onChange={e => handleParameterChange('temperature', Number.parseFloat(e.target.value))}
+                    style={{
+                      background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(modelParameters.temperature / 2) * 100}%, #cbd5e1 ${(modelParameters.temperature / 2) * 100}%, #cbd5e1 100%)`,
+                    }}
+                    className={`flex-1 accent-blue-500 h-1 appearance-none rounded-full`}
+                  />
+                  <input
+                    type="number"
+                    min="0"
+                    max="2"
+                    step="0.01"
+                    value={modelParameters.temperature}
+                    onChange={e => {
+                      const value = Number.parseFloat(e.target.value);
+                      if (!Number.isNaN(value) && value >= 0 && value <= 2) {
+                        handleParameterChange('temperature', value);
+                      }
+                    }}
+                    className={`w-16 rounded border border-white/20 bg-white/10 backdrop-blur-sm text-white focus:border-white/40 focus:ring-2 focus:ring-white/20 px-1 py-1 text-sm`}
+                    aria-label="Temperature number input"
+                  />
+                  <span className={`w-10 text-xs text-gray-300`}>{modelParameters.temperature.toFixed(2)}</span>
+                </div>
+              </div>
+
+              {/* Top P Slider */}
+              <div className="flex flex-col md:flex-row md:items-center gap-2">
+                <label htmlFor="unified-topP" className={`w-24 text-sm font-semibold text-gray-200`}>
+                  Top P
+                </label>
+                <div className="flex flex-1 items-center gap-2">
+                  <input
+                    id="unified-topP"
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.001"
+                    value={modelParameters.topP}
+                    onChange={e => handleParameterChange('topP', Number.parseFloat(e.target.value))}
+                    style={{
+                      background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${modelParameters.topP * 100}%, #cbd5e1 ${modelParameters.topP * 100}%, #cbd5e1 100%)`,
+                    }}
+                    className={`flex-1 accent-blue-500 h-1 appearance-none rounded-full`}
+                  />
+                  <input
+                    type="number"
+                    min="0"
+                    max="1"
+                    step="0.001"
+                    value={modelParameters.topP}
+                    onChange={e => {
+                      const value = Number.parseFloat(e.target.value);
+                      if (!Number.isNaN(value) && value >= 0 && value <= 1) {
+                        handleParameterChange('topP', value);
+                      }
+                    }}
+                    className={`w-16 rounded border border-white/20 bg-white/10 backdrop-blur-sm text-white focus:border-white/40 focus:ring-2 focus:ring-white/20 px-1 py-1 text-sm`}
+                    aria-label="Top P number input"
+                  />
+                  <span className={`w-10 text-xs text-gray-300`}>{modelParameters.topP.toFixed(3)}</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Reasoning Effort Selector (only for O-series models) */}
