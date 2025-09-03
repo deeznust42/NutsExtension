@@ -108,7 +108,7 @@ export default function ChatInput({
           : 'focus-within:border-white/20 focus-within:bg-white/10 hover:border-white/15 hover:bg-white/8'
       }`}
       aria-label="Chat input form">
-      <div className="flex items-center">
+      <div className="relative">
         <textarea
           ref={textareaRef}
           value={text}
@@ -117,14 +117,14 @@ export default function ChatInput({
           disabled={disabled}
           aria-disabled={disabled}
           rows={isFreshChat ? 3 : 1} // More rows for fresh chat
-          className={`flex-1 resize-none border-none bg-transparent p-3 text-white placeholder-gray-400 focus:outline-none text-sm ${
+          className={`w-full resize-none border-none bg-transparent p-3 pr-16 text-white placeholder-gray-400 focus:outline-none text-sm ${
             disabled ? 'cursor-not-allowed' : ''
           }`}
           placeholder={isFreshChat ? 'What can I help you with?' : 'What can I help you with?'}
           aria-label="Message input"
         />
 
-        <div className="flex items-center gap-2 px-3 py-2">
+        <div className="absolute top-3 right-3 flex items-center gap-2">
           {onMicClick && (
             <button
               type="button"
