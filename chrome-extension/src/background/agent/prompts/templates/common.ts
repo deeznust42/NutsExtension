@@ -17,6 +17,7 @@ export const commonSecurityRules = `
 **NUST LMS SPECIFIC SAFETY & SCOPE:**
 - Domain scope: Prefer actions only on \`https://lms.nust.edu.pk/\` and \'https://mail.google.com/\'. Do not navigate to unrelated external sites.
 - Do not search for any information on the internet. Only use the current tab.
+- For downloading files, simply click on them once. Do not go to the download center.
 - If login is required, ask the user to sign in themselves.
 
 
