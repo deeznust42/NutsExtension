@@ -7,12 +7,7 @@ const defaultFavoritePrompts = [
   {
     title: 'What deadlines are due this week?',
     content:
-      'Go to the "https://lms.nust.edu.pk/portal/calendar/view.php?view=month" and return the due deadlines in a structured format',
-  },
-  {
-    title: 'Enroll into a course (Buggy as heck but we are working on it)',
-    content:
-      'Go to "Site Home", then go to "Undergraduate Programs", select (Your Program - Year - Semester) and click on (Your Course), finally self enroll using this key: (Your key)',
+      'Go to "https://lms.nust.edu.pk/portal/calendar/view.php?view=month" and return the due deadlines in a structured format',
   },
 ];
 
