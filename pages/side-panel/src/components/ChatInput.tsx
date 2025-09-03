@@ -120,7 +120,7 @@ export default function ChatInput({
           className={`flex-1 resize-none border-none bg-transparent p-3 text-white placeholder-gray-400 focus:outline-none text-sm ${
             disabled ? 'cursor-not-allowed' : ''
           }`}
-          placeholder={isFreshChat ? 'What would you like me to help you with today?' : 'What can I help you with?'}
+          placeholder={isFreshChat ? 'What can I help you with?' : 'What can I help you with?'}
           aria-label="Message input"
         />
 
