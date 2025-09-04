@@ -117,14 +117,14 @@ export default function ChatInput({
           disabled={disabled}
           aria-disabled={disabled}
           rows={isFreshChat ? 3 : 1} // More rows for fresh chat
-          className={`w-full resize-none border-none bg-transparent p-3 pr-16 text-white placeholder-gray-400 focus:outline-none text-sm ${
+          className={`w-full resize-none border-none bg-transparent p-3 pr-24 text-white placeholder-gray-400 focus:outline-none text-sm ${
             disabled ? 'cursor-not-allowed' : ''
           }`}
           placeholder={isFreshChat ? 'What can I help you with?' : 'What can I help you with?'}
           aria-label="Message input"
         />
 
-        <div className="absolute top-3 right-3 flex items-center gap-2">
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
           {onMicClick && (
             <button
               type="button"
