@@ -393,6 +393,29 @@ export const ModelSettings = () => {
       // Refresh available models
       const models = await getAvailableModelsCallback();
       setAvailableModels(models);
+
+      // Auto-select first model for Gemini after successful save
+      // - Only applies to Gemini
+      // - Skip silently if no models
+      // - Persist via existing handleModelChange
+      if (provider === ProviderTypeEnum.Gemini) {
+        try {
+          const configuredModels = providers[provider]?.modelNames;
+          const fallbackModels = llmProviderModelNames[provider as keyof typeof llmProviderModelNames] || [];
+          const candidateModels = configuredModels && configuredModels.length > 0 ? configuredModels : fallbackModels;
+
+          const firstModel = candidateModels[0];
+          if (firstModel) {
+            // If a model is already selected, keep it; otherwise select the first
+            if (!selectedModel) {
+              await handleModelChange(`${provider}>${firstModel}`);
+            }
+          }
+        } catch (err) {
+          // Skip silently on any error
+          console.warn('Auto-select model skipped:', err);
+        }
+      }
     } catch (error) {
       console.error('Error saving API key:', error);
     }
