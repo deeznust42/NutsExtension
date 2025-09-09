@@ -179,7 +179,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-white/90 backdrop-blur-sm transition-colors duration-200 hover:bg-white/15 hover:border-white/30">
-          <span>Browse more useful prompts</span>
+          <span>Browse more prompts</span>
         </a>
       </div>
     </div>
