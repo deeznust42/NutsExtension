@@ -488,7 +488,7 @@ export const ModelSettings = () => {
 
   const renderModelSelect = () => (
     <div>
-      <p className={`mb-4 text-sm font-normal text-gray-300`}>Choose and configure the model used for Agent.</p>
+      <p className={`mb-4 text-sm font-normal text-gray-300`}>Choose and configure the model for Deez Agent.</p>
 
       <div className="space-y-4">
         {/* Model Selection */}
