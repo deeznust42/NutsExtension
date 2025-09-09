@@ -23,14 +23,6 @@ import {
   type SpeechToTextModelConfig,
 } from '@extension/storage';
 
-// Helper function to check if a model is an O-series model
-function isOpenAIOModel(modelName: string): boolean {
-  if (modelName.startsWith('openai/')) {
-    return modelName.startsWith('openai/o');
-  }
-  return modelName.startsWith('o');
-}
-
 export const ModelSettings = () => {
   const [providers, setProviders] = useState<Record<string, ProviderConfig>>({});
   const [modifiedProviders, setModifiedProviders] = useState<Set<string>>(new Set());
@@ -38,7 +30,6 @@ export const ModelSettings = () => {
   // Remove state for separate agent selections
   // Replace with a single selectedModel state
   const [selectedModel, setSelectedModel] = useState<string>('');
-  const [reasoningEffort, setReasoningEffort] = useState<'low' | 'medium' | 'high' | undefined>(undefined);
   const [newModelInputs, setNewModelInputs] = useState<Record<string, string>>({});
   const [isProviderSelectorOpen, setIsProviderSelectorOpen] = useState(false);
   const newlyAddedProviderRef = useRef<string | null>(null);
@@ -86,9 +77,6 @@ export const ModelSettings = () => {
         const config = await agentModelStore.getAgentModel(AgentNameEnum.Planner);
         if (config) {
           setSelectedModel(`${config.provider}>${config.modelName}`);
-          if (config.reasoningEffort) {
-            setReasoningEffort(config.reasoningEffort as 'low' | 'medium' | 'high');
-          }
         }
       } catch (error) {
         console.error('Error loading agent model:', error);
@@ -472,47 +460,7 @@ export const ModelSettings = () => {
         provider,
         modelName: model,
         parameters: params,
-        reasoningEffort: isOpenAIOModel(model) ? reasoningEffort || 'medium' : undefined,
       });
-    }
-  };
-
-  const handleReasoningEffortChange = async (value: 'low' | 'medium' | 'high') => {
-    setReasoningEffort(value);
-
-    // Only update if we have a selected model
-    if (selectedModel && isOpenAIOModel(selectedModel)) {
-      try {
-        // Find provider
-        const provider = getProviderForModel(selectedModel);
-
-        if (provider) {
-          // Get current parameters from storage
-          const currentConfig = await agentModelStore.getAgentModel(AgentNameEnum.Planner);
-          const currentParams =
-            currentConfig?.parameters || getDefaultAgentModelParams(provider, AgentNameEnum.Planner);
-
-          await agentModelStore.setAgentModel(AgentNameEnum.Planner, {
-            provider,
-            modelName: selectedModel,
-            parameters: currentParams,
-            reasoningEffort: value,
-          });
-          // Also update for other agents
-          for (const agent of Object.values(AgentNameEnum)) {
-            if (agent !== AgentNameEnum.Planner) {
-              await agentModelStore.setAgentModel(agent, {
-                provider,
-                modelName: selectedModel,
-                parameters: currentParams,
-                reasoningEffort: value,
-              });
-            }
-          }
-        }
-      } catch (error) {
-        console.error('Error saving reasoning effort:', error);
-      }
     }
   };
 
@@ -548,40 +496,30 @@ export const ModelSettings = () => {
           <label htmlFor="unified-model" className={`w-24 text-sm font-semibold text-gray-200`}>
             Model
           </label>
-          <select
-            id="unified-model"
-            className={`flex-1 rounded-lg border text-sm border-[#475569] bg-[#1e293b] text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/20 focus:border-[#3b82f6] transition-all duration-200`}
-            disabled={availableModels.length === 0}
-            value={selectedModel || ''}
-            onChange={e => handleModelChange(e.target.value)}>
-            <option key="default" value="">
-              Choose model
-            </option>
-            {availableModels.map(({ provider, providerName, model }) => (
-              <option key={`${provider}>${model}`} value={`${provider}>${model}`}>
-                {`${providerName} > ${model}`}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Reasoning Effort Selector (only for O-series models) */}
-        {selectedModel && isOpenAIOModel(selectedModel) && (
-          <div className="flex flex-col md:flex-row md:items-center gap-2">
-            <label htmlFor="unified-reasoning-effort" className={`w-24 text-sm font-semibold text-gray-200`}>
-              Reasoning
-            </label>
+          <div className="flex-1 relative">
             <select
-              id="unified-reasoning-effort"
-              value={reasoningEffort || 'medium'}
-              onChange={e => handleReasoningEffortChange(e.target.value as 'low' | 'medium' | 'high')}
-              className={`flex-1 rounded-lg border text-sm border-[#475569] bg-[#1e293b] text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/20 focus:border-[#3b82f6] transition-all duration-200`}>
-              <option value="low">Low (Faster)</option>
-              <option value="medium">Medium (Balanced)</option>
-              <option value="high">High (More thorough)</option>
+              id="unified-model"
+              className={`w-full rounded-lg border text-sm border-[#475569] bg-[#1e293b] text-white px-3 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/20 focus:border-[#3b82f6] transition-all duration-200 appearance-none cursor-pointer`}
+              disabled={availableModels.length === 0}
+              value={selectedModel || ''}
+              onChange={e => handleModelChange(e.target.value)}>
+              <option key="default" value="">
+                Choose model
+              </option>
+              {availableModels.map(({ provider, providerName, model }) => (
+                <option key={`${provider}>${model}`} value={`${provider}>${model}`}>
+                  {`${providerName} > ${model}`}
+                </option>
+              ))}
             </select>
+            {/* Custom dropdown arrow */}
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
