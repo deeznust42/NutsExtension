@@ -917,7 +917,7 @@ export const ModelSettings = () => {
           <Button
             variant="secondary"
             onClick={() => setIsProviderSelectorOpen(prev => !prev)}
-            className={`flex w-64 mx-auto items-center justify-center font-medium border border-gray-300/30 bg-gradient-to-b from-slate-700/80 to-slate-800/90 backdrop-blur-sm text-white hover:from-slate-600/80 hover:to-slate-700/90 hover:border-gray-200/40 px-4 py-2.5 text-sm rounded-full transition-all duration-200 ease-in-out shadow-lg hover:shadow-xl`}>
+            className={`flex w-64 mx-auto items-center justify-center font-medium border border-gray-300/30 bg-slate-700/80 backdrop-blur-sm text-gray-200 hover:bg-slate-600/80 hover:border-gray-200/40 px-4 py-2.5 text-sm rounded-2xl transition-all duration-200 ease-in-out`}>
             <span className="mr-2 text-lg">+</span> <span>Add New Provider</span>
           </Button>
           <div
