@@ -719,7 +719,30 @@ export const ModelSettings = () => {
     <section className="space-y-8">
       {/* LLM Providers Section */}
       <div className={`rounded-xl shadow-xl border border-[#22306a] bg-[#1a2550] p-6 mb-12`}>
-        <h2 className={`mb-6 text-2xl font-bold text-white tracking-tight leading-tight`}>LLM Providers</h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className={`text-2xl font-bold text-white tracking-tight leading-tight`}>LLM Providers</h2>
+          <a
+            href="https://nutslms.com/guide"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm text-blue-200 hover:text-white hover:bg-white/15 hover:border-white/30 shadow-md shadow-blue-500/10 hover:shadow-blue-500/20 transition-all duration-200`}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="size-4"
+              aria-hidden="true">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <path d="M12 17h.01" />
+            </svg>
+            <span className="font-medium">How to set up Deez</span>
+          </a>
+        </div>
         <div className="space-y-4">
           {getSortedProviders().length === 0 ? (
             <div className="py-6 text-center text-gray-300">
