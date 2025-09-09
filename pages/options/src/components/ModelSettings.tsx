@@ -488,7 +488,7 @@ export const ModelSettings = () => {
 
   const renderModelSelect = () => (
     <div>
-      <p className={`mb-4 text-sm font-normal text-gray-300`}>Choose and configure the model for Deez Agent.</p>
+      <p className={`mb-4 text-sm font-normal text-gray-300`}>Choose the model for Deez Agent.</p>
 
       <div className="space-y-4">
         {/* Model Selection */}
@@ -700,7 +700,7 @@ export const ModelSettings = () => {
         <div className="space-y-4">
           {getSortedProviders().length === 0 ? (
             <div className="py-6 text-center text-gray-300">
-              <p className="mb-2">No providers configured yet. Add a provider to get started.</p>
+              <p className="mb-2">Add a provider to get started.</p>
             </div>
           ) : (
             getSortedProviders().map(([providerId, providerConfig]) => {
