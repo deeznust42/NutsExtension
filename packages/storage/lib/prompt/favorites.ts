@@ -5,9 +5,9 @@ import type { BaseStorage } from '../base/types';
 // Template data
 const defaultFavoritePrompts = [
   {
-    title: 'What deadlines are due this week?',
+    title: 'What deadlines are due?',
     content:
-      'Go to "https://lms.nust.edu.pk/portal/calendar/view.php?view=month" and return the due deadlines in a structured format',
+      'Go to "https://lms.nust.edu.pk/portal/calendar/view.php?view=month" and return the due deadlines for this month only in a structured format',
   },
 ];
 
