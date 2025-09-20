@@ -15,7 +15,9 @@ const AuthScreen = ({ onVerificationSuccess }: AuthScreenProps) => {
   // Validate email domain
   const validateEmail = (emailInput: string): boolean => {
     const trimmedEmail = emailInput.trim().toLowerCase();
-    return (trimmedEmail.endsWith('@seecs.edu.pk') || trimmedEmail.endsWith('@student.nust.edu.pk')) && trimmedEmail.includes('@');
+    return (
+      (trimmedEmail.endsWith('@seecs.edu.pk') || trimmedEmail.endsWith('nust.edu.pk')) && trimmedEmail.includes('@')
+    );
   };
 
   // Handle email submission
