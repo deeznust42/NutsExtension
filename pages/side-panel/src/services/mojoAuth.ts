@@ -176,8 +176,8 @@ export const devMojoAuth = {
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Simulate success for @seecs.edu.pk emails
-      if (email.endsWith('@seecs.edu.pk')) {
+      // Simulate success for @seecs.edu.pk and @student.nust.edu.pk emails
+      if (email.endsWith('@seecs.edu.pk') || email.endsWith('@student.nust.edu.pk')) {
         console.log('DEV: Simulated OTP sent to', email);
         return {
           success: true,
