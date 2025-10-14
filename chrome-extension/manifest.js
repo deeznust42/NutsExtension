@@ -61,7 +61,7 @@ const manifest = withOperaSidebar(
     version: packageJson.version,
     description: '__MSG_extensionDescription__',
     // Replace broad host permissions with specific domains (NUST LMS and Gmail)
-    host_permissions: ['https://lms.nust.edu.pk/*', 'https://mail.google.com/*'],
+    host_permissions: ['https://lms.nust.edu.pk/*', 'https://qalam.nust.edu.pk/*', 'https://mail.google.com/*'],
     permissions: ['storage', 'scripting', 'tabs', 'activeTab', 'debugger', 'unlimitedStorage'],
     options_page: 'options/index.html',
     background: {
@@ -77,7 +77,7 @@ const manifest = withOperaSidebar(
     content_scripts: [
       {
         // Update content script to run on supported domains
-        matches: ['https://lms.nust.edu.pk/*', 'https://mail.google.com/*'],
+        matches: ['https://lms.nust.edu.pk/*', 'https://qalam.nust.edu.pk/*', 'https://mail.google.com/*'],
         js: ['content/index.iife.js'],
       },
     ],
@@ -93,7 +93,7 @@ const manifest = withOperaSidebar(
           'permission/permission.js',
         ],
         // Update to only allow access from supported domains
-        matches: ['https://lms.nust.edu.pk/*', 'https://mail.google.com/*'],
+        matches: ['https://lms.nust.edu.pk/*', 'https://qalam.nust.edu.pk/*', 'https://mail.google.com/*'],
       },
     ],
   }),

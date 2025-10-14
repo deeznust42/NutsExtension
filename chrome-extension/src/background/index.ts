@@ -57,7 +57,9 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     tabId &&
     changeInfo.status === 'complete' &&
     typeof tab.url === 'string' &&
-    (tab.url.startsWith('https://lms.nust.edu.pk/') || tab.url.startsWith('https://mail.google.com/'))
+    (tab.url.startsWith('https://lms.nust.edu.pk/') ||
+      tab.url.startsWith('https://qalam.nust.edu.pk/') ||
+      tab.url.startsWith('https://mail.google.com/'))
   ) {
     await injectBuildDomTree(tabId);
   }
