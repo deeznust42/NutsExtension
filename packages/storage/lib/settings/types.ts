@@ -14,8 +14,13 @@ export enum ProviderTypeEnum {
 }
 
 // Default supported models for each built-in provider
+// Updated with stable Gemini 2.5 models (June 2025)
+// Ordered by speed: fast (flash) -> more capable (pro)
 export const llmProviderModelNames = {
-  [ProviderTypeEnum.Gemini]: ['gemini-2.5-flash-preview-05-20'],
+  [ProviderTypeEnum.Gemini]: [
+    'gemini-2.5-flash', // Fast, efficient model (released June 17, 2025)
+    'gemini-2.5-pro', // More capable model, slower (released June 17, 2025)
+  ],
   // Custom OpenAI providers don't have predefined models as they are user-defined
 };
 
