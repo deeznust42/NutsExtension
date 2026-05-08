@@ -109,7 +109,14 @@ export class NavigatorAgent extends BaseAgent<z.ZodType, NavigatorResult> {
         if (isAbortedError(error)) {
           throw error;
         }
-        const errorMessage = `Failed to invoke ${this.modelName} with structured output: ${error}`;
+        logger.error('Navigator structured output raw error', {
+          model: this.modelName,
+          name: (error as Error)?.name,
+          message: (error as Error)?.message,
+          stack: (error as Error)?.stack,
+          cause: (error as { cause?: unknown })?.cause,
+        });
+        const errorMessage = `Failed to invoke ${this.modelName} with structured output: ${(error as Error)?.message ?? error}`;
         throw new Error(errorMessage);
       }
 
@@ -133,7 +140,15 @@ export class NavigatorAgent extends BaseAgent<z.ZodType, NavigatorResult> {
           action: [...toolCall.args.action],
         };
       }
-      throw new Error('Could not parse response');
+      logger.error('Navigator parse failure — full raw response', {
+        model: this.modelName,
+        rawContent: (rawResponse as BaseMessage)?.content,
+        rawKeys: rawResponse ? Object.keys(rawResponse) : [],
+        parsed: response?.parsed,
+      });
+      throw new Error(
+        `Could not parse response from ${this.modelName}: model returned no parsed output and no tool calls. Check service worker console for the raw payload.`,
+      );
     }
     throw new Error('Navigator needs to work with LLM that supports tool calling');
   }

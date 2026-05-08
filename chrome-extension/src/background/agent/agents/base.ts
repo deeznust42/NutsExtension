@@ -125,7 +125,14 @@ export abstract class BaseAgent<T extends z.ZodType, M = unknown> {
         if (isAbortedError(error)) {
           throw error;
         }
-        const errorMessage = `Failed to invoke ${this.modelName} with structured output: ${error}`;
+        logger.error('Structured output raw error', {
+          model: this.modelName,
+          name: (error as Error)?.name,
+          message: (error as Error)?.message,
+          stack: (error as Error)?.stack,
+          cause: (error as { cause?: unknown })?.cause,
+        });
+        const errorMessage = `Failed to invoke ${this.modelName} with structured output: ${(error as Error)?.message ?? error}`;
         throw new Error(errorMessage);
       }
     }

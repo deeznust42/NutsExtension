@@ -18,8 +18,8 @@
   "dependencies": {
     "@extension/shared": "workspace:*",
     "@extension/storage": "workspace:*",
-    "@langchain/core": "0.3.57",
-    "@langchain/google-genai": "0.2.10",
+    "@langchain/core": "0.3.80",
+    "@langchain/google-genai": "0.2.18",
     "@langchain/groq": "^0.2.2",
     "jsonrepair": "^3.12.0",
     "puppeteer-core": "24.10.1",
@@ -28,7 +28,7 @@
     "zod-to-json-schema": "^3.24.5"
   },
   "overrides": {
-    "@langchain/core": "0.3.57"
+    "@langchain/core": "0.3.80"
   },
   "devDependencies": {
     "@extension/dev-utils": "workspace:*",

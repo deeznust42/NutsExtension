@@ -117,14 +117,14 @@ importers:
         specifier: workspace:*
         version: link:../packages/storage
       '@langchain/core':
-        specifier: 0.3.57
-        version: 0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
+        specifier: 0.3.80
+        version: 0.3.80(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
       '@langchain/google-genai':
-        specifier: 0.2.10
-        version: 0.2.10(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(zod@3.25.58)
+        specifier: 0.2.18
+        version: 0.2.18(@langchain/core@0.3.80(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))
       '@langchain/groq':
         specifier: ^0.2.2
-        version: 0.2.2(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))
+        version: 0.2.2(@langchain/core@0.3.80(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))
       jsonrepair:
         specifier: ^3.12.0
         version: 3.12.0
@@ -598,15 +598,15 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@langchain/core@0.3.57':
-    resolution: {integrity: sha512-jz28qCTKJmi47b6jqhQ6vYRTG5jRpqhtPQjriRTB5wR8mgvzo6xKs0fG/kExS3ZvM79ytD1npBvgf8i19xOo9Q==}
+  '@langchain/core@0.3.80':
+    resolution: {integrity: sha512-vcJDV2vk1AlCwSh3aBm/urQ1ZrlXFFBocv11bz/NBUfLWD5/UDNMzwPdaAd2dKvNmTWa9FM2lirLU3+JCf4cRA==}
     engines: {node: '>=18'}
 
-  '@langchain/google-genai@0.2.10':
-    resolution: {integrity: sha512-kIy0qhu7FAsShNTvuOx8uV+hf7mWk8OzJP5W9mjs1ovAIT1C9WqG1epkhexBfj4DAQfQ6E+m/oGtJ+CVsalspw==}
+  '@langchain/google-genai@0.2.18':
+    resolution: {integrity: sha512-m9EiN3VKC01A7/625YQ6Q1Lqq8zueewADX4W5Tcme4RImN75zkg2Z7FYbD1Fo6Zwolc4wBNO6LUtbg3no4rv1Q==}
     engines: {node: '>=18'}
     peerDependencies:
-      '@langchain/core': '>=0.3.55 <0.4.0'
+      '@langchain/core': '>=0.3.58 <0.4.0'
 
   '@langchain/groq@0.2.2':
     resolution: {integrity: sha512-kvLhDrNimamQBXlP4LFb/x9Y3tuObHhgmbC3ponLGWgL/Vu6q+UGOAUCJIC0DnOUTYXpgklHRgQKw484HJx+mw==}
@@ -2172,11 +2172,20 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
-  langsmith@0.3.29:
-    resolution: {integrity: sha512-JPF2B339qpYy9FyuY4Yz1aWYtgPlFc/a+VTj3L/JcFLHCiMP7+Ig8I9jO+o1QwVa+JU3iugL1RS0wwc+Glw0zA==}
+  langsmith@0.3.87:
+    resolution: {integrity: sha512-XXR1+9INH8YX96FKWc5tie0QixWz6tOqAsAKfcJyPkE0xPep+NDz0IQLR32q4bn10QK3LqD2HN6T3n6z1YLW7Q==}
     peerDependencies:
+      '@opentelemetry/api': '*'
+      '@opentelemetry/exporter-trace-otlp-proto': '*'
+      '@opentelemetry/sdk-trace-base': '*'
       openai: '*'
     peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+      '@opentelemetry/exporter-trace-otlp-proto':
+        optional: true
+      '@opentelemetry/sdk-trace-base':
+        optional: true
       openai:
         optional: true
 
@@ -3142,6 +3151,7 @@ packages:
 
   uuid@10.0.0:
     resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@11.1.0:
@@ -3480,14 +3490,14 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))':
+  '@langchain/core@0.3.80(openai@4.103.0(ws@8.18.2)(zod@3.25.58))':
     dependencies:
       '@cfworker/json-schema': 4.1.1
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.20
-      langsmith: 0.3.29(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
+      langsmith: 0.3.87(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
       mustache: 4.2.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -3495,20 +3505,20 @@ snapshots:
       zod: 3.25.58
       zod-to-json-schema: 3.24.5(zod@3.25.58)
     transitivePeerDependencies:
+      - '@opentelemetry/api'
+      - '@opentelemetry/exporter-trace-otlp-proto'
+      - '@opentelemetry/sdk-trace-base'
       - openai
 
-  '@langchain/google-genai@0.2.10(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))(zod@3.25.58)':
+  '@langchain/google-genai@0.2.18(@langchain/core@0.3.80(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))':
     dependencies:
       '@google/generative-ai': 0.24.1
-      '@langchain/core': 0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
+      '@langchain/core': 0.3.80(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
       uuid: 11.1.0
-      zod-to-json-schema: 3.24.5(zod@3.25.58)
-    transitivePeerDependencies:
-      - zod
 
-  '@langchain/groq@0.2.2(@langchain/core@0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))':
+  '@langchain/groq@0.2.2(@langchain/core@0.3.80(openai@4.103.0(ws@8.18.2)(zod@3.25.58)))':
     dependencies:
-      '@langchain/core': 0.3.57(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
+      '@langchain/core': 0.3.80(openai@4.103.0(ws@8.18.2)(zod@3.25.58))
       groq-sdk: 0.19.0
       zod: 3.25.58
       zod-to-json-schema: 3.24.5(zod@3.25.58)
@@ -5274,13 +5284,12 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  langsmith@0.3.29(openai@4.103.0(ws@8.18.2)(zod@3.25.58)):
+  langsmith@0.3.87(openai@4.103.0(ws@8.18.2)(zod@3.25.58)):
     dependencies:
       '@types/uuid': 10.0.0
       chalk: 4.1.2
       console-table-printer: 2.14.0
       p-queue: 6.6.2
-      p-retry: 4.6.2
       semver: 7.7.2
       uuid: 10.0.0
     optionalDependencies:
